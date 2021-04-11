@@ -1,0 +1,8 @@
+.root {
+    -fx-background-color: #65c77f;
+}
+
+#libraryTitleLabel {
+    -fx-font-size: 70px;
+    -fx-alignment: center;
+}
