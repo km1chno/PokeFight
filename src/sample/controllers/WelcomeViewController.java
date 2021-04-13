@@ -18,13 +18,17 @@ public class WelcomeViewController {
 
     public void welcomeLibraryButtonOnClick(javafx.event.ActionEvent actionEvent) {
         try {
-            sceneController.switchToLibraryView(actionEvent);
+            sceneController.switchToView(actionEvent, "libraryView");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void welcomeArenaButtonOnClick(javafx.event.ActionEvent actionEvent) {
-        System.out.println("W budowie!");
+        try {
+            sceneController.switchToView(actionEvent, "arenaView");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
