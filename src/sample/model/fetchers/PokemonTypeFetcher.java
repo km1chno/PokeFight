@@ -23,8 +23,8 @@ public class PokemonTypeFetcher implements Fetcher {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
+            connection.setConnectTimeout(100);
+            connection.setReadTimeout(100);
 
             int status = connection.getResponseCode(); // TO-DO - create exceptions for non-success codes
 
