@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -23,6 +24,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class LibraryViewController implements Initializable {
     @FXML
+    ScrollPane scrollPane;
+    @FXML
     TilePane tilePane;
 
     PokemonType[] pokemons = new PokemonType[10];
@@ -36,7 +39,6 @@ public class LibraryViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         Task<Void> fetchPokemons = new Task<>() {
             @Override
             public Void call() {
