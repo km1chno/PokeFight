@@ -9,10 +9,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.MalformedInputException;
 
 public class PokemonTypeFetcher implements Fetcher {
-    private Class<PokemonType> dataClass = PokemonType.class;
+    private final Class<PokemonType> dataClass = PokemonType.class;
 
     @Override
     public String fetch(String urlString) {
@@ -23,10 +22,8 @@ public class PokemonTypeFetcher implements Fetcher {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setConnectTimeout(100);
-            connection.setReadTimeout(100);
 
-            int status = connection.getResponseCode(); // TO-DO - create exceptions for non-success codes
+            //int status = connection.getResponseCode(); // TO-DO - create exceptions for non-success codes
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));

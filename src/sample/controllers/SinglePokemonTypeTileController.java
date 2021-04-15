@@ -3,6 +3,7 @@ package sample.controllers;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 public class SinglePokemonTypeTileController {
     @FXML
@@ -12,10 +13,13 @@ public class SinglePokemonTypeTileController {
     private Label pokemonTileIdLabel;
 
     @FXML
-    Label pokemonTileHeightLabel;
+    private Label pokemonTileHeightLabel;
 
     @FXML
-    Label pokemonTypeWeightLabel;
+    private Label pokemonTypeWeightLabel;
+
+    @FXML
+    private ImageView pokemonTileImageView;
 
     public Label getPokemonTileNameLabel() {
         return pokemonTileNameLabel;
@@ -33,19 +37,5 @@ public class SinglePokemonTypeTileController {
         return pokemonTypeWeightLabel;
     }
 
-    /*public void setPokemonTileNameLabel(String name) {
-        pokemonTileNameLabel.setText(name);
-    }
-
-    public void setPokemonTileIdLabel(int id) {
-        pokemonTileIdLabel.setText("ID: " + id);
-    }
-
-    public void setPokemonTileHeightLabel(int height) {
-        pokemonTileHeightLabel.setText("Height: " + height);
-    }
-
-    public void setPokemonTypeWeightLabel(int weight) {
-        pokemonTypeWeightLabel.setText("Width: " + weight);
-    }*/
+    public ImageView getPokemonTileImageView() { return pokemonTileImageView; }
 }
