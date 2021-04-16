@@ -12,17 +12,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LibraryViewController implements Initializable {
+    static private final int NUMBER_OF_POKEMONS = 5;
+
     @FXML
     ScrollPane scrollPane;
     @FXML
     TilePane tilePane;
 
-    PokemonType[] pokemons = new PokemonType[10];
-
-    private final int numberOfPokemons = 10;
+    PokemonType[] pokemons = new PokemonType[NUMBER_OF_POKEMONS];
 
     public void updateLibrary() {
-        for (int i = 0; i < numberOfPokemons; i++)
+        for (int i = 0; i < NUMBER_OF_POKEMONS; i++)
             tilePane.getChildren().add(new SinglePokemonTypeTileControl(pokemons[i]));
     }
 
@@ -31,7 +31,7 @@ public class LibraryViewController implements Initializable {
         Task<Void> fetchPokemons = new Task<>() {
             @Override
             public Void call() {
-                for (int i = 0; i < numberOfPokemons; i++)
+                for (int i = 0; i < NUMBER_OF_POKEMONS; i++)
                     pokemons[i] = (PokemonType) new PokemonTypeFetcher().fetchAndParse("https://pokeapi.co/api/v2/pokemon/" + (i + 1));
                 return null;
             }

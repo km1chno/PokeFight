@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,6 +11,7 @@
       <Label fx:id="pokemonTileIdLabel" layoutY="162.0" prefHeight="16.0" prefWidth="321.0" text="Label" />
       <Label fx:id="pokemonTileHeightLabel" layoutX="2.0" layoutY="233.0" prefHeight="16.0" prefWidth="321.0" text="Label" />
       <Label fx:id="pokemonTypeWeightLabel" layoutX="2.0" layoutY="306.0" prefHeight="16.0" prefWidth="321.0" text="Label" />
-      <ImageView fx:id="pokemonTileImageView" fitHeight="150.0" fitWidth="200.0" layoutX="371.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="pokemonTileImageView" fitHeight="150.0" fitWidth="200.0" layoutX="355.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="pokemonTileMoreButton" layoutX="424.0" layoutY="294.0" mnemonicParsing="false" onAction="#onMoreButtonClick" text="MORE" />
    </children>
 </AnchorPane>
