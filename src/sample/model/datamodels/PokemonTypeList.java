@@ -13,4 +13,20 @@ public class PokemonTypeList {
         private String name;
         private String url;
     }
+
+    public int getCount() {
+        return results.length;
+    }
+
+    public String getName(int i) {
+        if (i >= count)
+            throw new RuntimeException();
+        return results[i].name;
+    }
+
+    public String getUrl(int i) {
+        if (i >= count)
+            throw new RuntimeException();
+        return results[i].url;
+    }
 }

@@ -25,11 +25,11 @@ public class SceneSwitchController {
         stage.show();
     }
 
-    public void switchToSinglePokemonDetails(ActionEvent event, PokemonType pokemon) throws IOException {
+    public void switchToSinglePokemonDetails(ActionEvent event, String url) throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/singlePokemonDetailsView.fxml")));
         root = (Parent) loader.load();
         SinglePokemonDetailsController pokemonDetailsController = loader.getController();
-        pokemonDetailsController.setPokemon(pokemon);
+        pokemonDetailsController.setPokemon(url);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
