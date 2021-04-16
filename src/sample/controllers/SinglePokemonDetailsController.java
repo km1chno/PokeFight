@@ -41,7 +41,7 @@ public class SinglePokemonDetailsController {
         pokemonDetailsIdLabel.setText("ID: " + pokemon.getId());
         pokemonDetailsHeightLabel.setText("Height: " + pokemon.getHeight());
         pokemonDetailsWeightLabel.setText("Weight: " + pokemon.getWeight());
-        pokemonDetailsImageView.setImage(new Image(pokemon.getSprites().getFrontDefault()));
+        pokemonDetailsImageView.setImage(new Image("file:resources/sprites/pokemon/" + pokemon.getId() + ".png"));
     }
 
     public void onSinglePokemonDetailsGoBackClick(ActionEvent event) {

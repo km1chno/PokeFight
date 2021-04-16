@@ -48,7 +48,7 @@ public class SinglePokemonTypeTileController {
         pokemonTileIdLabel.setText("ID: " + pokemon.getId());
         pokemonTileHeightLabel.setText("Height: " + pokemon.getHeight());
         pokemonTypeWeightLabel.setText("Weight: " + pokemon.getWeight());
-        pokemonTileImageView.setImage(new Image(pokemon.getSprites().getFrontDefault()));
+        pokemonTileImageView.setImage(new Image("file:resources/sprites/pokemon/" + pokemon.getId() + ".png"));
     }
 
     public void onMoreButtonClick(ActionEvent event) {
