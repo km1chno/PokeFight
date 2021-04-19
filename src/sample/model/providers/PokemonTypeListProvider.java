@@ -19,4 +19,11 @@ public class PokemonTypeListProvider {
         }
         return pokemonList;
     }
+
+    public static PokemonTypeList getDataWithFilter(int count, PokemonTypeListFilter filter) {
+        if (!upToDate) {
+            PokemonTypeListProvider.fetchData();
+        }
+        return pokemonList.filter(count, filter);
+    }
 }
