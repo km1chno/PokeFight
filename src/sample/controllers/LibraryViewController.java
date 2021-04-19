@@ -10,6 +10,7 @@ import sample.model.datamodels.PokemonType;
 import sample.model.datamodels.PokemonTypeList;
 import sample.model.fetchers.PokemonTypeFetcher;
 import sample.model.fetchers.PokemonTypeListFetcher;
+import sample.model.providers.PokemonTypeListProvider;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,12 +36,11 @@ public class LibraryViewController implements Initializable {
         Task<Void> fetchPokemons = new Task<>() {
             @Override
             public Void call() {
-                pokemonList = (PokemonTypeList) new PokemonTypeListFetcher().fetchAndParse("https://pokeapi.co/api/v2/pokemon?limit=898");
+                pokemonList = PokemonTypeListProvider.getData();
                 return null;
             }
         };
         fetchPokemons.setOnSucceeded(workerStateEvent -> updateLibrary());
-
         Thread thread = new Thread(fetchPokemons);
         thread.setDaemon(true);
         thread.start();
