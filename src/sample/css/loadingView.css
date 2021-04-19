@@ -1,0 +1,8 @@
+.root {
+    -fx-background-color: #65c77f;
+}
+
+#loadingViewLabel {
+    -fx-font-size: 50px;
+    -fx-alignment: center;
+}

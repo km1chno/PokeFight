@@ -16,7 +16,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class SinglePokemonTypeTileController {
-    private PokemonType pokemon;
+    private int id;
+    private String name;
+    private String url;
+
     private final SceneSwitchController switchController;
 
     public SinglePokemonTypeTileController() {
@@ -30,30 +33,24 @@ public class SinglePokemonTypeTileController {
     private Label pokemonTileIdLabel;
 
     @FXML
-    private Label pokemonTileHeightLabel;
-
-    @FXML
-    private Label pokemonTypeWeightLabel;
-
-    @FXML
     private ImageView pokemonTileImageView;
 
     @FXML
     private Button pokemonTileMoreButton;
 
-    public void setPokemon(PokemonType pokemon) {
-        this.pokemon = pokemon;
+    public void setPokemon(int id, String name, String url) {
+        this.id = id;
+        this.name = name;
+        this.url = url;
 
-        pokemonTileNameLabel.setText(pokemon.getName());
-        pokemonTileIdLabel.setText("ID: " + pokemon.getId());
-        pokemonTileHeightLabel.setText("Height: " + pokemon.getHeight());
-        pokemonTypeWeightLabel.setText("Weight: " + pokemon.getWeight());
-        pokemonTileImageView.setImage(new Image(pokemon.getSprites().getFrontDefault()));
+        pokemonTileNameLabel.setText(name);
+        pokemonTileIdLabel.setText("ID: " + id);
+        pokemonTileImageView.setImage(new Image("file:resources/sprites/pokemon/" + id + ".png"));
     }
 
     public void onMoreButtonClick(ActionEvent event) {
         try {
-            switchController.switchToSinglePokemonDetails(event, pokemon);
+            switchController.switchToSinglePokemonDetails(event, url);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -5,12 +5,10 @@ public class PokemonType {
     private final int height;
     private final int weight;
     private final String name;
-    private final Sprites sprites;
 
     PokemonType() {
         id = weight = height = 0;
         name = "";
-        sprites = new Sprites();
     }
 
     public int getId() {
@@ -28,8 +26,6 @@ public class PokemonType {
     public String getName() {
         return name;
     }
-
-    public Sprites getSprites() { return sprites; }
 }
 
 
