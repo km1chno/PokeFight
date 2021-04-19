@@ -12,18 +12,3 @@
     -fx-pref-columns: 2;
     -fx-pref-tile-width: 632px;
 }
-
-#pokemonTile {
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-background-color: inherit;
-    -fx-pref-width: 632px;
-}
-
-#pokemonTileNameLabel {
-    -fx-font-size: 2em;
-}
-
-#pokemonTile .label {
-    -fx-padding: 0 10px;
-}

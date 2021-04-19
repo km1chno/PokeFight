@@ -13,7 +13,7 @@ public class PokemonTypeListFilter {
         if (nameSearch.length() > pokemon.name.length())
             return false;
         for (int i = 0; i < nameSearch.length(); i++) {
-            if (nameSearch.charAt(i) != pokemon.name.charAt(i))
+            if (Character.toLowerCase(nameSearch.charAt(i)) != Character.toLowerCase(pokemon.name.charAt(i)))
                 return false;
         }
         return true;

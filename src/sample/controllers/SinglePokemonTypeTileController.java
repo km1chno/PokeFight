@@ -40,12 +40,12 @@ public class SinglePokemonTypeTileController {
 
     public void setPokemon(int id, String name, String url) {
         this.id = id;
-        this.name = name;
+        this.name = name.substring(0, 1).toUpperCase() + name.substring(1);;
         this.url = url;
 
-        pokemonTileNameLabel.setText(name);
-        pokemonTileIdLabel.setText("ID: " + id);
-        pokemonTileImageView.setImage(new Image("file:resources/sprites/pokemon/" + id + ".png"));
+        pokemonTileNameLabel.setText(this.name);
+        pokemonTileIdLabel.setText("ID: " + this.id);
+        pokemonTileImageView.setImage(new Image("file:resources/sprites/pokemon/" + this.id + ".png"));
     }
 
     public void onMoreButtonClick(ActionEvent event) {

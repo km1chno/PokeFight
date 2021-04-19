@@ -32,6 +32,7 @@ public class SceneSwitchController {
         stage = window;
         scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/" + name + ".css")).toExternalForm());
+
         stage.setScene(scene);
         stage.show();
     }
@@ -45,6 +46,7 @@ public class SceneSwitchController {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/singlePokemonDetailsView.css")).toExternalForm());
+
         stage.setScene(scene);
         stage.show();
     }

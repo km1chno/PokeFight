@@ -12,6 +12,7 @@ import sample.model.providers.PokemonTypeListFilter;
 import sample.model.providers.PokemonTypeListProvider;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
 
