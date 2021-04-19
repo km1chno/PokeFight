@@ -1,5 +1,6 @@
 package sample.controllers;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -7,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.model.datamodels.PokemonType;
+import sample.model.providers.PokemonTypeListProvider;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -25,6 +27,15 @@ public class SceneSwitchController {
         stage.show();
     }
 
+    public void switchToView(Stage window, String name) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/" + name + ".fxml")));
+        stage = window;
+        scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/" + name + ".css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void switchToSinglePokemonDetails(ActionEvent event, String url) throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/singlePokemonDetailsView.fxml")));
         root = (Parent) loader.load();
@@ -36,5 +47,30 @@ public class SceneSwitchController {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/singlePokemonDetailsView.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void switchToLibraryView(ActionEvent event) throws IOException {
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        switchToView(event, "loadingView");
+
+        Task<Void> fetchPokemons = new Task<>() {
+            @Override
+            public Void call() {
+                PokemonTypeListProvider.getData();
+                return null;
+            }
+        };
+
+        fetchPokemons.setOnSucceeded(workerStateEvent -> {
+            try {
+                switchToView(window, "libraryView");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Thread thread = new Thread(fetchPokemons);
+        thread.setDaemon(true);
+        thread.start();
     }
 }

@@ -18,7 +18,7 @@ public class WelcomeViewController {
 
     public void welcomeLibraryButtonOnClick(javafx.event.ActionEvent actionEvent) {
         try {
-            sceneController.switchToView(actionEvent, "libraryView");
+            sceneController.switchToLibraryView(actionEvent);
         } catch (Exception e) {
             e.printStackTrace();
         }

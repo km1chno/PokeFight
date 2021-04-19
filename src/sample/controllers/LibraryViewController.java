@@ -6,10 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.TilePane;
 import sample.components.SinglePokemonTypeTileControl;
-import sample.model.datamodels.PokemonType;
 import sample.model.datamodels.PokemonTypeList;
-import sample.model.fetchers.PokemonTypeFetcher;
-import sample.model.fetchers.PokemonTypeListFetcher;
 import sample.model.providers.PokemonTypeListProvider;
 
 import java.net.URL;
@@ -24,25 +21,11 @@ public class LibraryViewController implements Initializable {
     @FXML
     TilePane tilePane;
 
-    public void updateLibrary() {
-        NUMBER_OF_POKEMONS = pokemonList.getCount();
-
-        for (int i = 0; i < NUMBER_OF_POKEMONS; i++)
-            tilePane.getChildren().add(new SinglePokemonTypeTileControl(i+1, pokemonList.getName(i), pokemonList.getUrl(i)));
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Task<Void> fetchPokemons = new Task<>() {
-            @Override
-            public Void call() {
-                pokemonList = PokemonTypeListProvider.getData();
-                return null;
-            }
-        };
-        fetchPokemons.setOnSucceeded(workerStateEvent -> updateLibrary());
-        Thread thread = new Thread(fetchPokemons);
-        thread.setDaemon(true);
-        thread.start();
+        pokemonList = PokemonTypeListProvider.getData();
+        NUMBER_OF_POKEMONS = pokemonList.getCount();
+        for (int i = 0; i < NUMBER_OF_POKEMONS; i++)
+            tilePane.getChildren().add(new SinglePokemonTypeTileControl(i+1, pokemonList.getName(i), pokemonList.getUrl(i)));
     }
 }

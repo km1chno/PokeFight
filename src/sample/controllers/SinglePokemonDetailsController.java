@@ -64,7 +64,7 @@ public class SinglePokemonDetailsController {
 
     public void onSinglePokemonDetailsGoBackClick(ActionEvent event) {
         try {
-            sceneController.switchToView(event, "libraryView");
+            sceneController.switchToLibraryView(event);
         } catch (Exception e) {
             e.printStackTrace();
         }
