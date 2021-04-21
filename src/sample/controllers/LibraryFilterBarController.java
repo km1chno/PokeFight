@@ -4,10 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import sample.model.providers.PokemonTypeListFilter;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.function.BiFunction;
+import java.util.function.UnaryOperator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LibraryFilterBarController {
     private BiFunction<Integer, PokemonTypeListFilter, Void> libraryUpdateFunction;
@@ -24,26 +29,24 @@ public class LibraryFilterBarController {
     @FXML
     Button filterBarGoBackButton;
 
-    public void setLibraryUpdateFunction(BiFunction<Integer, PokemonTypeListFilter, Void> f) {
-        libraryUpdateFunction = f;
-    }
-
-    public void onFilterBarSubmitButtonClick(ActionEvent event) {
+    private void submit() {
         String name = filterBarNameInput.getText();
         String countString = filterBarCountInput.getText();
 
         if (countString.equals(""))
             countString = "2000";
 
-        if (countString.length() > 1 && countString.charAt(0) == '0')
-            return;
-        for (int i = 0; i < countString.length(); i++) {
-            if (countString.charAt(i) < '0' || countString.charAt(i) > '9')
-                return;
-        }
         int count = Integer.parseInt(countString);
         libraryUpdateFunction.apply(count, new PokemonTypeListFilter(name));
     }
+
+    public void setLibraryUpdateFunction(BiFunction<Integer, PokemonTypeListFilter, Void> f) {
+        libraryUpdateFunction = f;
+    }
+
+    public void onFilterBarSubmitButtonClick(ActionEvent event) { submit(); }
+
+    public void onTextFieldEnter(ActionEvent event) { submit(); }
 
     public void onFilterBarGoBackButtonClick(ActionEvent event) {
         try {
@@ -51,5 +54,12 @@ public class LibraryFilterBarController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void configureNumericTextField(TextField textField) {
+        UnaryOperator<TextFormatter.Change> filter = change -> change.getControlNewText().matches("\\d*") ? change : null;
+        TextFormatter<TextFormatter.Change> formatter = new TextFormatter<>(filter);
+
+        textField.setTextFormatter(formatter);
     }
 }

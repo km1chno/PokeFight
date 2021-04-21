@@ -40,6 +40,7 @@ public class LibraryViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         filterBar = new LibraryFilterBarControl();
         filterBar.getController().setLibraryUpdateFunction(updateLibraryWithFilter);
+        filterBar.getController().configureNumericTextField(filterBar.getController().filterBarCountInput);
 
         anchorPane.getChildren().add(filterBar);
         pokemonList = PokemonTypeListProvider.getData();
