@@ -3,9 +3,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.LoadingViewController">
    <children>
-      <Label fx:id="loadingViewLabel" layoutX="229.0" layoutY="392.0" prefHeight="16.0" prefWidth="873.0" text="Loading..." />
+      <Label fx:id="loadingViewLabel" layoutX="221.0" layoutY="383.0" prefHeight="17.0" prefWidth="861.0" text="Loading..." />
    </children>
 </AnchorPane>
