@@ -12,3 +12,13 @@
     -fx-pref-columns: 2;
     -fx-pref-tile-width: 632px;
 }
+
+.button {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-background-color: #111111;
+}
+
+#filterBar {
+    -fx-background-color: blue;
+}
