@@ -7,12 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import sample.model.providers.PokemonTypeListFilter;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.function.BiFunction;
 import java.util.function.UnaryOperator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LibraryFilterBarController {
     private BiFunction<Integer, PokemonTypeListFilter, Void> libraryUpdateFunction;
