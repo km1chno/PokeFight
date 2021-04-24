@@ -1,0 +1,11 @@
+.label {
+    -fx-alignment: center;
+}
+
+#mainContainer {
+    -fx-background-color: #319e41;
+}
+
+#statsLabel {
+    -fx-font-size: 2em;
+}

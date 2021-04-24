@@ -1,16 +1,21 @@
 package sample.model.datamodels;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PokemonType {
     private final int id;
     private final int height;
     private final int weight;
     private final String name;
     private final TypeResult[] types;
+    private final StatResult[] stats;
 
     PokemonType() {
         id = weight = height = 0;
         name = "";
         types = new TypeResult[0];
+        stats = new StatResult[0];
     }
 
     public int getId() {
@@ -34,6 +39,13 @@ public class PokemonType {
         for (int i = 0; i < types.length; i++)
             typesArr[i] = types[i].type;
         return typesArr;
+    }
+
+    public Map<String, Double> getStats() {
+        HashMap<String, Double> map = new HashMap<String, Double>();
+        for (StatResult stat: stats)
+            map.put(stat.stat.name, (double) stat.base_stat);
+        return map;
     }
 }
 
