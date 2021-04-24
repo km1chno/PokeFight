@@ -6,6 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import sample.controllers.SinglePokemonTypeTileController;
 import sample.model.datamodels.PokemonType;
 
+import java.util.Objects;
+
 public class SinglePokemonTypeTileControl extends AnchorPane {
     SinglePokemonTypeTileController controller;
     private int id;
@@ -21,12 +23,12 @@ public class SinglePokemonTypeTileControl extends AnchorPane {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/singlePokemonTypeTile.fxml"));
+            this.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/singlePokemonTypeTile.css")).toExternalForm());
 
             controller = new SinglePokemonTypeTileController();
 
             loader.setController(controller);
             Node node = loader.load();
-
             this.getChildren().add(node);
 
             controller.setPokemon(id, name, url);
