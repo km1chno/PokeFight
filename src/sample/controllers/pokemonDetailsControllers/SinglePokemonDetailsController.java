@@ -9,10 +9,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import sample.components.pokemonDetailsControls.MainInfoBoxControl;
+import sample.components.pokemonDetailsControls.TypesBoxControl;
 import sample.controllers.SceneSwitchController;
 import sample.model.datamodels.PokemonType;
 import sample.model.fetchers.PokemonTypeFetcher;
 
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,6 +23,8 @@ public class SinglePokemonDetailsController implements Initializable {
     private String url;
 
     private final MainInfoBoxControl mainInfoBoxControl = new MainInfoBoxControl();
+    private final TypesBoxControl typesBoxControl = new TypesBoxControl();
+
     private final SceneSwitchController sceneController = new SceneSwitchController();
 
     public SinglePokemonDetailsController() {
@@ -36,10 +40,15 @@ public class SinglePokemonDetailsController implements Initializable {
         mainInfoBoxControl.relocate(20, 20);
         anchorPane.getChildren().add(mainInfoBoxControl);
         anchorPane.getChildren().get(anchorPane.getChildren().size()-1).toFront();
+
+        typesBoxControl.relocate(590, 20);
+        anchorPane.getChildren().add(typesBoxControl);
+        anchorPane.getChildren().get(anchorPane.getChildren().size()-1).toFront();
     }
 
     public void updateInfo() {
         mainInfoBoxControl.setPokemon(pokemon);
+        typesBoxControl.setIcons(pokemon.getTypes());
     }
 
     public void setPokemon(String url) {
