@@ -8,6 +8,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="filterBarNameInput" layoutX="735.0" layoutY="65.0" onAction="#onTextFieldEnter" prefHeight="38.0" prefWidth="281.0" />
+      <!--
       <Button layoutX="233.0" layoutY="23.0" mnemonicParsing="false" text="1" />
       <Button layoutX="233.0" layoutY="52.0" mnemonicParsing="false" text="2" />
       <Button layoutX="233.0" layoutY="83.0" mnemonicParsing="false" text="3" />
@@ -26,6 +27,7 @@
       <Button layoutX="439.0" layoutY="24.0" mnemonicParsing="false" text="16" />
       <Button layoutX="439.0" layoutY="53.0" mnemonicParsing="false" text="17" />
       <Button layoutX="439.0" layoutY="84.0" mnemonicParsing="false" text="18" />
+      -->
       <Label layoutX="735.0" layoutY="17.0" prefHeight="38.0" prefWidth="281.0" text="Szukaj po nazwie:" />
       <TextField fx:id="filterBarCountInput" layoutX="523.0" layoutY="65.0" onAction="#onTextFieldEnter" prefHeight="38.0" prefWidth="168.0" />
       <Label layoutX="523.0" layoutY="17.0" prefHeight="38.0" prefWidth="212.0" text="Pokaż pierwsze n wyników:" />

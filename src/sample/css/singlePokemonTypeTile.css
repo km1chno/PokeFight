@@ -6,7 +6,7 @@
 }
 
 #pokemonTileNameLabel {
-    -fx-font-size: 2em;
+    -fx-font-size: 30px;
 }
 
 #pokemonTile .label {

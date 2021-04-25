@@ -7,12 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import sample.model.providers.PokemonTypeListFilter;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.function.BiFunction;
 import java.util.function.UnaryOperator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LibraryFilterBarController {
     private BiFunction<Integer, PokemonTypeListFilter, Void> libraryUpdateFunction;
@@ -28,6 +25,14 @@ public class LibraryFilterBarController {
 
     @FXML
     Button filterBarGoBackButton;
+
+    private void goHome(ActionEvent event) {
+        try {
+            new SceneSwitchController().switchToView(event, "welcomeView");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void submit() {
         String name = filterBarNameInput.getText();
@@ -48,13 +53,7 @@ public class LibraryFilterBarController {
 
     public void onTextFieldEnter(ActionEvent event) { submit(); }
 
-    public void onFilterBarGoBackButtonClick(ActionEvent event) {
-        try {
-            new SceneSwitchController().switchToView(event, "welcomeView");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public void onFilterBarGoBackButtonClick(ActionEvent event) { goHome(event); }
 
     public void configureNumericTextField(TextField textField) {
         UnaryOperator<TextFormatter.Change> filter = change -> change.getControlNewText().matches("\\d*") ? change : null;

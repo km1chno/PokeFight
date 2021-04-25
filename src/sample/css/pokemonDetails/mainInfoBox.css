@@ -1,0 +1,31 @@
+#mainContainer {
+    -fx-background-color: #319e41;
+}
+
+#imageWrapper {
+    -fx-border-color: #d5de2c;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+}
+
+#nameLabel {
+    -fx-font-size: 2em;
+    -fx-alignment: center;
+}
+
+#idLabel {
+    -fx-font-size: 1.5em;
+    -fx-alignment: center;
+}
+
+#heightLabel {
+    -fx-font-size: 1.5em;
+    -fx-alignment: center;
+}
+
+#weightLabel {
+    -fx-font-size: 1.5em;
+    -fx-alignment: center;
+}
+
+

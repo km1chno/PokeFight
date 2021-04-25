@@ -6,8 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import sample.model.datamodels.PokemonType;
+import sample.controllers.pokemonDetailsControllers.SinglePokemonDetailsController;
 import sample.model.providers.PokemonTypeListProvider;
 
 import java.io.IOException;
@@ -17,6 +18,18 @@ public class SceneSwitchController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    private void escapeToView(Stage window, String name) {
+        scene.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ESCAPE) {
+                try {
+                    switchToView(window, name);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     public void switchToView(ActionEvent event, String name) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/" + name + ".fxml")));
@@ -38,7 +51,7 @@ public class SceneSwitchController {
     }
 
     public void switchToSinglePokemonDetails(ActionEvent event, String url) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/singlePokemonDetailsView.fxml")));
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/pokemonDetailsViews/singlePokemonDetailsView.fxml")));
         root = (Parent) loader.load();
         SinglePokemonDetailsController pokemonDetailsController = loader.getController();
         pokemonDetailsController.setPokemon(url);
@@ -66,6 +79,7 @@ public class SceneSwitchController {
         fetchPokemons.setOnSucceeded(workerStateEvent -> {
             try {
                 switchToView(window, "libraryView");
+                escapeToView(window, "welcomeView");
             } catch (IOException e) {
                 e.printStackTrace();
             }

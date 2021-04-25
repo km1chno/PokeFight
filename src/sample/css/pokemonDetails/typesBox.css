@@ -1,0 +1,12 @@
+#mainContainer {
+    -fx-background-color: #319e41;
+}
+
+#iconsPane {
+    -fx-background-color: #c9c8c3;
+}
+
+#typesLabel {
+    -fx-font-size: 2em;
+    -fx-alignment: center;
+}
