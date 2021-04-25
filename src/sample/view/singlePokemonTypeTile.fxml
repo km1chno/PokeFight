@@ -5,11 +5,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane fx:id="pokemonTile" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="pokemonTileNameLabel" layoutX="73.0" layoutY="110.0" prefHeight="59.0" prefWidth="253.0" text="Label" />
-      <Label fx:id="pokemonTileIdLabel" layoutX="73.0" layoutY="206.0" prefHeight="16.0" prefWidth="253.0" text="Label" />
+      <Pane fx:id="textWrapper" layoutX="72.0" layoutY="82.0" prefHeight="154.0" prefWidth="253.0">
+         <children>
+            <Label fx:id="pokemonTileNameLabel" layoutY="14.0" prefHeight="75.0" prefWidth="253.0" text="Label" />
+            <Label fx:id="pokemonTileIdLabel" layoutY="102.0" prefHeight="16.0" prefWidth="253.0" text="Label" />
+         </children>
+      </Pane>
       <Button fx:id="pokemonTileMoreButton" layoutX="399.0" layoutY="293.0" mnemonicParsing="false" onAction="#onMoreButtonClick" prefHeight="50.0" prefWidth="108.0" text="MORE" />
       <BorderPane fx:id="pokemonTileImageViewWrapper" layoutX="353.0" layoutY="59.0" prefHeight="200.0" prefWidth="200.0">
          <center>

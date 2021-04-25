@@ -31,6 +31,10 @@ public class MainInfoBoxControl extends AnchorPane {
         controller.setPokemon(pokemon);
     }
 
+    public void setBackgroundColor(String type) {
+        controller.setBackgroundColor(type);
+    }
+
     public MainInfoBoxController getController() {
         return controller;
     }

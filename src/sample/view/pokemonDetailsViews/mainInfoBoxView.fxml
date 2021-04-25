@@ -12,9 +12,17 @@
             <ImageView fx:id="spriteImageView" fitHeight="433.0" fitWidth="440.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Label fx:id="nameLabel" layoutX="47.0" layoutY="31.0" prefHeight="63.0" prefWidth="457.0" text="Name" />
-      <Label fx:id="idLabel" layoutX="47.0" layoutY="619.0" prefHeight="22.0" prefWidth="457.0" text="Label" />
-      <Label fx:id="heightLabel" layoutX="47.0" layoutY="651.0" prefHeight="16.0" prefWidth="457.0" text="Label" />
-      <Label fx:id="weightLabel" layoutX="47.0" layoutY="680.0" prefHeight="16.0" prefWidth="457.0" text="Label" />
+      <Pane fx:id="nameWrapper" layoutX="93.0" layoutY="45.0" prefHeight="45.0" prefWidth="365.0">
+         <children>
+            <Label fx:id="nameLabel" layoutY="-2.0" prefHeight="51.0" prefWidth="365.0" text="Name" />
+         </children>
+      </Pane>
+      <Pane fx:id="lowerInfoWrapper" layoutX="140.0" layoutY="583.0" prefHeight="129.0" prefWidth="271.0">
+         <children>
+            <Label fx:id="idLabel" layoutY="14.0" prefHeight="22.0" prefWidth="271.0" text="Label" />
+            <Label fx:id="heightLabel" layoutY="97.0" prefHeight="16.0" prefWidth="271.0" text="Label" />
+            <Label fx:id="weightLabel" layoutY="56.0" prefHeight="16.0" prefWidth="271.0" text="Label" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

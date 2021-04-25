@@ -2,6 +2,7 @@ package sample.controllers.pokemonDetailsControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Arrays;
@@ -48,6 +49,9 @@ public class StatsBoxController {
     @FXML
     Label spLabel;
 
+    @FXML
+    Pane mainContainer;
+
     public void setStats(Map<String, Double> stats) {
         List<Rectangle> rectangles = Arrays.asList(hpRect, aRect, dRect, saRect, sdRect, spRect);
         List<Label> labels = Arrays.asList(hpLabel, aLabel, dLabel, saLabel, sdLabel, spLabel);
@@ -65,5 +69,9 @@ public class StatsBoxController {
             label.setLayoutY(label.getLayoutY() + dy);
             label.setText(String.valueOf(base_stat));
         }
+    }
+
+    public void setBackgroundColor(String type) {
+        mainContainer.getStyleClass().add(type);
     }
 }

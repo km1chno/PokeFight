@@ -33,6 +33,10 @@ public class TypesBoxControl extends AnchorPane {
         controller.setIcons(types);
     }
 
+    public void setBackgroundColor(String type) {
+        controller.setBackgroundColor(type);
+    }
+
     public TypesBoxController getController() {
         return controller;
     }

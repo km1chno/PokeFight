@@ -26,6 +26,9 @@ public class MainInfoBoxController {
     @FXML
     private ImageView spriteImageView;
 
+    @FXML
+    private Pane mainContainer;
+
     public void setPokemon(PokemonType pokemon) {
         nameLabel.setText(pokemon.getName());
         idLabel.setText("ID: " + pokemon.getId());
@@ -33,5 +36,9 @@ public class MainInfoBoxController {
         weightLabel.setText("Weight: " + pokemon.getWeight());
 
         spriteImageView.setImage(new Image("file:resources/sprites/pokemon/" + pokemon.getId() + ".png"));
+    }
+
+    public void setBackgroundColor(String type) {
+        mainContainer.getStyleClass().add(type);
     }
 }

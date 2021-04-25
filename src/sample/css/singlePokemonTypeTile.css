@@ -14,12 +14,23 @@
 }
 
 #pokemonTileImageViewWrapper {
-    -fx-border-color: #d5de2c;
+    -fx-border-color: black;
     -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #f0efda;
+    -fx-background-radius: 20px;
 }
 
 #pokemonTileMoreButton {
     -fx-font-size: 20px;
     -fx-text-fill: white;
     -fx-background-color: #111111;
+}
+
+#textWrapper {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #f0efda;
+    -fx-background-radius: 20px;
 }

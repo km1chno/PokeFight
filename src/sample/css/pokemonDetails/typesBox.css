@@ -1,12 +1,27 @@
 #mainContainer {
-    -fx-background-color: #319e41;
+    -fx-background-radius: 20px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-border-color: black;
 }
 
 #iconsPane {
-    -fx-background-color: #c9c8c3;
+    -fx-background-color: #f0efda;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
 }
 
 #typesLabel {
     -fx-font-size: 2em;
     -fx-alignment: center;
+}
+
+#titleWrapper {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #f0efda;
+    -fx-background-radius: 20px;
 }

@@ -3,9 +3,28 @@
 }
 
 #mainContainer {
-    -fx-background-color: #319e41;
+    -fx-background-radius: 20px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-border-color: black;
 }
 
 #statsLabel {
     -fx-font-size: 2em;
+}
+
+#titleWrapper {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #f0efda;
+    -fx-background-radius: 20px;
+}
+
+#contentWrapper {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #f0efda;
+    -fx-background-radius: 20px;
 }

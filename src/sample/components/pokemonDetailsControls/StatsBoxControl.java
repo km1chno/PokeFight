@@ -31,6 +31,10 @@ public class StatsBoxControl extends AnchorPane {
         controller.setStats(stats);
     }
 
+    public void setBackgroundColor(String type) {
+        controller.setBackgroundColor(type);
+    }
+
     public StatsBoxController getController() {
         return controller;
     }

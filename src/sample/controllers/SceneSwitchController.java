@@ -58,7 +58,7 @@ public class SceneSwitchController {
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/singlePokemonDetailsView.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/pokemonDetails/singlePokemonDetailsView.css")).toExternalForm());
 
         stage.setScene(scene);
         stage.show();

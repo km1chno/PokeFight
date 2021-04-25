@@ -2,28 +2,37 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane fx:id="mainContainer" prefHeight="370.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="statsLabel" layoutY="23.0" prefHeight="53.0" prefWidth="560.0" text="Stats" />
-      <Rectangle fx:id="hpRect" arcHeight="5.0" arcWidth="5.0" fill="#ff591f" height="200.0" layoutX="20.0" layoutY="106.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-      <Rectangle fx:id="aRect" arcHeight="5.0" arcWidth="5.0" fill="#ffaa1f" height="200.0" layoutX="110.0" layoutY="106.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-      <Rectangle fx:id="dRect" arcHeight="5.0" arcWidth="5.0" fill="#e2ff1f" height="200.0" layoutX="200.0" layoutY="106.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-      <Rectangle fx:id="saRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="290.0" layoutY="106.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-      <Rectangle fx:id="sdRect" arcHeight="5.0" arcWidth="5.0" fill="#1ffffc" height="200.0" layoutX="380.0" layoutY="106.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-      <Rectangle fx:id="spRect" arcHeight="5.0" arcWidth="5.0" fill="#d31fff" height="200.0" layoutX="470.0" layoutY="106.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
-      <Label layoutX="21.0" layoutY="326.0" prefHeight="16.0" prefWidth="70.0" text="HP" />
-      <Label layoutX="110.0" layoutY="326.0" prefHeight="16.0" prefWidth="70.0" text="A" />
-      <Label layoutX="200.0" layoutY="326.0" prefWidth="70.0" text="D" />
-      <Label layoutX="290.0" layoutY="326.0" prefWidth="70.0" text="SA" />
-      <Label layoutX="380.0" layoutY="326.0" prefWidth="70.0" text="SD" />
-      <Label layoutX="470.0" layoutY="326.0" prefWidth="70.0" text="SP" />
-      <Label fx:id="hpLabel" layoutX="20.0" layoutY="82.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
-      <Label fx:id="aLabel" layoutX="110.0" layoutY="82.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
-      <Label fx:id="dLabel" layoutX="200.0" layoutY="82.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
-      <Label fx:id="saLabel" layoutX="290.0" layoutY="82.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
-      <Label fx:id="sdLabel" layoutX="380.0" layoutY="82.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
-      <Label fx:id="spLabel" layoutX="470.0" layoutY="82.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
+      <Pane fx:id="contentWrapper" layoutX="8.0" layoutY="82.0" prefHeight="276.0" prefWidth="544.0">
+         <children>
+            <Rectangle fx:id="hpRect" arcHeight="5.0" arcWidth="5.0" fill="#ff591f" height="200.0" layoutX="12.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Rectangle fx:id="aRect" arcHeight="5.0" arcWidth="5.0" fill="#ffaa1f" height="200.0" layoutX="102.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Rectangle fx:id="dRect" arcHeight="5.0" arcWidth="5.0" fill="#e2ff1f" height="200.0" layoutX="192.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Rectangle fx:id="saRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="282.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Rectangle fx:id="sdRect" arcHeight="5.0" arcWidth="5.0" fill="#1ffffc" height="200.0" layoutX="372.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Rectangle fx:id="spRect" arcHeight="5.0" arcWidth="5.0" fill="#d31fff" height="200.0" layoutX="462.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+            <Label layoutX="13.0" layoutY="252.0" prefHeight="16.0" prefWidth="70.0" text="HP" />
+            <Label layoutX="102.0" layoutY="252.0" prefHeight="16.0" prefWidth="70.0" text="A" />
+            <Label layoutX="192.0" layoutY="252.0" prefWidth="70.0" text="D" />
+            <Label layoutX="282.0" layoutY="252.0" prefWidth="70.0" text="SA" />
+            <Label layoutX="372.0" layoutY="252.0" prefWidth="70.0" text="SD" />
+            <Label layoutX="462.0" layoutY="252.0" prefWidth="70.0" text="SP" />
+            <Label fx:id="hpLabel" layoutX="12.0" layoutY="8.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
+            <Label fx:id="aLabel" layoutX="102.0" layoutY="8.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
+            <Label fx:id="dLabel" layoutX="192.0" layoutY="8.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
+            <Label fx:id="saLabel" layoutX="282.0" layoutY="8.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
+            <Label fx:id="sdLabel" layoutX="372.0" layoutY="8.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
+            <Label fx:id="spLabel" layoutX="462.0" layoutY="8.0" prefHeight="16.0" prefWidth="70.0" text="Label" />
+         </children>
+      </Pane>
+      <Pane fx:id="titleWrapper" layoutX="134.0" layoutY="21.0" prefHeight="53.0" prefWidth="293.0">
+         <children>
+            <Label fx:id="statsLabel" prefHeight="53.0" prefWidth="293.0" text="Base Stats" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

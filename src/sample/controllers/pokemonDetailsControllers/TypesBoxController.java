@@ -16,6 +16,9 @@ public class TypesBoxController {
     @FXML
     Pane iconsPane;
 
+    @FXML
+    Pane mainContainer;
+
     public void setIcons(Result[] types) {
         HashSet<String> activeTypes = new HashSet<>();
         for (Result type: types)
@@ -36,5 +39,9 @@ public class TypesBoxController {
                 imageView.setOpacity(0.3);
             iconsPane.getChildren().add(imageView);
         }
+    }
+
+    public void setBackgroundColor(String type) {
+        mainContainer.getStyleClass().add(type);
     }
 }

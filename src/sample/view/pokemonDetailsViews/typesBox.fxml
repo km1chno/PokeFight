@@ -6,7 +6,11 @@
 
 <AnchorPane fx:id="mainContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="typesLabel" layoutY="29.0" prefHeight="59.0" prefWidth="670.0" text="TYPES" />
       <Pane fx:id="iconsPane" layoutX="20.0" layoutY="110.0" prefHeight="240.0" prefWidth="630.0" />
+      <Pane fx:id="titleWrapper" layoutX="179.0" layoutY="33.0" prefHeight="49.0" prefWidth="312.0">
+         <children>
+            <Label fx:id="typesLabel" prefHeight="49.0" prefWidth="312.0" text="Types" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

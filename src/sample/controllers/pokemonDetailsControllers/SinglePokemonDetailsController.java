@@ -56,6 +56,11 @@ public class SinglePokemonDetailsController implements Initializable {
         mainInfoBoxControl.setPokemon(pokemon);
         typesBoxControl.setIcons(pokemon.getTypes());
         statsBox.setIcons(pokemon.getStats());
+
+        String type = pokemon.getTypes()[0].name;
+        mainInfoBoxControl.setBackgroundColor(type);
+        statsBox.setBackgroundColor(type);
+        typesBoxControl.setBackgroundColor(type);
     }
 
     public void setPokemon(String url) {

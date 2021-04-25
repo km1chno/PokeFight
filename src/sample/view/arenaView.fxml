@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.ArenaViewController">
    <children>
-      <Label fx:id="arenaTitleLabel" alignment="CENTER" layoutY="72.0" prefHeight="17.0" prefWidth="1280.0" text="Battle to the death" />
+      <Label fx:id="arenaTitleLabel" alignment="CENTER" layoutY="72.0" prefHeight="17.0" prefWidth="1280.0" text="Fight to the death" />
       <Button fx:id="menuButton" layoutX="1011.0" layoutY="651.0" mnemonicParsing="false" onAction="#menuButtonOnClick" text="Return to menu" />
    </children>
 </AnchorPane>
