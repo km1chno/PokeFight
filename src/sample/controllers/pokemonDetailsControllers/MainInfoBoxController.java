@@ -32,8 +32,8 @@ public class MainInfoBoxController {
     public void setPokemon(PokemonType pokemon) {
         nameLabel.setText(pokemon.getName());
         idLabel.setText("ID: " + pokemon.getId());
-        heightLabel.setText("Height: " + pokemon.getHeight());
-        weightLabel.setText("Weight: " + pokemon.getWeight());
+        heightLabel.setText("Height: " + pokemon.getHeight() * 10 + " cm");
+        weightLabel.setText("Weight: " + pokemon.getWeight() * 100 + " g");
 
         spriteImageView.setImage(new Image("file:resources/sprites/pokemon/" + pokemon.getId() + ".png"));
     }

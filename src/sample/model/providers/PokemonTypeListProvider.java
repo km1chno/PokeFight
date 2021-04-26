@@ -6,7 +6,7 @@ import sample.model.fetchers.PokemonTypeListFetcher;
 public class PokemonTypeListProvider {
     private static PokemonTypeList pokemonList = null;
     private static boolean upToDate = false;
-    private static String url = "https://pokeapi.co/api/v2/pokemon?limit=898";
+    private static String url = "https://pokeapi.co/api/v2/pokemon?limit=200";
 
     private static void fetchData() {
         pokemonList = (PokemonTypeList) new PokemonTypeListFetcher().fetchAndParse(url);
