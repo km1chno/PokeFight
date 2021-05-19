@@ -1,0 +1,13 @@
+#pokemonTilePane {
+    -fx-background-color: inherit;
+}
+
+.redBordered {
+    -fx-border-color: red;
+    -fx-border-width: 1px;
+}
+
+.blueBordered {
+    -fx-border-color: blue;
+    -fx-border-width: 1px;
+}

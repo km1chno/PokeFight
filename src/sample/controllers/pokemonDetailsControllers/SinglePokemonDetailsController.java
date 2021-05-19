@@ -14,6 +14,7 @@ import sample.components.pokemonDetailsControls.TypesBoxControl;
 import sample.controllers.SceneSwitchController;
 import sample.model.datamodels.PokemonType;
 import sample.model.fetchers.PokemonTypeFetcher;
+import sample.model.providers.PokemonTypeProvider;
 
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -63,13 +64,11 @@ public class SinglePokemonDetailsController implements Initializable {
         typesBoxControl.setBackgroundColor(type);
     }
 
-    public void setPokemon(String url) {
-        this.url = url;
-
+    public void setPokemon(int id) {
         Task<Void> fetchPokemon = new Task<>() {
             @Override
             public Void call() {
-                pokemon = (PokemonType) new PokemonTypeFetcher().fetchAndParse(url);
+                pokemon = PokemonTypeProvider.getData(id);
                 return null;
             }
         };

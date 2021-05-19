@@ -8,7 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import sample.controllers.fightPrepControllers.FightPrepViewController;
 import sample.controllers.pokemonDetailsControllers.SinglePokemonDetailsController;
+import sample.model.datamodels.PokemonType;
 import sample.model.providers.PokemonTypeListProvider;
 
 import java.io.IOException;
@@ -50,11 +52,11 @@ public class SceneSwitchController {
         stage.show();
     }
 
-    public void switchToSinglePokemonDetails(ActionEvent event, String url) throws IOException {
+    public void switchToSinglePokemonDetails(ActionEvent event, int id) throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/pokemonDetailsViews/singlePokemonDetailsView.fxml")));
         root = (Parent) loader.load();
         SinglePokemonDetailsController pokemonDetailsController = loader.getController();
-        pokemonDetailsController.setPokemon(url);
+        pokemonDetailsController.setPokemon(id);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -88,5 +90,37 @@ public class SceneSwitchController {
         Thread thread = new Thread(fetchPokemons);
         thread.setDaemon(true);
         thread.start();
+    }
+
+    public void switchToFighterChooseView(ActionEvent event) {
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../view/fighterChooseViews/fighterChooseView.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/fighterChoose/fighterChooseView.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToFightPrepView(ActionEvent event, PokemonType left, PokemonType right) {
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/fightPrepViews/fightPrepView.fxml")));
+
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FightPrepViewController fightPrepController = loader.getController();
+        fightPrepController.setPokemons(left, right);
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/fightPrep/fightPrepView.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
     }
 }

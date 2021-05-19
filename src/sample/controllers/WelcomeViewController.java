@@ -26,7 +26,7 @@ public class WelcomeViewController {
 
     public void welcomeArenaButtonOnClick(javafx.event.ActionEvent actionEvent) {
         try {
-            sceneController.switchToView(actionEvent, "arenaView");
+            sceneController.switchToFighterChooseView(actionEvent);
         } catch (Exception e) {
             e.printStackTrace();
         }

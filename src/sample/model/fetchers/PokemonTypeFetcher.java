@@ -47,6 +47,10 @@ public class PokemonTypeFetcher implements Fetcher {
         return "";
     }
 
+    public String fetch(int id) {
+        return fetch("https://pokeapi.co/api/v2/pokemon/" + id);
+    }
+
     public Object parse(String content) {
         Gson gson = new Gson();
         return gson.fromJson(content, dataClass);
@@ -55,4 +59,6 @@ public class PokemonTypeFetcher implements Fetcher {
     public Object fetchAndParse(String urlString) {
         return parse(fetch(urlString));
     }
+
+    public Object fetchAndParse(int id) { return parse(fetch(id)); }
 }

@@ -50,7 +50,7 @@ public class SinglePokemonTypeTileController {
 
     public void onMoreButtonClick(ActionEvent event) {
         try {
-            switchController.switchToSinglePokemonDetails(event, url);
+            switchController.switchToSinglePokemonDetails(event, id);
         } catch (IOException e) {
             e.printStackTrace();
         }
