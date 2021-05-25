@@ -1,5 +1,6 @@
 package sample.model.datamodels;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +47,13 @@ public class PokemonType {
         for (StatResult stat: stats)
             map.put(stat.stat.name, (double) stat.base_stat);
         return map;
+    }
+
+    public ArrayList<Integer> getStatsArray() {
+        ArrayList<Integer> array = new ArrayList<>();
+        for (StatResult stat: stats)
+            array.add(stat.base_stat);
+        return array;
     }
 }
 
