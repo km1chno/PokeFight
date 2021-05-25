@@ -54,11 +54,4 @@ public class LibraryFilterBarController {
     public void onTextFieldEnter(ActionEvent event) { submit(); }
 
     public void onFilterBarGoBackButtonClick(ActionEvent event) { goHome(event); }
-
-    public void configureNumericTextField(TextField textField) {
-        UnaryOperator<TextFormatter.Change> filter = change -> change.getControlNewText().matches("\\d*") ? change : null;
-        TextFormatter<TextFormatter.Change> formatter = new TextFormatter<>(filter);
-
-        textField.setTextFormatter(formatter);
-    }
 }

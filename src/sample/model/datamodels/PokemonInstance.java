@@ -49,7 +49,7 @@ public class PokemonInstance {
         lvl = exp = IVhp = IVattack = IVdefense = IVspAttack = IVspDef = IVspeed = EV = hp = attack = defense = spAttack = spDef = speed = 0;
     }
 
-    PokemonInstance(PokemonType pokemonType, Move[] moves, int lvl, int exp, ArrayList<Integer> IV) throws IncorrectStatsException {
+    public PokemonInstance(PokemonType pokemonType, Move[] moves, int lvl, int exp, ArrayList<Integer> IV) throws IncorrectStatsException {
         if (pokemonType == null || moves == null || moves.length != 4 || exp < 0 || lvl > 100 || lvl < 1 || IV == null || IV.size() != 6) {
             throw new IncorrectStatsException();
         }
@@ -95,5 +95,19 @@ public class PokemonInstance {
     public List<Integer> getStats() {
         // in order: hp, attack, defense, specialAttack, specialDefense, speed
         return Arrays.asList(hp, attack, defense, spAttack, spDef, speed);
+    }
+
+    public void print() {
+        System.out.println("Pokemon type name: " + pokemonType.getName());
+        System.out.println("Level: " + lvl);
+        System.out.println("Experience: " + exp);
+        System.out.println("IV stats: " + IVhp + ", " + IVattack + ", " + IVdefense + ", " + IVspAttack + ", " + IVspDef + ", " + IVspeed);
+        System.out.println("EV: " + EV);
+        System.out.println("Calculated Stats: " + hp + ", " + attack + ", " + defense + ", " + spAttack + ", " + spDef + ", " + speed);
+        System.out.print("Moves: ");
+        System.out.print(( (moves[0] == null) ? "null, " : moves[0].getName() + ": " + moves[0].getPower() + ", "));
+        System.out.print(( (moves[1] == null) ? "null, " : moves[1].getName() + ": " + moves[1].getPower() + ", "));
+        System.out.print(( (moves[2] == null) ? "null, " : moves[2].getName() + ": " + moves[2].getPower() + ", "));
+        System.out.println(( (moves[3] == null) ? "null" : moves[3].getName() + ": " + moves[3].getPower()));
     }
 }

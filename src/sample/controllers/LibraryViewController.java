@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import sample.components.LibraryFilterBarControl;
 import sample.components.SinglePokemonTypeTileControl;
+import sample.model.Utils;
 import sample.model.datamodels.PokemonTypeList;
 import sample.model.providers.PokemonTypeListFilter;
 import sample.model.providers.PokemonTypeListProvider;
@@ -44,7 +45,7 @@ public class LibraryViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         filterBar = new LibraryFilterBarControl();
         filterBar.getController().setLibraryUpdateFunction(updateLibraryWithFilter);
-        filterBar.getController().configureNumericTextField(filterBar.getController().filterBarCountInput);
+        Utils.configureNumericTextField(filterBar.getController().filterBarCountInput);
         filterBar.setStyle("-fx-background-color: #54b66e");
 
         anchorPane.getChildren().add(filterBar);
