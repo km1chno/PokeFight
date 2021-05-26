@@ -7,31 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="javafx-fxml">
-        <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/16/javafx-fxml-16.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/16/javafx-fxml-16-linux.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/16/javafx-controls-16.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/16/javafx-controls-16-linux.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/16/javafx-graphics-16.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/16/javafx-graphics-16-linux.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/16/javafx-base-16.jar!/" />
-          <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/16/javafx-base-16-linux.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/gson-2.8.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" exported="" name="gson-2.8.2" level="project" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
   </component>
 </module>
