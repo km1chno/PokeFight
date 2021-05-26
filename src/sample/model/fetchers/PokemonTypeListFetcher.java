@@ -2,6 +2,7 @@ package sample.model.fetchers;
 
 import com.google.gson.Gson;
 import sample.model.datamodels.PokemonTypeList;
+import sample.model.exceptions.HttpException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class PokemonTypeListFetcher implements Fetcher {
     private final Class<PokemonTypeList> dataClass = PokemonTypeList.class;
 
     @Override
-    public String fetch(String urlString) {
+    public String fetch(String urlString) throws HttpException {
         URL url;
 
         try {
@@ -23,7 +24,10 @@ public class PokemonTypeListFetcher implements Fetcher {
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json");
 
-            //int status = connection.getResponseCode(); // TO-DO - create exceptions for non-success codes
+            int status = connection.getResponseCode(); // TO-DO - create exceptions for non-success codes
+            if (status != 200) {
+                throw new HttpException(status);
+            }
 
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
@@ -52,7 +56,7 @@ public class PokemonTypeListFetcher implements Fetcher {
         return gson.fromJson(content, dataClass);
     }
 
-    public Object fetchAndParse(String urlString) {
+    public Object fetchAndParse(String urlString) throws HttpException {
         return parse(fetch(urlString));
     }
 }

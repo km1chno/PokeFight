@@ -14,6 +14,7 @@ import sample.components.pokemonDetailsControls.StatsBoxControl;
 import sample.components.pokemonDetailsControls.TypesBoxControl;
 import sample.controllers.SceneSwitchController;
 import sample.model.datamodels.PokemonType;
+import sample.model.exceptions.HttpException;
 import sample.model.fetchers.PokemonTypeFetcher;
 
 import java.lang.reflect.Type;
@@ -67,12 +68,13 @@ public class SinglePokemonDetailsController implements Initializable {
 
         Task<Void> fetchPokemon = new Task<>() {
             @Override
-            public Void call() {
+            public Void call() throws Exception {
                 pokemon = (PokemonType) new PokemonTypeFetcher().fetchAndParse(url);
                 return null;
             }
         };
         fetchPokemon.setOnSucceeded(workerStateEvent -> updateInfo());
+        fetchPokemon.setOnFailed(workerStateEvent -> SceneSwitchController.handleException((HttpException) fetchPokemon.getException()));
 
         Thread thread = new Thread(fetchPokemon);
         thread.setDaemon(true);

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import sample.controllers.pokemonDetailsControllers.SinglePokemonDetailsController;
+import sample.model.exceptions.HttpException;
 import sample.model.providers.PokemonTypeListProvider;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class SceneSwitchController {
     private static Stage stage;
     private static Scene scene;
     private static Parent root;
+    private static boolean exceptionHandled = false;
 
     static public Stage sourceOfEvent(Event event) {
         return (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -54,16 +56,20 @@ public class SceneSwitchController {
     }
 
     // Switches Scene based on event instead of stage
-    public static void switchToView(ActionEvent event, String name) throws IOException {
+    public static void switchToView(Event event, String name) throws IOException {
         switchToView(sourceOfEvent(event), name);
     }
 
-    public static void switchToSinglePokemonDetails(ActionEvent event, String url) throws IOException {
+    public static void switchToSinglePokemonDetails(Event event, String url) throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(SceneSwitchController.class.getResource("../view/pokemonDetailsViews/singlePokemonDetailsView.fxml")));
         root = loader.load();
         SinglePokemonDetailsController pokemonDetailsController = loader.getController();
         pokemonDetailsController.setPokemon(url);
 
+        if (exceptionHandled) {
+            exceptionHandled = false;
+            return;
+        }
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(SceneSwitchController.class.getResource("../css/pokemonDetails/singlePokemonDetailsView.css")).toExternalForm());
@@ -72,13 +78,13 @@ public class SceneSwitchController {
         stage.show();
     }
 
-    public static void switchToLibraryView(ActionEvent event) throws IOException {
+    public static void switchToLibraryView(Event event) throws IOException {
         Stage window = sourceOfEvent(event);
         switchToView(window, "loadingView");
 
         Task<Void> fetchPokemons = new Task<>() {
             @Override
-            public Void call() {
+            public Void call() throws HttpException {
                 PokemonTypeListProvider.getData();
                 return null;
             }
@@ -92,9 +98,27 @@ public class SceneSwitchController {
                 e.printStackTrace();
             }
         });
+        fetchPokemons.setOnFailed(workerStateEvent -> handleException((HttpException) fetchPokemons.getException()));
 
         Thread thread = new Thread(fetchPokemons);
         thread.setDaemon(true);
         thread.start();
+    }
+
+    public static void handleException(HttpException exception) {
+        exceptionHandled = true;
+        try {
+            switchToView(stage, "fetchFailView");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void goHome(ActionEvent event) {
+        try {
+            SceneSwitchController.switchToView(event, "welcomeView");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

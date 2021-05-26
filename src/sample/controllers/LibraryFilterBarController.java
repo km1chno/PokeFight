@@ -26,14 +26,6 @@ public class LibraryFilterBarController {
     @FXML
     Button filterBarGoBackButton;
 
-    private void goHome(ActionEvent event) {
-        try {
-            SceneSwitchController.switchToView(event, "welcomeView");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void submit() {
         String name = filterBarNameInput.getText();
         String countString = filterBarCountInput.getText();
@@ -53,7 +45,7 @@ public class LibraryFilterBarController {
 
     public void onTextFieldEnter(ActionEvent event) { submit(); }
 
-    public void onFilterBarGoBackButtonClick(ActionEvent event) { goHome(event); }
+    public void onFilterBarGoBackButtonClick(ActionEvent event) { SceneSwitchController.goHome(event); }
 
     public void configureNumericTextField(TextField textField) {
         UnaryOperator<TextFormatter.Change> filter = change -> change.getControlNewText().matches("\\d*") ? change : null;
