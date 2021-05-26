@@ -64,23 +64,11 @@ public class Simulator {
         for(Move move:leftMoves){
             int res=1;
             Result[] rTypes = rightType.getTypes();
-            /*if(rightType.getTypes().length==2){
-                res=getEffect(move.type, rTypes[0], rTypes[1]);
-            }
-            else{
-                res=getEffect(move.type, rTypes[0]);
-            }*/
             leftEffectiveness.add(res);
         }
         for(Move move:rightMoves){
             int res=1;
             Result[] lTypes = leftType.getTypes();
-            /* if(leftType.getTypes().length==2){
-                res=getEffect(move.type, lTypes[0], lTypes[1]);
-            }
-            else{
-                res=getEffect(move.type, lTypes[0]);
-            }*/
             rightEffectiveness.add(res);
         }
         return new PokemonIntelligence(leftEffectiveness, rightEffectiveness);
@@ -109,29 +97,50 @@ public class Simulator {
         Integer leftHP=leftStats.get(0);
         Integer rightHP=rightStats.get(0);
 
-
         while(leftHP>0 && rightHP>0){
             if(leftStats.get(5)>rightStats.get(5)){
                 int d=intelligence.whatToDo(FightingPokemon.LEFT);
                 double ile=Math.random();
                 //idk what type accuracy is
                 if(leftMoves[d].getAccuracy()>ile) {
-                    rightHP-=leftMoves[d].getPower();
+                   // System.out.println(d);
+                    rightHP-=leftMoves[d].getPower()/4;
                     log.addLog(FightingPokemon.LEFT, leftMoves[d], leftMoves[d].getPower());
+                }
+                if(rightHP<=0) break;
+                 d=intelligence.whatToDo(FightingPokemon.RIGHT);
+                 ile=Math.random();
+                //idk what type accuracy is
+                if(rightMoves[d].getAccuracy()>ile) {
+                    leftHP-=rightMoves[d].getPower()/4;
+                    log.addLog(FightingPokemon.RIGHT, rightMoves[d], rightMoves[d].getPower());
                 }
             }
             else{
+                //System.out.println(leftHP + " " + rightHP);
                 int d=intelligence.whatToDo(FightingPokemon.RIGHT);
                 double ile=Math.random();
                 //idk what type accuracy is
                 if(rightMoves[d].getAccuracy()>ile) {
-                    leftHP-=rightMoves[d].getPower();
+                    leftHP-=rightMoves[d].getPower()/4;
                     log.addLog(FightingPokemon.RIGHT, rightMoves[d], rightMoves[d].getPower());
                 }
+                if(leftHP<=0) break;
+                 d=intelligence.whatToDo(FightingPokemon.LEFT);
+                 ile=Math.random();
+                //System.out.println(d);
+                if(leftMoves[d].getAccuracy()>ile) {
+                   // System.out.println(d);
+                    rightHP-=leftMoves[d].getPower()/4;
+                    log.addLog(FightingPokemon.LEFT, leftMoves[d], leftMoves[d].getPower());
+                }
             }
+            //System.out.println(leftHP + "co " + rightHP);
         }
-        if(leftHP==0) log.addLog(FightingPokemon.RIGHT);
-        else log.addLog(FightingPokemon.LEFT);
+        //System.out.println(leftHP + " " + rightHP);
+        if(leftHP<=0) log.addLog(FightingPokemon.RIGHT);
+        else if(rightHP<=0)log.addLog(FightingPokemon.LEFT);
+        else log.addLog(FightingPokemon.NONE);
         return log;
     }
 }
