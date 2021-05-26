@@ -28,5 +28,20 @@
       <Label layoutX="185.0" layoutY="508.0" prefHeight="16.0" prefWidth="217.0" text="Skills" />
       <Label layoutX="194.0" layoutY="613.0" prefHeight="16.0" prefWidth="186.0" text="level/experience" />
       <Label layoutX="34.0" layoutY="681.0" text="Individual Values: hp / attack / defense / special attack / special defense / speed" />
+      <ComboBox fx:id="rightMove1" layoutX="826.0" layoutY="534.0" prefWidth="150.0" />
+      <ComboBox fx:id="rightMove2" layoutX="988.0" layoutY="534.0" prefWidth="150.0" />
+      <ComboBox fx:id="rightMove3" layoutX="826.0" layoutY="580.0" prefWidth="150.0" />
+      <ComboBox fx:id="rightMove4" layoutX="988.0" layoutY="580.0" prefWidth="150.0" />
+      <TextField fx:id="rightLvl" layoutX="802.0" layoutY="647.0" />
+      <TextField fx:id="rightExp" layoutX="979.0" layoutY="647.0" />
+      <TextField fx:id="rightIVhp" layoutX="722.0" layoutY="712.0" />
+      <TextField fx:id="rightIVdef" layoutX="1081.0" layoutY="712.0" />
+      <TextField fx:id="rightIVAttack" layoutX="899.0" layoutY="712.0" />
+      <TextField fx:id="rightIVspAttack" layoutX="722.0" layoutY="747.0" />
+      <TextField fx:id="rightIVspDef" layoutX="899.0" layoutY="747.0" />
+      <TextField fx:id="rightIVspeed" layoutX="1081.0" layoutY="747.0" />
+      <Label layoutX="878.0" layoutY="513.0" prefHeight="16.0" prefWidth="217.0" text="Skills" />
+      <Label layoutX="887.0" layoutY="618.0" prefHeight="16.0" prefWidth="186.0" text="level/experience" />
+      <Label layoutX="727.0" layoutY="686.0" text="Individual Values: hp / attack / defense / special attack / special defense / speed" />
    </children>
 </AnchorPane>

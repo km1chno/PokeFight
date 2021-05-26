@@ -13,6 +13,8 @@ import sample.model.datamodels.MoveResult;
 import sample.model.datamodels.PokemonInstance;
 import sample.model.datamodels.PokemonType;
 import sample.model.exceptions.IncorrectStatsException;
+import sample.model.fight.GeneralLogs;
+import sample.model.fight.Simulator;
 import sample.model.providers.MoveProvider;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.Arrays;
 public class FightPrepViewController {
     private PokemonType leftPokemon;
     private PokemonType rightPokemon;
+    private Simulator fightSimulator;
 
     @FXML
     ImageView leftPokemonImageView;
@@ -65,9 +68,47 @@ public class FightPrepViewController {
     TextField leftIVspeed;
 
     @FXML
+    ComboBox<String> rightMove1;
+
+    @FXML
+    ComboBox<String> rightMove2;
+
+    @FXML
+    ComboBox<String> rightMove3;
+
+    @FXML
+    ComboBox<String> rightMove4;
+
+    @FXML
+    TextField rightLvl;
+
+    @FXML
+    TextField rightExp;
+
+    @FXML
+    TextField rightIVhp;
+
+    @FXML
+    TextField rightIVAttack;
+
+    @FXML
+    TextField rightIVdef;
+
+    @FXML
+    TextField rightIVspAttack;
+
+    @FXML
+    TextField rightIVspDef;
+
+    @FXML
+    TextField rightIVspeed;
+
+    @FXML
     Button fightButton;
 
     public void setPokemons(PokemonType leftPokemon, PokemonType rightPokemon) {
+        fightSimulator = new Simulator();
+
         Utils.configureNumericTextField(leftLvl);
         Utils.configureNumericTextField(leftExp);
         Utils.configureNumericTextField(leftIVhp);
@@ -76,6 +117,15 @@ public class FightPrepViewController {
         Utils.configureNumericTextField(leftIVspAttack);
         Utils.configureNumericTextField(leftIVspDef);
         Utils.configureNumericTextField(leftIVspeed);
+
+        Utils.configureNumericTextField(rightLvl);
+        Utils.configureNumericTextField(rightExp);
+        Utils.configureNumericTextField(rightIVhp);
+        Utils.configureNumericTextField(rightIVAttack);
+        Utils.configureNumericTextField(rightIVdef);
+        Utils.configureNumericTextField(rightIVspAttack);
+        Utils.configureNumericTextField(rightIVspDef);
+        Utils.configureNumericTextField(rightIVspeed);
 
         this.leftPokemon = leftPokemon;
         this.rightPokemon = rightPokemon;
@@ -89,6 +139,13 @@ public class FightPrepViewController {
             leftMove3.getItems().add(move.move.name);
             leftMove4.getItems().add(move.move.name);
         }
+
+        for (MoveResult move : rightPokemon.getMoves()) {
+            rightMove1.getItems().add(move.move.name);
+            rightMove2.getItems().add(move.move.name);
+            rightMove3.getItems().add(move.move.name);
+            rightMove4.getItems().add(move.move.name);
+        }
     }
 
     public void onFightButtonClick(ActionEvent event) {
@@ -98,10 +155,17 @@ public class FightPrepViewController {
         leftPokemonMoves[2] = MoveProvider.getData(leftMove3.getValue());
         leftPokemonMoves[3] = MoveProvider.getData(leftMove4.getValue());
 
-        ArrayList<Integer> IV;
+        Move[] rightPokemonMoves = new Move[4];
+        rightPokemonMoves[0] = MoveProvider.getData(rightMove1.getValue());
+        rightPokemonMoves[1] = MoveProvider.getData(rightMove2.getValue());
+        rightPokemonMoves[2] = MoveProvider.getData(rightMove3.getValue());
+        rightPokemonMoves[3] = MoveProvider.getData(rightMove4.getValue());
+
+        ArrayList<Integer> leftIV;
+        ArrayList<Integer> rightIV;
 
         try {
-            IV = new ArrayList<Integer>(Arrays.asList(
+            leftIV = new ArrayList<Integer>(Arrays.asList(
                     Integer.parseInt(leftIVhp.getText()),
                     Integer.parseInt(leftIVAttack.getText()),
                     Integer.parseInt(leftIVdef.getText()),
@@ -109,21 +173,37 @@ public class FightPrepViewController {
                     Integer.parseInt(leftIVspDef.getText()),
                     Integer.parseInt(leftIVspeed.getText())
             ));
+
+            rightIV = new ArrayList<Integer>(Arrays.asList(
+                    Integer.parseInt(rightIVhp.getText()),
+                    Integer.parseInt(rightIVAttack.getText()),
+                    Integer.parseInt(rightIVdef.getText()),
+                    Integer.parseInt(rightIVspAttack.getText()),
+                    Integer.parseInt(rightIVspDef.getText()),
+                    Integer.parseInt(rightIVspeed.getText())
+            ));
         } catch (NumberFormatException e) {
             System.out.println("IncorrectStatsException");
             return;
         }
 
-
         PokemonInstance leftPokemonInstance;
+        PokemonInstance rightPokemonInstance;
+
         try {
-            leftPokemonInstance = new PokemonInstance(leftPokemon, leftPokemonMoves, Integer.parseInt(leftLvl.getText()), Integer.parseInt(leftExp.getText()), IV);
+            leftPokemonInstance = new PokemonInstance(leftPokemon, leftPokemonMoves, Integer.parseInt(leftLvl.getText()), Integer.parseInt(leftExp.getText()), leftIV);
+            rightPokemonInstance = new PokemonInstance(rightPokemon, rightPokemonMoves, Integer.parseInt(rightLvl.getText()), Integer.parseInt(rightExp.getText()), rightIV);
         } catch (IncorrectStatsException e) {
             System.out.println("IncorrectStatsException");
             return;
         }
 
-        System.out.println("Successfully created leftPokemon!");
+        System.out.println("They are ready to fight!");
         leftPokemonInstance.print();
+        rightPokemonInstance.print();
+
+        GeneralLogs fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
+
+        fightLogs.print();
     }
 }

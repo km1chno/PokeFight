@@ -13,12 +13,14 @@ public class GeneralLogs {
     Integer rightWins;
     Integer stalemates;
     Integer maxDamage;
+
     public GeneralLogs(PokemonType lType, PokemonType rType){
         leftType=lType;
         rightType=rType;
         allFights=leftWins=rightWins=stalemates=maxDamage=0;
         logs = new ArrayList<>();
     }
+
     public void addResult(SingleFightLog log){
         if(log.winner==FightingPokemon.LEFT){
             leftWins++;
@@ -49,6 +51,8 @@ public class GeneralLogs {
     }
 
     public void print(){
-        //ADD SOME NICE GENERAL OUTPUT AFTER SIMULATION
+        System.out.println("The fight has finished!");
+        System.out.println("Left wins: " + leftWins);
+        System.out.println("Right wins: " + rightWins);
     }
 }
