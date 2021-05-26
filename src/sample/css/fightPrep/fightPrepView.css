@@ -1,0 +1,37 @@
+.root {
+    -fx-background-color: #65c77f;
+}
+
+.text-field {
+    -fx-background-radius: 10px;
+}
+
+.text-field:focused {
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+}
+
+.button {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-background-color: #111111;
+}
+
+.imageWrapper {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #f0efda;
+    -fx-background-radius: 20px;
+}
+
+.backgroundPane {
+    -fx-border-color: black;
+    -fx-background-color: #519162;
+}
+
+.label {
+    -fx-font-size: 2em;
+    -fx-alignment: center;
+}
