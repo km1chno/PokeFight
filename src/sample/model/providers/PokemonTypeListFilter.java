@@ -42,6 +42,7 @@ public class PokemonTypeListFilter {
         }
         return true;*/
         if (Objects.equals("", nameSearch)) return true;
-        return 2 * levenshteinDistance(pokemon) <= pokemon.name.length();
+        int lev = levenshteinDistance(pokemon);
+        return levenshteinDistance(pokemon) <= Math.max(pokemon.name.length() - nameSearch.length() + 1, 3);
     }
 }
