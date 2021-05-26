@@ -32,7 +32,7 @@ public class GeneralLogs {
             stalemates++;
         }
         allFights++;
-        maxDamage=Integer.max(maxDamage, log.maxDamage);
+        maxDamage = Integer.max(maxDamage, log.maxDamage);
         logs.add(log);
     }
 
@@ -54,5 +54,6 @@ public class GeneralLogs {
         System.out.println("The fight has finished!");
         System.out.println("Left wins: " + leftWins);
         System.out.println("Right wins: " + rightWins);
+        System.out.println("Stalemates: " + stalemates);
     }
 }

@@ -7,7 +7,7 @@ public class Move {
     private final int pp;
     Result type;
 
-    Move() {
+    public Move() {
         name = "";
         accuracy = power = pp = 0;
         type = new Result();

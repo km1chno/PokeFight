@@ -7,6 +7,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import sample.model.Constants;
 import sample.model.Utils;
 import sample.model.datamodels.Move;
 import sample.model.datamodels.MoveResult;
@@ -150,16 +151,16 @@ public class FightPrepViewController {
 
     public void onFightButtonClick(ActionEvent event) {
         Move[] leftPokemonMoves = new Move[4];
-        leftPokemonMoves[0] = MoveProvider.getData(leftMove1.getValue());
-        leftPokemonMoves[1] = MoveProvider.getData(leftMove2.getValue());
-        leftPokemonMoves[2] = MoveProvider.getData(leftMove3.getValue());
-        leftPokemonMoves[3] = MoveProvider.getData(leftMove4.getValue());
+        leftPokemonMoves[0] = (leftMove1.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove1.getValue());
+        leftPokemonMoves[1] = (leftMove2.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove2.getValue());
+        leftPokemonMoves[2] = (leftMove3.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove3.getValue());
+        leftPokemonMoves[3] = (leftMove4.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove4.getValue());
 
         Move[] rightPokemonMoves = new Move[4];
-        rightPokemonMoves[0] = MoveProvider.getData(rightMove1.getValue());
-        rightPokemonMoves[1] = MoveProvider.getData(rightMove2.getValue());
-        rightPokemonMoves[2] = MoveProvider.getData(rightMove3.getValue());
-        rightPokemonMoves[3] = MoveProvider.getData(rightMove4.getValue());
+        rightPokemonMoves[0] = (rightMove1.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove1.getValue());
+        rightPokemonMoves[1] = (rightMove2.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove2.getValue());
+        rightPokemonMoves[2] = (rightMove3.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove3.getValue());
+        rightPokemonMoves[3] = (rightMove4.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove4.getValue());
 
         ArrayList<Integer> leftIV;
         ArrayList<Integer> rightIV;
