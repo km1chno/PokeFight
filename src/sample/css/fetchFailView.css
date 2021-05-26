@@ -1,0 +1,11 @@
+#errorMessage {
+    -fx-font-size: 50px;
+    -fx-alignment: center;
+}
+
+#goBackButton {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-background-color: #111111;
+    -fx-alignment: center;
+}

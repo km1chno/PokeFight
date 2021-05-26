@@ -10,6 +10,7 @@ import sample.components.fighterChooseControls.PokemonTileControl;
 import sample.controllers.SceneSwitchController;
 import sample.model.datamodels.PokemonType;
 import sample.model.datamodels.PokemonTypeList;
+import sample.model.exceptions.HttpException;
 import sample.model.providers.PokemonTypeListProvider;
 import sample.model.providers.PokemonTypeProvider;
 
@@ -67,7 +68,13 @@ public class FighterChooseViewController implements Initializable {
 
         leftScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         rightScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        pokemonList = PokemonTypeListProvider.getData();
+
+        try {
+            pokemonList = PokemonTypeListProvider.getData();
+        } catch (HttpException e) {
+            e.printStackTrace();
+        }
+
         updateChooseView();
     }
 

@@ -9,6 +9,7 @@ import sample.components.LibraryFilterBarControl;
 import sample.components.SinglePokemonTypeTileControl;
 import sample.model.Utils;
 import sample.model.datamodels.PokemonTypeList;
+import sample.model.exceptions.HttpException;
 import sample.model.providers.PokemonTypeListFilter;
 import sample.model.providers.PokemonTypeListProvider;
 
@@ -34,8 +35,12 @@ public class LibraryViewController implements Initializable {
 
     // Updates pokemonList with given filter and applies changes to display
     private final BiFunction<Integer, PokemonTypeListFilter, Void> updateLibraryWithFilter = (count, filter) -> {
-        pokemonList = PokemonTypeListProvider.getDataWithFilter(count, filter);
-        updateLibrary();
+        try {
+            pokemonList = PokemonTypeListProvider.getDataWithFilter(count, filter);
+            updateLibrary();
+        } catch (HttpException e) {
+            SceneSwitchController.handleException(e);
+        }
         return null;
     };
 
@@ -48,16 +53,19 @@ public class LibraryViewController implements Initializable {
         filterBar.setStyle("-fx-background-color: #54b66e");
 
         anchorPane.getChildren().add(filterBar);
-        pokemonList = PokemonTypeListProvider.getData();
+        try {
+            pokemonList = PokemonTypeListProvider.getData();
 
-        updateLibrary();
-        scrollPane.vvalueProperty().addListener((observableValue, number, t1) -> {
-            System.out.println(number + " " + t1);
-            if ((double)t1 >= scrollPane.getVmax()) {
-                loadedPosition = Math.min(loadedPosition + NUMBER_TO_LOAD, NUMBER_OF_POKEMONS);
-                addTiles();
-            }
-        });
+            updateLibrary();
+            scrollPane.vvalueProperty().addListener((observableValue, number, t1) -> {
+                if ((double) t1 >= scrollPane.getVmax()) {
+                    loadedPosition = Math.min(loadedPosition + NUMBER_TO_LOAD, NUMBER_OF_POKEMONS);
+                    addTiles();
+                }
+            });
+        } catch (HttpException e) {
+            SceneSwitchController.handleException(e);
+        }
     }
 
     // Updates NUMBER_OF_POKEMONS, NUMBER_TO_LOAD and tilePane based on pokemonList
