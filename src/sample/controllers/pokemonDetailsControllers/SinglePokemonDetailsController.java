@@ -6,29 +6,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import sample.components.pokemonDetailsControls.MainInfoBoxControl;
 import sample.components.pokemonDetailsControls.StatsBoxControl;
 import sample.components.pokemonDetailsControls.TypesBoxControl;
 import sample.controllers.SceneSwitchController;
 import sample.model.datamodels.PokemonType;
-import sample.model.fetchers.PokemonTypeFetcher;
 import sample.model.providers.PokemonTypeProvider;
 
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SinglePokemonDetailsController implements Initializable {
     private PokemonType pokemon;
-    private String url;
 
     private final MainInfoBoxControl mainInfoBoxControl = new MainInfoBoxControl();
     private final TypesBoxControl typesBoxControl = new TypesBoxControl();
     private final StatsBoxControl statsBox = new StatsBoxControl();
-
-    private final SceneSwitchController sceneController = new SceneSwitchController();
 
     public SinglePokemonDetailsController() {
     }
@@ -81,7 +74,7 @@ public class SinglePokemonDetailsController implements Initializable {
 
     public void onSinglePokemonDetailsGoBackClick(ActionEvent event) {
         try {
-            sceneController.switchToLibraryView(event);
+            SceneSwitchController.switchToLibraryView(event);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -3,6 +3,9 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class WelcomeViewController {
     @FXML
@@ -14,11 +17,9 @@ public class WelcomeViewController {
     @FXML
     Button welcomeArenaButton;
 
-    SceneSwitchController sceneController = new SceneSwitchController();
-
     public void welcomeLibraryButtonOnClick(javafx.event.ActionEvent actionEvent) {
         try {
-            sceneController.switchToLibraryView(actionEvent);
+            SceneSwitchController.switchToLibraryView(actionEvent);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,9 +27,9 @@ public class WelcomeViewController {
 
     public void welcomeArenaButtonOnClick(javafx.event.ActionEvent actionEvent) {
         try {
-            sceneController.switchToFighterChooseView(actionEvent);
-        } catch (Exception e) {
-            e.printStackTrace();
+            SceneSwitchController.switchToView(SceneSwitchController.sourceOfEvent(actionEvent), "../view/fighterChooseViews/fighterChooseView.fxml", "../css/fighterChoose/fighterChooseView.css");
+        } catch (IOException e) {
+          e.printStackTrace();
         }
     }
 }
