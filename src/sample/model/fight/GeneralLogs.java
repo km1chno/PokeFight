@@ -1,4 +1,6 @@
-package sample.model.datamodels;
+package sample.model.fight;
+
+import sample.model.datamodels.PokemonType;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,4 @@ public class GeneralLogs {
     public void print(){
         //ADD SOME NICE GENERAL OUTPUT AFTER SIMULATION
     }
-
-
 }

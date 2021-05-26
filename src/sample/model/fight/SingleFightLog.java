@@ -1,4 +1,7 @@
-package sample.model.datamodels;
+package sample.model.fight;
+
+import sample.model.datamodels.Move;
+import sample.model.datamodels.PokemonType;
 
 import java.util.ArrayList;
 

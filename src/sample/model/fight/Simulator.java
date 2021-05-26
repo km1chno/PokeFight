@@ -1,5 +1,9 @@
-package sample.model.datamodels;
+package sample.model.fight;
 
+import sample.model.datamodels.Move;
+import sample.model.datamodels.PokemonInstance;
+import sample.model.datamodels.PokemonType;
+import sample.model.datamodels.Result;
 import sample.model.exceptions.ToManyFightsException;
 
 import java.util.ArrayList;
