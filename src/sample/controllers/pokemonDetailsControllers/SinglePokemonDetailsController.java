@@ -4,6 +4,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -26,8 +27,6 @@ public class SinglePokemonDetailsController implements Initializable {
     private final MainInfoBoxControl mainInfoBoxControl = new MainInfoBoxControl();
     private final TypesBoxControl typesBoxControl = new TypesBoxControl();
     private final StatsBoxControl statsBox = new StatsBoxControl();
-
-    private final SceneSwitchController sceneController = new SceneSwitchController();
 
     public SinglePokemonDetailsController() {
     }
@@ -82,7 +81,7 @@ public class SinglePokemonDetailsController implements Initializable {
 
     public void onSinglePokemonDetailsGoBackClick(ActionEvent event) {
         try {
-            sceneController.switchToLibraryView(event);
+            SceneSwitchController.switchToLibraryView(event);
         } catch (Exception e) {
             e.printStackTrace();
         }

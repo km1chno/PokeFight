@@ -28,7 +28,7 @@ public class LibraryFilterBarController {
 
     private void goHome(ActionEvent event) {
         try {
-            new SceneSwitchController().switchToView(event, "welcomeView");
+            SceneSwitchController.switchToView(event, "welcomeView");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -20,11 +20,7 @@ public class SinglePokemonTypeTileController {
     private String name;
     private String url;
 
-    private final SceneSwitchController switchController;
-
-    public SinglePokemonTypeTileController() {
-        switchController = new SceneSwitchController();
-    }
+    public SinglePokemonTypeTileController() {}
 
     @FXML
     private Label pokemonTileNameLabel;
@@ -50,7 +46,7 @@ public class SinglePokemonTypeTileController {
 
     public void onMoreButtonClick(ActionEvent event) {
         try {
-            switchController.switchToSinglePokemonDetails(event, url);
+            SceneSwitchController.switchToSinglePokemonDetails(event, url);
         } catch (IOException e) {
             e.printStackTrace();
         }

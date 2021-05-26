@@ -14,11 +14,9 @@ public class WelcomeViewController {
     @FXML
     Button welcomeArenaButton;
 
-    SceneSwitchController sceneController = new SceneSwitchController();
-
     public void welcomeLibraryButtonOnClick(javafx.event.ActionEvent actionEvent) {
         try {
-            sceneController.switchToLibraryView(actionEvent);
+            SceneSwitchController.switchToLibraryView(actionEvent);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,7 +24,7 @@ public class WelcomeViewController {
 
     public void welcomeArenaButtonOnClick(javafx.event.ActionEvent actionEvent) {
         try {
-            sceneController.switchToView(actionEvent, "arenaView");
+            SceneSwitchController.switchToView(actionEvent, "arenaView");
         } catch (Exception e) {
             e.printStackTrace();
         }

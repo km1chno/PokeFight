@@ -2,7 +2,6 @@ package sample.model.providers;
 
 import sample.model.datamodels.Result;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class PokemonTypeListFilter {
