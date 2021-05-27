@@ -43,7 +43,7 @@ public class AbstractFetcher implements Fetcher {
             connection.disconnect();
 
             return content.toString();
-        } catch (Exception e) {
+        } catch (IOException e) {
             SceneSwitchController.handleException(e);
         }
         return "";
