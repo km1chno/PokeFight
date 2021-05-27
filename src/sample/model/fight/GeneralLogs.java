@@ -7,7 +7,9 @@ import java.util.ArrayList;
 public class GeneralLogs {
     private final PokemonType leftType;
     private final PokemonType rightType;
+
     ArrayList<SingleFightLog> logs;
+
     Integer allFights;
     Integer leftWins;
     Integer rightWins;
@@ -45,15 +47,24 @@ public class GeneralLogs {
     }
 
     public String getWinnerName(){
-        if(leftWins>rightWins) return leftType.getName();
-        else if(rightWins>leftWins) return rightType.getName();
+        if (leftWins > rightWins) return leftType.getName();
+        else if (rightWins > leftWins) return rightType.getName();
         else return FightingPokemon.NONE.toString();
     }
 
-    public void print(){
-        System.out.println("The fight has finished!");
-        System.out.println("Left wins: " + leftWins);
-        System.out.println("Right wins: " + rightWins);
-        System.out.println("Stalemates: " + stalemates);
+    public Integer getAllFights() {
+        return allFights;
+    }
+
+    public Integer getLeftWins() {
+        return leftWins;
+    }
+
+    public Integer getRightWins() {
+        return rightWins;
+    }
+
+    public Integer getStalemates() {
+        return stalemates;
     }
 }

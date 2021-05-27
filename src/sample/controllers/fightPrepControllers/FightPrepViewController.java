@@ -2,11 +2,11 @@ package sample.controllers.fightPrepControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import sample.controllers.SceneSwitchController;
 import sample.model.Constants;
 import sample.model.Utils;
@@ -20,13 +20,23 @@ import sample.model.fight.GeneralLogs;
 import sample.model.fight.Simulator;
 import sample.model.providers.MoveProvider;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
-public class FightPrepViewController {
+public class FightPrepViewController implements Initializable {
     private PokemonType leftPokemon;
     private PokemonType rightPokemon;
     private Simulator fightSimulator;
+
+    private ArrayList<TextField> leftIVFields;
+    private ArrayList<TextField> rightIVFields;
+    private ArrayList<ComboBox<String>> leftMovesFields;
+    private ArrayList<ComboBox<String>> rightMovesFields;
 
     @FXML
     ImageView leftPokemonImageView;
@@ -109,26 +119,47 @@ public class FightPrepViewController {
     @FXML
     Button fightButton;
 
-    public void setPokemons(PokemonType leftPokemon, PokemonType rightPokemon) {
+    @FXML
+    Label vsLabel;
+
+    @FXML
+    Pane resultsPane;
+
+    @FXML
+    Label winnerNameLabel;
+
+    @FXML
+    Label scoreLabelLeft;
+
+    @FXML
+    Label scoreLabelStalemate;
+
+    @FXML
+    Label scoreLabelRight;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         fightSimulator = new Simulator();
 
+        leftIVFields = new ArrayList<>(Arrays.asList(leftIVhp, leftIVAttack, leftIVdef, leftIVspAttack, leftIVspDef, leftIVspeed));
+        rightIVFields = new ArrayList<>(Arrays.asList(rightIVhp, rightIVAttack, rightIVdef, rightIVspAttack, rightIVspDef, rightIVspeed));
+
+        leftMovesFields = new ArrayList<>(Arrays.asList(leftMove1, leftMove2, leftMove3, leftMove4));
+        rightMovesFields = new ArrayList<>(Arrays.asList(rightMove1, rightMove2, rightMove3, rightMove4));
+    }
+
+    public void setPokemons(PokemonType leftPokemon, PokemonType rightPokemon) {
         Utils.configureNumericTextField(leftLvl);
         Utils.configureNumericTextField(leftExp);
-        Utils.configureNumericTextField(leftIVhp);
-        Utils.configureNumericTextField(leftIVAttack);
-        Utils.configureNumericTextField(leftIVdef);
-        Utils.configureNumericTextField(leftIVspAttack);
-        Utils.configureNumericTextField(leftIVspDef);
-        Utils.configureNumericTextField(leftIVspeed);
+        for (TextField field : leftIVFields) {
+            Utils.configureNumericTextField(field);
+        }
 
         Utils.configureNumericTextField(rightLvl);
         Utils.configureNumericTextField(rightExp);
-        Utils.configureNumericTextField(rightIVhp);
-        Utils.configureNumericTextField(rightIVAttack);
-        Utils.configureNumericTextField(rightIVdef);
-        Utils.configureNumericTextField(rightIVspAttack);
-        Utils.configureNumericTextField(rightIVspDef);
-        Utils.configureNumericTextField(rightIVspeed);
+        for (TextField field : rightIVFields) {
+            Utils.configureNumericTextField(field);
+        }
 
         this.leftPokemon = leftPokemon;
         this.rightPokemon = rightPokemon;
@@ -137,71 +168,62 @@ public class FightPrepViewController {
         rightPokemonImageView.setImage(new Image("file:resources/sprites/pokemon/" + this.rightPokemon.getId() + ".png"));
 
         for (MoveResult move : leftPokemon.getMoves()) {
-            leftMove1.getItems().add(move.move.name);
-            leftMove2.getItems().add(move.move.name);
-            leftMove3.getItems().add(move.move.name);
-            leftMove4.getItems().add(move.move.name);
+            for (ComboBox<String> comboBox : leftMovesFields) {
+                comboBox.getItems().add(move.move.name);
+            }
         }
 
         for (MoveResult move : rightPokemon.getMoves()) {
-            rightMove1.getItems().add(move.move.name);
-            rightMove2.getItems().add(move.move.name);
-            rightMove3.getItems().add(move.move.name);
-            rightMove4.getItems().add(move.move.name);
+            for (ComboBox<String> comboBox : rightMovesFields) {
+                comboBox.getItems().add(move.move.name);
+            }
         }
+    }
+
+    public void showIncorrectStatsDialog() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wrong stats input");
+        alert.setHeaderText("Make sure you choose all the stats correctly (or use random stats button)");
+        alert.setContentText("Pokemon Level must be an integer in range [1, 100]\nPokemon Exp must be a non-negative integer\nAll of Individual Values must be integers in range [0, 31]");
+
+        alert.showAndWait();
+    }
+
+    public void showResult(GeneralLogs logs) {
+        vsLabel.setStyle("-fx-opacity: 0");
+        resultsPane.setStyle("-fx-opacity: 1");
+        winnerNameLabel.setText(logs.getWinnerName() + " wins!");
+        scoreLabelLeft.setText(String.valueOf(logs.getLeftWins()));
+        scoreLabelStalemate.setText(String.valueOf(logs.getStalemates()));
+        scoreLabelRight.setText(String.valueOf(logs.getRightWins()));
     }
 
     public void onFightButtonClick(ActionEvent event) {
         Move[] leftPokemonMoves = new Move[4];
         Move[] rightPokemonMoves = new Move[4];
-        try {
-            leftPokemonMoves[0] = (leftMove1.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove1.getValue());
-            leftPokemonMoves[1] = (leftMove2.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove2.getValue());
-            leftPokemonMoves[2] = (leftMove3.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove3.getValue());
-            leftPokemonMoves[3] = (leftMove4.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove4.getValue());
 
-            rightPokemonMoves[0] = (rightMove1.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove1.getValue());
-            rightPokemonMoves[1] = (rightMove2.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove2.getValue());
-            rightPokemonMoves[2] = (rightMove3.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove3.getValue());
-            rightPokemonMoves[3] = (rightMove4.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove4.getValue());
+        try {
+            for (int i = 0; i < 4; i++) {
+                leftPokemonMoves[i] = (leftMovesFields.get(i).getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMovesFields.get(i).getValue());
+                rightPokemonMoves[i] = (rightMovesFields.get(i).getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMovesFields.get(i).getValue());
+            }
         } catch (HttpException e) {
             SceneSwitchController.handleException(e);
         }
 
         ArrayList<Integer> leftIV;
         ArrayList<Integer> rightIV;
-
-        try {
-            leftIV = new ArrayList<Integer>(Arrays.asList(
-                    Integer.parseInt(leftIVhp.getText()),
-                    Integer.parseInt(leftIVAttack.getText()),
-                    Integer.parseInt(leftIVdef.getText()),
-                    Integer.parseInt(leftIVspAttack.getText()),
-                    Integer.parseInt(leftIVspDef.getText()),
-                    Integer.parseInt(leftIVspeed.getText())
-            ));
-
-            rightIV = new ArrayList<Integer>(Arrays.asList(
-                    Integer.parseInt(rightIVhp.getText()),
-                    Integer.parseInt(rightIVAttack.getText()),
-                    Integer.parseInt(rightIVdef.getText()),
-                    Integer.parseInt(rightIVspAttack.getText()),
-                    Integer.parseInt(rightIVspDef.getText()),
-                    Integer.parseInt(rightIVspeed.getText())
-            ));
-        } catch (NumberFormatException e) {
-            System.out.println("IncorrectStatsException");
-            return;
-        }
-
         PokemonInstance leftPokemonInstance;
         PokemonInstance rightPokemonInstance;
 
         try {
+            leftIV = leftIVFields.stream().map(x -> Integer.parseInt(x.getText())).collect(Collectors.toCollection(ArrayList::new));
+            rightIV = rightIVFields.stream().map(x -> Integer.parseInt(x.getText())).collect(Collectors.toCollection(ArrayList::new));
+
             leftPokemonInstance = new PokemonInstance(leftPokemon, leftPokemonMoves, Integer.parseInt(leftLvl.getText()), Integer.parseInt(leftExp.getText()), leftIV);
             rightPokemonInstance = new PokemonInstance(rightPokemon, rightPokemonMoves, Integer.parseInt(rightLvl.getText()), Integer.parseInt(rightExp.getText()), rightIV);
-        } catch (IncorrectStatsException e) {
-            System.out.println("IncorrectStatsException");
+        } catch (NumberFormatException | IncorrectStatsException e) {
+            showIncorrectStatsDialog();
             return;
         }
 
@@ -211,6 +233,33 @@ public class FightPrepViewController {
 
         GeneralLogs fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
 
-        fightLogs.print();
+        showResult(fightLogs);
+    }
+
+    public void onGoBackButtonClick(ActionEvent event) {
+        try {
+            SceneSwitchController.switchToView(SceneSwitchController.sourceOfEvent(event), "../view/fighterChooseViews/fighterChooseView.fxml", "../css/fighterChoose/fighterChooseView.css");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onRandomStatsButtonClick(ActionEvent event) {
+        Random random = new Random();
+
+        for (int i = 0; i < 4; i++) {
+            leftMovesFields.get(i).getSelectionModel().select(Math.abs(random.nextInt()) % leftMovesFields.get(i).getItems().size());
+            rightMovesFields.get(i).getSelectionModel().select(Math.abs(random.nextInt()) % rightMovesFields.get(i).getItems().size());
+
+        }
+        for (int i = 0; i < 6; i++) {
+            leftIVFields.get(i).setText(String.valueOf(Math.abs(random.nextInt() % 5)));
+            rightIVFields.get(i).setText(String.valueOf(Math.abs(random.nextInt() % 5)));
+        }
+
+        leftLvl.setText(String.valueOf(Math.abs(random.nextInt()) % 101));
+        leftExp.setText(String.valueOf(Math.abs(random.nextInt()) % 101));
+        rightLvl.setText(String.valueOf(Math.abs(random.nextInt()) % 101));
+        rightExp.setText(String.valueOf(Math.abs(random.nextInt()) % 101));
     }
 }
