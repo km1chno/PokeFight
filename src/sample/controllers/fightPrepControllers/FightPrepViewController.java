@@ -7,12 +7,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import sample.controllers.SceneSwitchController;
 import sample.model.Constants;
 import sample.model.Utils;
 import sample.model.datamodels.Move;
 import sample.model.datamodels.MoveResult;
 import sample.model.datamodels.PokemonInstance;
 import sample.model.datamodels.PokemonType;
+import sample.model.exceptions.HttpException;
 import sample.model.exceptions.IncorrectStatsException;
 import sample.model.fight.GeneralLogs;
 import sample.model.fight.Simulator;
@@ -151,16 +153,20 @@ public class FightPrepViewController {
 
     public void onFightButtonClick(ActionEvent event) {
         Move[] leftPokemonMoves = new Move[4];
-        leftPokemonMoves[0] = (leftMove1.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove1.getValue());
-        leftPokemonMoves[1] = (leftMove2.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove2.getValue());
-        leftPokemonMoves[2] = (leftMove3.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove3.getValue());
-        leftPokemonMoves[3] = (leftMove4.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove4.getValue());
-
         Move[] rightPokemonMoves = new Move[4];
-        rightPokemonMoves[0] = (rightMove1.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove1.getValue());
-        rightPokemonMoves[1] = (rightMove2.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove2.getValue());
-        rightPokemonMoves[2] = (rightMove3.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove3.getValue());
-        rightPokemonMoves[3] = (rightMove4.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove4.getValue());
+        try {
+            leftPokemonMoves[0] = (leftMove1.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove1.getValue());
+            leftPokemonMoves[1] = (leftMove2.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove2.getValue());
+            leftPokemonMoves[2] = (leftMove3.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove3.getValue());
+            leftPokemonMoves[3] = (leftMove4.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(leftMove4.getValue());
+
+            rightPokemonMoves[0] = (rightMove1.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove1.getValue());
+            rightPokemonMoves[1] = (rightMove2.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove2.getValue());
+            rightPokemonMoves[2] = (rightMove3.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove3.getValue());
+            rightPokemonMoves[3] = (rightMove4.getValue() == null) ? Constants.EMPTY_MOVE : MoveProvider.getData(rightMove4.getValue());
+        } catch (HttpException e) {
+            SceneSwitchController.handleException(e);
+        }
 
         ArrayList<Integer> leftIV;
         ArrayList<Integer> rightIV;

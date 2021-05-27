@@ -28,18 +28,10 @@ public class PokemonTypeListFilter {
                 partial[i][j] = Integer.min(Integer.min(partial[i - 1][j], partial[i][j - 1]) + 1, partial[i - 1][j - 1] + sameChar);
             }
         }
-        System.out.println(pokemon.name + "'s distance is " + partial[n][m]);
         return partial[n][m];
     }
 
     public boolean test(Result pokemon) {
-        /*if (nameSearch.length() > pokemon.name.length())
-            return false;
-        for (int i = 0; i < nameSearch.length(); i++) {
-            if (Character.toLowerCase(nameSearch.charAt(i)) != Character.toLowerCase(pokemon.name.charAt(i)))
-                return false;
-        }
-        return true;*/
         if (Objects.equals("", nameSearch)) return true;
         int lev = levenshteinDistance(pokemon);
         return levenshteinDistance(pokemon) <= Math.max(pokemon.name.length() - nameSearch.length() + 1, 3);

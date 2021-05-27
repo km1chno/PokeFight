@@ -1,5 +1,6 @@
 package sample.model.providers;
 
+import sample.model.Constants;
 import sample.model.datamodels.PokemonTypeList;
 import sample.model.exceptions.HttpException;
 import sample.model.fetchers.PokemonTypeListFetcher;
@@ -7,9 +8,9 @@ import sample.model.fetchers.PokemonTypeListFetcher;
 public class PokemonTypeListProvider {
     private static PokemonTypeList pokemonList = null;
     private static boolean upToDate = false;
-    private static String url = "https://pokeapi.co/api/v2/pokemon?limit=200";
 
     private static void fetchData() throws HttpException {
+        String url = Constants.API_BASE_URL + "pokemon?limit=" + Constants.MAX_POKEDEX_POKEMON_NUMBER;
         pokemonList = (PokemonTypeList) new PokemonTypeListFetcher().fetchAndParse(url);
         upToDate = true;
     }

@@ -1,22 +1,23 @@
 package sample.model.fight;
 
 import javafx.util.Pair;
+import sample.model.Constants;
 import sample.model.datamodels.Result;
 import sample.model.datamodels.TypeEffects;
+import sample.model.exceptions.HttpException;
 import sample.model.fetchers.TypeEffectsFetcher;
 
 import java.util.HashMap;
 
 public class TypeEffectSupplier {
-    private static HashMap<Pair<String, String>, Double> effect = new HashMap<>();
+    private static final HashMap<Pair<String, String>, Double> effect = new HashMap<>();
     private static boolean upToDate = false;
-    private static TypeEffectsFetcher fetcher = null;
 
-    private static void update() {
-        fetcher = new TypeEffectsFetcher();
+    private static void update() throws HttpException {
+        TypeEffectsFetcher fetcher = new TypeEffectsFetcher();
 
-        for (int i = 1; i <= 18; i++) {
-            TypeEffects type = (TypeEffects) fetcher.fetchAndParse(i);
+        for (int i = 1; i <= Constants.TYPES_NUMBER; i++) {
+            TypeEffects type = (TypeEffects) fetcher.fetchAndParseFromId(i);
 
             for (Result res : type.damage_relations.double_damage_to) {
                 effect.put(new Pair<>(type.name, res.name), 2.0);
@@ -34,7 +35,7 @@ public class TypeEffectSupplier {
         upToDate = true;
     }
 
-    public static double getEffect(String type1, String type2) {
+    public static double getEffect(String type1, String type2) throws HttpException {
         if (!upToDate) {
             update();
         }
@@ -44,7 +45,7 @@ public class TypeEffectSupplier {
         return 1.0;
     }
 
-    public static double getEffect(String type1, String type2, String type3) {
+    public static double getEffect(String type1, String type2, String type3) throws HttpException {
         return getEffect(type1, type2) * getEffect(type1, type3);
     }
 }

@@ -3,9 +3,12 @@ package sample.controllers.fighterChooseControllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import sample.components.fighterChooseControls.PokemonTileControl;
 import sample.controllers.SceneSwitchController;
 import sample.model.datamodels.PokemonType;
@@ -14,6 +17,7 @@ import sample.model.exceptions.HttpException;
 import sample.model.providers.PokemonTypeListProvider;
 import sample.model.providers.PokemonTypeProvider;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
@@ -55,7 +59,12 @@ public class FighterChooseViewController implements Initializable {
                 ((PokemonTileControl) leftTilePane.getChildren().get(chosenLeft.getId()-1)).deletePaneStyle("redBordered");
             }
             ((PokemonTileControl) leftTilePane.getChildren().get(id-1)).addPaneStyle("redBordered");
-            chosenLeft = PokemonTypeProvider.getData(id);
+
+            try {
+                chosenLeft = PokemonTypeProvider.getData(id);
+            } catch (HttpException e) {
+                SceneSwitchController.handleException(e);
+            }
         };
 
         setRight = id -> {
@@ -63,7 +72,12 @@ public class FighterChooseViewController implements Initializable {
                 ((PokemonTileControl) rightTilePane.getChildren().get(chosenRight.getId()-1)).deletePaneStyle("blueBordered");
             }
             ((PokemonTileControl) rightTilePane.getChildren().get(id-1)).addPaneStyle("blueBordered");
-            chosenRight = PokemonTypeProvider.getData(id);
+
+            try {
+                chosenRight = PokemonTypeProvider.getData(id);
+            } catch (HttpException e) {
+                SceneSwitchController.handleException(e);
+            }
         };
 
         leftScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);

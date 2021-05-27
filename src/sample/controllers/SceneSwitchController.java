@@ -100,20 +100,24 @@ public class SceneSwitchController {
                 e.printStackTrace();
             }
         });
-        fetchPokemons.setOnFailed(workerStateEvent -> handleException((HttpException) fetchPokemons.getException()));
+        fetchPokemons.setOnFailed(workerStateEvent -> handleException(fetchPokemons.getException()));
 
         Thread thread = new Thread(fetchPokemons);
         thread.setDaemon(true);
         thread.start();
     }
 
-    public static void handleException(HttpException exception) {
+    public static void handleException(Throwable exception) {
+        /* TO-DO: Create cases for different exceptions */
         exceptionHandled = true;
+
         try {
             switchToView(stage, "fetchFailView");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        exception.printStackTrace();
     }
 
     public static void goHome(ActionEvent event) {

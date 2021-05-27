@@ -62,7 +62,7 @@ public class SinglePokemonDetailsController implements Initializable {
         Task<Void> fetchPokemon = new Task<>() {
             @Override
             public Void call() throws Exception {
-                pokemon = (PokemonType) new PokemonTypeFetcher().fetchAndParse(id);
+                pokemon = (PokemonType) new PokemonTypeFetcher().fetchAndParseFromId(id);
                 return null;
             }
         };
