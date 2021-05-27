@@ -100,17 +100,21 @@ public class Simulator {
 
         boolean keepFighting = true;
         int roundsWithNoDamage = 0;
-
+        Random random = new Random();
         while (keepFighting) {
             int leftHPbefore = leftHP;
             int rightHPbefore = rightHP;
-
+           // System.out.println(leftHP + " " + rightHP);
+            if(leftHP<=0 || rightHP<=0)
+                break;
             if (leftStats.get(5)>rightStats.get(5)) {
+
                 int d=intelligence.whatToDo(FightingPokemon.LEFT);
-                double ile=Math.random();
+                int ile=Math.abs(random.nextInt())%101;
 
                 //idk what type accuracy is
                 if (leftMoves[d].getAccuracy()>ile) {
+                    //System.out.println(d);
                     rightHP-=leftMoves[d].getPower()/4;
                     log.addLog(FightingPokemon.LEFT, leftMoves[d], leftMoves[d].getPower());
                 }
@@ -120,7 +124,8 @@ public class Simulator {
                 }
 
                 d=intelligence.whatToDo(FightingPokemon.RIGHT);
-                ile=Math.random();
+
+                ile=Math.abs(random.nextInt())%101;
                 //idk what type accuracy is
 
                 if (rightMoves[d].getAccuracy()>ile) {
@@ -130,7 +135,7 @@ public class Simulator {
             }
             else {
                 int d=intelligence.whatToDo(FightingPokemon.RIGHT);
-                double ile=Math.random();
+                int ile=Math.abs(random.nextInt())%101;
 
                 //idk what type accuracy is
                 if(rightMoves[d].getAccuracy()>ile) {
@@ -144,9 +149,10 @@ public class Simulator {
                 }
 
                 d=intelligence.whatToDo(FightingPokemon.LEFT);
-                ile=Math.random();
+                ile=Math.abs(random.nextInt())%101;
 
                 if(leftMoves[d].getAccuracy()>ile) {
+                    //System.out.println(d);
                     rightHP-=leftMoves[d].getPower()/4;
                     log.addLog(FightingPokemon.LEFT, leftMoves[d], leftMoves[d].getPower());
                 }
@@ -189,7 +195,7 @@ class PokemonIntelligence{
             for(Integer val: leftEffectiveness){
                 res+=val;
             }
-            int choose = random.nextInt(res- leftEffectiveness.get(0)) + leftEffectiveness.get(0);
+            int choose = Math.abs(random.nextInt(res- leftEffectiveness.get(0))) + leftEffectiveness.get(0);
             for(int i=0; i< leftEffectiveness.size(); i++){
                 choose-=leftEffectiveness.get(i);
                 if(choose<=0) return i;
@@ -199,13 +205,13 @@ class PokemonIntelligence{
             for(Integer val: rightEffectiveness){
                 res+=val;
             }
-            int choose = random.nextInt(res- rightEffectiveness.get(0)) + rightEffectiveness.get(0);
+            int choose = Math.abs(random.nextInt(res- rightEffectiveness.get(0))) + rightEffectiveness.get(0);
             for(int i=0; i< rightEffectiveness.size(); i++){
                 choose-=rightEffectiveness.get(i);
                 if(choose<=0) return i;
             }
         }
-        return random.nextInt(leftEffectiveness.size());
+        return Math.abs(random.nextInt(leftEffectiveness.size()));
     }
 }
 
