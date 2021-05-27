@@ -1,5 +1,7 @@
 package sample.model.datamodels;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,12 +12,14 @@ public class PokemonType {
     private final String name;
     private final TypeResult[] types;
     private final StatResult[] stats;
+    private final MoveResult[] moves;
 
     PokemonType() {
         id = weight = height = 0;
         name = "";
         types = new TypeResult[0];
         stats = new StatResult[0];
+        moves = new MoveResult[0];
     }
 
     public int getId() {
@@ -46,6 +50,17 @@ public class PokemonType {
         for (StatResult stat: stats)
             map.put(stat.stat.name, (double) stat.base_stat);
         return map;
+    }
+
+    public ArrayList<Integer> getStatsArray() {
+        ArrayList<Integer> array = new ArrayList<>();
+        for (StatResult stat: stats)
+            array.add(stat.base_stat);
+        return array;
+    }
+
+    public ArrayList<MoveResult> getMoves() {
+        return new ArrayList<>(Arrays.asList(moves));
     }
 }
 

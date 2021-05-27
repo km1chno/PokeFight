@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="pokemonTilePane" prefHeight="144.0" prefWidth="144.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="pokemonTileBorderPane" layoutX="1.0" layoutY="1.0" prefHeight="142.0" prefWidth="142.0">
+         <children>
+            <ImageView fx:id="pokemonTileImageView" fitHeight="142.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="pokemonTileButton" mnemonicParsing="false" onAction="#onPokemonTileButtonClick" opacity="0.0" prefHeight="142.0" prefWidth="142.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

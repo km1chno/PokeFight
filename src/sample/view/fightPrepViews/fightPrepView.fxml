@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.fightPrepControllers.FightPrepViewController">
+   <children>
+      <Pane layoutX="30.0" layoutY="30.0" prefHeight="741.0" prefWidth="414.0" styleClass="backgroundPane" />
+      <Pane layoutX="836.0" layoutY="30.0" prefHeight="741.0" prefWidth="414.0" styleClass="backgroundPane" />
+      <Pane layoutX="58.0" layoutY="58.0" styleClass="imageWrapper">
+         <children>
+            <ImageView fx:id="leftPokemonImageView" fitHeight="354.0" fitWidth="354.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Pane layoutX="868.0" layoutY="58.0" styleClass="imageWrapper">
+         <children>
+            <ImageView fx:id="rightPokemonImageView" fitHeight="354.0" fitWidth="354.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Label layoutX="565.0" layoutY="225.0" prefHeight="20.0" prefWidth="150.0" text="VS" />
+      <ComboBox fx:id="leftMove1" layoutX="60.0" layoutY="460.0" prefWidth="171.0" promptText="Move 1" />
+      <ComboBox fx:id="leftMove2" layoutX="239.0" layoutY="460.0" prefWidth="171.0" promptText="Move 2" />
+      <ComboBox fx:id="leftMove3" layoutX="61.0" layoutY="499.0" prefHeight="24.0" prefWidth="171.0" promptText="Move 3" />
+      <ComboBox fx:id="leftMove4" layoutX="239.0" layoutY="499.0" prefWidth="171.0" promptText="Move 4" />
+      <TextField fx:id="leftLvl" layoutX="61.0" layoutY="568.0" prefHeight="24.0" prefWidth="171.0" promptText="Level" />
+      <TextField fx:id="leftExp" layoutX="238.0" layoutY="568.0" prefHeight="24.0" prefWidth="171.0" promptText="Experience" />
+      <TextField fx:id="leftIVhp" layoutX="60.0" layoutY="637.0" promptText="IV HP" />
+      <TextField fx:id="leftIVdef" layoutX="60.0" layoutY="704.0" promptText="IV Special Defense" />
+      <TextField fx:id="leftIVAttack" layoutX="237.0" layoutY="637.0" promptText="IV Attack" />
+      <TextField fx:id="leftIVspAttack" layoutX="60.0" layoutY="672.0" promptText="IV Defense" />
+      <TextField fx:id="leftIVspDef" layoutX="237.0" layoutY="672.0" promptText="IV Special Attack" />
+      <TextField fx:id="leftIVspeed" layoutX="237.0" layoutY="704.0" promptText="IV Speed" />
+      <Button fx:id="fightButton" layoutX="565.0" layoutY="412.0" mnemonicParsing="false" onAction="#onFightButtonClick" prefHeight="44.0" prefWidth="150.0" text="Fight!" />
+      <ComboBox fx:id="rightMove1" layoutX="870.0" layoutY="460.0" prefWidth="171.0" promptText="Move 1" />
+      <ComboBox fx:id="rightMove2" layoutX="1049.0" layoutY="460.0" prefWidth="171.0" promptText="Move 2" />
+      <ComboBox fx:id="rightMove3" layoutX="870.0" layoutY="499.0" prefWidth="171.0" promptText="Move 3" />
+      <ComboBox fx:id="rightMove4" layoutX="1049.0" layoutY="499.0" prefWidth="171.0" promptText="Move 4" />
+      <TextField fx:id="rightLvl" layoutX="870.0" layoutY="568.0" promptText="Level" />
+      <TextField fx:id="rightExp" layoutX="1049.0" layoutY="568.0" promptText="Experience" />
+      <TextField fx:id="rightIVhp" layoutX="870.0" layoutY="637.0" promptText="IV HP" />
+      <TextField fx:id="rightIVdef" layoutX="870.0" layoutY="672.0" promptText="IV Defense" />
+      <TextField fx:id="rightIVAttack" layoutX="1049.0" layoutY="637.0" promptText="IV Attack" />
+      <TextField fx:id="rightIVspAttack" layoutX="1049.0" layoutY="672.0" promptText="IV Special Attack" />
+      <TextField fx:id="rightIVspDef" layoutX="870.0" layoutY="704.0" promptText="IV Special Defense" />
+      <TextField fx:id="rightIVspeed" layoutX="1049.0" layoutY="704.0" promptText="IV Speed" />
+      <Button layoutX="565.0" layoutY="501.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="150.0" text="Button" />
+   </children>
+</AnchorPane>

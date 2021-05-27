@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.fighterChooseControllers.FighterChooseViewController">
+   <children>
+      <ScrollPane fx:id="leftScrollPane" layoutX="20.0" layoutY="100.0" prefHeight="680.0" prefWidth="610.0">
+         <content>
+            <TilePane fx:id="leftTilePane" prefHeight="678.0" prefWidth="608.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane fx:id="rightScrollPane" layoutX="650.0" layoutY="100.0" prefHeight="680.0" prefWidth="610.0">
+         <content>
+            <TilePane fx:id="rightTilePane" prefHeight="678.0" prefWidth="608.0" />
+         </content>
+      </ScrollPane>
+      <Label layoutY="16.0" prefHeight="69.0" prefWidth="356.0" text="Choose fighters" />
+      <Button fx:id="chooseFighterAdvanceButton" layoutX="957.0" layoutY="29.0" mnemonicParsing="false" onAction="#onChooseFighterAdvanceButtonClick" prefHeight="45.0" prefWidth="273.0" text="CHOOSE SKILLS" />
+   </children>
+</AnchorPane>
