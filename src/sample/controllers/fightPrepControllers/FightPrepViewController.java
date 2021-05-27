@@ -244,13 +244,12 @@ public class FightPrepViewController implements Initializable {
 
         }
         for (int i = 0; i < 6; i++) {
-            leftIVFields.get(i).setText(String.valueOf(Math.abs(random.nextInt() % 5)));
-            rightIVFields.get(i).setText(String.valueOf(Math.abs(random.nextInt() % 5)));
+            leftIVFields.get(i).setText(String.valueOf(random.nextInt(5)));
+            rightIVFields.get(i).setText(String.valueOf(random.nextInt(5)));
         }
-
-        leftLvl.setText(String.valueOf(Math.abs(random.nextInt()) % 101));
-        leftExp.setText(String.valueOf(Math.abs(random.nextInt()) % 101));
-        rightLvl.setText(String.valueOf(Math.abs(random.nextInt()) % 101));
-        rightExp.setText(String.valueOf(Math.abs(random.nextInt()) % 101));
+        leftLvl.setText(String.valueOf(random.nextInt(100)+1 ));
+        leftExp.setText(String.valueOf(random.nextInt(101) ));
+        rightLvl.setText(String.valueOf(random.nextInt(101) ));
+        rightExp.setText(String.valueOf(random.nextInt(101) ));
     }
 }
