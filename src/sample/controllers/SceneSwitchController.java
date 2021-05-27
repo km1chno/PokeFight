@@ -128,8 +128,8 @@ public class SceneSwitchController {
         }
     }
 
-    public void switchToFightPrepView(ActionEvent event, PokemonType left, PokemonType right) {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("../view/fightPrepViews/fightPrepView.fxml")));
+    public static void switchToFightPrepView(ActionEvent event, PokemonType left, PokemonType right) {
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(SceneSwitchController.class.getResource("../view/fightPrepViews/fightPrepView.fxml")));
 
         try {
             root = (Parent) loader.load();
@@ -142,7 +142,7 @@ public class SceneSwitchController {
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../css/fightPrep/fightPrepView.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(SceneSwitchController.class.getResource("../css/fightPrep/fightPrepView.css")).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

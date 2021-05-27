@@ -1,5 +1,6 @@
 package sample.model;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 
@@ -24,5 +25,22 @@ public class Utils {
         TextFormatter<TextFormatter.Change> formatter = new TextFormatter<>(filter);
 
         textField.setTextFormatter(formatter);
+    }
+
+    public static void showIncorrectStatsDialog() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wrong stats input");
+        alert.setHeaderText("Make sure you choose all the stats correctly (or use random stats button)");
+        alert.setContentText("Pokemon Level must be an integer in range [1, 100]\nPokemon Exp must be a non-negative integer\nAll of Individual Values must be integers in range [0, 31]");
+
+        alert.showAndWait();
+    }
+
+    public static void showNoPokemonChosenDialog() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("You have to choose both pokemons");
+        alert.setHeaderText("It looks like you have not chosen both fighters");
+
+        alert.showAndWait();
     }
 }

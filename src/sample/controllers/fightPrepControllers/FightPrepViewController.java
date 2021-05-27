@@ -180,15 +180,6 @@ public class FightPrepViewController implements Initializable {
         }
     }
 
-    public void showIncorrectStatsDialog() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Wrong stats input");
-        alert.setHeaderText("Make sure you choose all the stats correctly (or use random stats button)");
-        alert.setContentText("Pokemon Level must be an integer in range [1, 100]\nPokemon Exp must be a non-negative integer\nAll of Individual Values must be integers in range [0, 31]");
-
-        alert.showAndWait();
-    }
-
     public void showResult(GeneralLogs logs) {
         vsLabel.setStyle("-fx-opacity: 0");
         resultsPane.setStyle("-fx-opacity: 1");
@@ -223,7 +214,7 @@ public class FightPrepViewController implements Initializable {
             leftPokemonInstance = new PokemonInstance(leftPokemon, leftPokemonMoves, Integer.parseInt(leftLvl.getText()), Integer.parseInt(leftExp.getText()), leftIV);
             rightPokemonInstance = new PokemonInstance(rightPokemon, rightPokemonMoves, Integer.parseInt(rightLvl.getText()), Integer.parseInt(rightExp.getText()), rightIV);
         } catch (NumberFormatException | IncorrectStatsException e) {
-            showIncorrectStatsDialog();
+            Utils.showIncorrectStatsDialog();
             return;
         }
 

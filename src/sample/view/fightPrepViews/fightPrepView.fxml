@@ -44,7 +44,7 @@
       <TextField fx:id="leftIVspAttack" layoutX="60.0" layoutY="672.0" promptText="IV Defense" />
       <TextField fx:id="leftIVspDef" layoutX="237.0" layoutY="672.0" promptText="IV Special Attack" />
       <TextField fx:id="leftIVspeed" layoutX="237.0" layoutY="704.0" promptText="IV Speed" />
-      <Button fx:id="fightButton" layoutX="565.0" layoutY="650.0" mnemonicParsing="false" onAction="#onFightButtonClick" prefHeight="44.0" prefWidth="150.0" text="Fight!" />
+      <Button fx:id="fightButton" layoutX="505.0" layoutY="650.0" mnemonicParsing="false" onAction="#onFightButtonClick" prefHeight="44.0" prefWidth="271.0" text="Fight!" />
       <ComboBox fx:id="rightMove1" layoutX="870.0" layoutY="460.0" prefWidth="171.0" promptText="Move 1" />
       <ComboBox fx:id="rightMove2" layoutX="1049.0" layoutY="460.0" prefWidth="171.0" promptText="Move 2" />
       <ComboBox fx:id="rightMove3" layoutX="870.0" layoutY="499.0" prefWidth="171.0" promptText="Move 3" />
@@ -57,7 +57,7 @@
       <TextField fx:id="rightIVspAttack" layoutX="1049.0" layoutY="672.0" promptText="IV Special Attack" />
       <TextField fx:id="rightIVspDef" layoutX="870.0" layoutY="704.0" promptText="IV Special Defense" />
       <TextField fx:id="rightIVspeed" layoutX="1049.0" layoutY="704.0" promptText="IV Speed" />
-      <Button layoutX="565.0" layoutY="706.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="44.0" prefWidth="150.0" text="Go Back" />
-      <Button fx:id="randomStatsButton" layoutX="565.0" layoutY="592.0" mnemonicParsing="false" onAction="#onRandomStatsButtonClick" prefHeight="44.0" prefWidth="150.0" text="Random Stats" />
+      <Button layoutX="505.0" layoutY="706.0" mnemonicParsing="false" onAction="#onGoBackButtonClick" prefHeight="44.0" prefWidth="271.0" text="Go Back" />
+      <Button fx:id="randomStatsButton" layoutX="505.0" layoutY="592.0" mnemonicParsing="false" onAction="#onRandomStatsButtonClick" prefHeight="44.0" prefWidth="271.0" text="Random Stats" />
    </children>
 </AnchorPane>
