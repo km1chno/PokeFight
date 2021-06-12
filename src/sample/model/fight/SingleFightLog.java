@@ -41,4 +41,6 @@ public class SingleFightLog {
         }
     }
 
+    public ArrayList<String> getMoveLogs() { return logs; }
+
 }

@@ -10,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import sample.controllers.fightPrepControllers.FightPrepViewController;
+import sample.controllers.fightPrepControllers.FightResultViewController;
 import sample.controllers.pokemonDetailsControllers.SinglePokemonDetailsController;
 import sample.model.datamodels.PokemonType;
 import sample.model.exceptions.HttpException;
+import sample.model.fight.GeneralLogs;
 import sample.model.providers.PokemonTypeListProvider;
 
 import java.io.IOException;
@@ -23,6 +25,7 @@ public class SceneSwitchController {
     private static Stage stage;
     private static Scene scene;
     private static Parent root;
+    private static FXMLLoader loader;
 
     public static void setPrimaryStage(Stage stage) { primaryStage = stage; }
 
@@ -31,7 +34,7 @@ public class SceneSwitchController {
     }
 
     // Sets the escape Stage
-    private static void escapeToView(Stage window, String name) {
+    public static void escapeToView(Stage window, String name) {
         scene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ESCAPE) {
                 try {
@@ -45,7 +48,8 @@ public class SceneSwitchController {
 
     // Switches the current Scene displayed on window to the Scene defined by fxmlPath and cssPath
     public static void switchToView(Stage window, String fxmlPath, String cssPath) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(SceneSwitchController.class.getResource(fxmlPath)));
+        loader = new FXMLLoader(Objects.requireNonNull(SceneSwitchController.class.getResource(fxmlPath)));
+        root = loader.load();
         stage = window;
         scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(SceneSwitchController.class.getResource(cssPath)).toExternalForm());
@@ -65,7 +69,7 @@ public class SceneSwitchController {
     }
 
     public static void switchToSinglePokemonDetails(ActionEvent event, int id) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(SceneSwitchController.class.getResource("../view/pokemonDetailsViews/singlePokemonDetailsView.fxml")));
+        loader = new FXMLLoader(Objects.requireNonNull(SceneSwitchController.class.getResource("../view/pokemonDetailsViews/singlePokemonDetailsView.fxml")));
         root = loader.load();
         SinglePokemonDetailsController pokemonDetailsController = loader.getController();
         pokemonDetailsController.setPokemon(id);
@@ -128,7 +132,7 @@ public class SceneSwitchController {
     }
 
     public static void switchToFightPrepView(ActionEvent event, PokemonType left, PokemonType right) {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(SceneSwitchController.class.getResource("../view/fightPrepViews/fightPrepView.fxml")));
+        loader = new FXMLLoader(Objects.requireNonNull(SceneSwitchController.class.getResource("../view/fightPrep/fightPrepView.fxml")));
 
         try {
             root = (Parent) loader.load();
@@ -145,4 +149,13 @@ public class SceneSwitchController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public static void switchToFightResultView(ActionEvent event, GeneralLogs logs) throws IOException {
+        switchToView(event, "fightPrep/fightResultView");
+        escapeToView(sourceOfEvent(event), "fightPrep/fightPrepView");
+        FightResultViewController controller = loader.getController();
+        controller.setLogs(logs);
+    }
+
+    public static Scene getScene() { return scene; }
 }

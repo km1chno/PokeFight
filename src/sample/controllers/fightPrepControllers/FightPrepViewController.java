@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import sample.controllers.SceneSwitchController;
 import sample.model.Constants;
 import sample.model.Utils;
@@ -20,6 +21,7 @@ import sample.model.fight.GeneralLogs;
 import sample.model.fight.Simulator;
 import sample.model.providers.MoveProvider;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class FightPrepViewController {
     private PokemonType leftPokemon;
     private PokemonType rightPokemon;
     private Simulator fightSimulator;
+    private GeneralLogs fightLogs;
 
     private ArrayList<TextField> leftIVFields;
     private ArrayList<TextField> rightIVFields;
@@ -138,6 +141,9 @@ public class FightPrepViewController {
     Label scoreLabelRight;
 
     @FXML
+    Button moreInfoButton;
+
+    @FXML
     public void initialize() {
         fightSimulator = new Simulator();
 
@@ -180,13 +186,14 @@ public class FightPrepViewController {
         }
     }
 
-    public void showResult(GeneralLogs logs) {
-        vsLabel.setStyle("-fx-opacity: 0");
-        resultsPane.setStyle("-fx-opacity: 1");
-        winnerNameLabel.setText(logs.getWinnerName() + " wins!");
-        scoreLabelLeft.setText(String.valueOf(logs.getLeftWins()));
-        scoreLabelStalemate.setText(String.valueOf(logs.getStalemates()));
-        scoreLabelRight.setText(String.valueOf(logs.getRightWins()));
+    public void showResult() {
+        vsLabel.setVisible(false);
+        resultsPane.setVisible(true);
+        winnerNameLabel.setText(fightLogs.getWinnerName() + " wins!");
+        scoreLabelLeft.setText(String.valueOf(fightLogs.getLeftWins()));
+        scoreLabelStalemate.setText(String.valueOf(fightLogs.getStalemates()));
+        scoreLabelRight.setText(String.valueOf(fightLogs.getRightWins()));
+        moreInfoButton.setVisible(true);
     }
 
     public void onFightButtonClick(ActionEvent event) {
@@ -222,9 +229,9 @@ public class FightPrepViewController {
         leftPokemonInstance.print();
         rightPokemonInstance.print();
 
-        GeneralLogs fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
+        fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
 
-        showResult(fightLogs);
+        showResult();
     }
 
     public void onGoBackButtonClick(ActionEvent event) {
@@ -241,7 +248,6 @@ public class FightPrepViewController {
         for (int i = 0; i < 4; i++) {
             leftMovesFields.get(i).getSelectionModel().select(Math.abs(random.nextInt()) % leftMovesFields.get(i).getItems().size());
             rightMovesFields.get(i).getSelectionModel().select(Math.abs(random.nextInt()) % rightMovesFields.get(i).getItems().size());
-
         }
         for (int i = 0; i < 6; i++) {
             leftIVFields.get(i).setText(String.valueOf(random.nextInt(5)));
@@ -251,5 +257,13 @@ public class FightPrepViewController {
         leftExp.setText(String.valueOf(random.nextInt(101) ));
         rightLvl.setText(String.valueOf(random.nextInt(101) ));
         rightExp.setText(String.valueOf(random.nextInt(101) ));
+    }
+
+    public void onMoreInfoClick(ActionEvent event) {
+        try {
+            SceneSwitchController.switchToFightResultView(event, fightLogs);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
