@@ -86,6 +86,33 @@ public class PokemonInstance {
         speed = (int) Math.floor(0.01 * (2 * baseStats.get(5) + IVspeed + Math.floor(0.25 * (double) EV)) * lvl) + 5;
     }
 
+    public PokemonInstance(PokemonInstance pokemon) {
+        this.pokemonType= pokemon.pokemonType;
+        this.moves = new Move[pokemon.moves.length];
+        for(int i=0; i<pokemon.moves.length; i++){
+            this.moves[i]= new Move(pokemon.moves[i]);
+        }
+        this.lvl=pokemon.lvl;
+        this.exp=pokemon.exp;
+        this.IVattack=pokemon.IVattack;
+        this.IVdefense=pokemon.IVdefense;
+        this.IVhp=pokemon.IVhp;
+        this.IVspeed=pokemon.IVspeed;
+        this.IVspAttack=pokemon.IVspeed;
+        this.IVspDef=pokemon.IVspDef;
+        this.EV=pokemon.EV;
+        this.hp=pokemon.hp;
+        this.attack=pokemon.attack;
+        this.defense=pokemon.defense;
+        this.speed=pokemon.speed;
+        this.spAttack=pokemon.spAttack;
+        this.spDef=pokemon.spDef;
+        this.accuracy=pokemon.accuracy;
+        this.evasion=pokemon.evasion;
+
+
+    }
+
     public PokemonType getPokemonType() {
         return pokemonType;
     }

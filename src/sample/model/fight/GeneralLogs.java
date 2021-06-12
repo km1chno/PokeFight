@@ -25,10 +25,10 @@ public class GeneralLogs {
     }
 
     public void addResult(SingleFightLog log){
-        if(log.winner==FightingPokemon.LEFT){
+        if(log.winner== FightingPokemon.LEFT){
             leftWins++;
         }
-        else if(log.winner==FightingPokemon.RIGHT){
+        else if(log.winner== FightingPokemon.RIGHT){
             rightWins++;
         }
         else{

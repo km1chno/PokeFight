@@ -19,6 +19,15 @@ public class Move {
         meta = new MoveMetaData();
     }
 
+    public Move(Move move) {
+        this.name= move.getName();
+        this.accuracy=move.getAccuracy();
+        this.power=move.getPower();
+        this.pp=move.getPowerPoints();
+        this.meta=move.getMeta();
+        this.type = new Result(move.type);
+    }
+
     public String getName() { return name; }
     public int getAccuracy() { return accuracy; }
     public int getPower() { return power; }

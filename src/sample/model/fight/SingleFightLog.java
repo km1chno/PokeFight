@@ -15,30 +15,30 @@ public class SingleFightLog {
     public SingleFightLog(PokemonType lType, PokemonType rType){
         leftType=lType;
         rightType=rType;
-        winner=FightingPokemon.NONE;
+        winner= FightingPokemon.NONE;
         maxDamage=0;
     }
     public void addLog(FightingPokemon p, Move move, Integer damage){
-        if(p==FightingPokemon.LEFT){
+        if(p== FightingPokemon.LEFT.LEFT){
             logs.add(leftType.getName()+ " zadal "+ damage.toString() + " uzywajac " + move.getName() );
         }
-        else if(p==FightingPokemon.RIGHT){
+        else if(p== FightingPokemon.LEFT.RIGHT){
             logs.add(rightType.getName()+ " zadal "+ damage.toString() + " uzywajac " + move.getName() );
         }
         maxDamage=Integer.max(maxDamage, damage);
     }
     public void addLog(FightingPokemon p){
-        if(p==FightingPokemon.LEFT){
+        if(p== FightingPokemon.LEFT.LEFT){
             logs.add(leftType.getName() + " wygrywa walke!");
-            winner=FightingPokemon.LEFT;
+            winner= FightingPokemon.LEFT;
         }
-        else if(p==FightingPokemon.RIGHT){
+        else if(p== FightingPokemon.LEFT.RIGHT){
             logs.add(rightType.getName() + " wygrywa walke!");
-            winner=FightingPokemon.RIGHT;
+            winner= FightingPokemon.RIGHT;
         }
         else{
             logs.add("Pat w walkach pokemonow? co do diabla?!");
-            winner=FightingPokemon.NONE;
+            winner= FightingPokemon.NONE;
         }
     }
 
