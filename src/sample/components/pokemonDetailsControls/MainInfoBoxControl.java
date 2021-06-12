@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import sample.controllers.pokemonDetailsControllers.MainInfoBoxController;
 import sample.model.datamodels.PokemonType;
+import sample.model.datamodels.Type;
 
 import java.util.Objects;
 
@@ -31,7 +32,7 @@ public class MainInfoBoxControl extends AnchorPane {
         controller.setPokemon(pokemon);
     }
 
-    public void setBackgroundColor(String type) {
+    public void setBackgroundColor(Type type) {
         controller.setBackgroundColor(type);
     }
 

@@ -7,6 +7,7 @@ import sample.controllers.pokemonDetailsControllers.MainInfoBoxController;
 import sample.controllers.pokemonDetailsControllers.TypesBoxController;
 import sample.model.datamodels.PokemonType;
 import sample.model.datamodels.Result;
+import sample.model.datamodels.Type;
 
 import java.util.Objects;
 
@@ -29,11 +30,11 @@ public class TypesBoxControl extends AnchorPane {
         }
     }
 
-    public void setIcons(Result[] types) {
+    public void setIcons(Type[] types) {
         controller.setIcons(types);
     }
 
-    public void setBackgroundColor(String type) {
+    public void setBackgroundColor(Type type) {
         controller.setBackgroundColor(type);
     }
 

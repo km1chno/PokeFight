@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import sample.model.datamodels.Type;
 
 import java.util.Arrays;
 import java.util.List;
@@ -71,7 +72,7 @@ public class StatsBoxController {
         }
     }
 
-    public void setBackgroundColor(String type) {
-        mainContainer.getStyleClass().add(type);
+    public void setBackgroundColor(Type type) {
+        mainContainer.getStyleClass().add(type.getName());
     }
 }

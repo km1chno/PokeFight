@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import sample.model.datamodels.PokemonType;
+import sample.model.datamodels.Type;
 
 public class MainInfoBoxController {
     @FXML
@@ -38,7 +39,7 @@ public class MainInfoBoxController {
         spriteImageView.setImage(new Image("file:resources/sprites/pokemon/" + pokemon.getId() + ".png"));
     }
 
-    public void setBackgroundColor(String type) {
-        mainContainer.getStyleClass().add(type);
+    public void setBackgroundColor(Type type) {
+        mainContainer.getStyleClass().add(type.getName());
     }
 }
