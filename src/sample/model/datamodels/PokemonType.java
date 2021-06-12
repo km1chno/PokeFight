@@ -38,10 +38,10 @@ public class PokemonType {
         return name;
     }
 
-    public Result[] getTypes() {
-        Result[] typesArr = new Result[types.length];
+    public Type[] getTypes() {
+        Type[] typesArr = new Type[types.length];
         for (int i = 0; i < types.length; i++)
-            typesArr[i] = types[i].type;
+            typesArr[i] = Type.valueOf(types[i].type.name.toUpperCase());
         return typesArr;
     }
 

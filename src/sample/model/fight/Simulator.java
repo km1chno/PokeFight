@@ -1,12 +1,10 @@
 package sample.model.fight;
 
-import sample.model.datamodels.Move;
-import sample.model.datamodels.PokemonInstance;
-import sample.model.datamodels.PokemonType;
-import sample.model.datamodels.Result;
+import sample.model.datamodels.*;
 import sample.model.exceptions.ToManyFightsException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 enum LogsPrecision{
@@ -64,12 +62,12 @@ public class Simulator {
         ArrayList<Integer> rightEffectiveness = new ArrayList<>();
         for(Move move:leftMoves){
             int res=1;
-            Result[] rTypes = rightType.getTypes();
+            Type[] rTypes = rightType.getTypes();
             leftEffectiveness.add(res);
         }
         for(Move move:rightMoves){
             int res=1;
-            Result[] lTypes = leftType.getTypes();
+            Type[] lTypes = leftType.getTypes();
             rightEffectiveness.add(res);
         }
         return new PokemonIntelligence(leftEffectiveness, rightEffectiveness);

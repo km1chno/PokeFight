@@ -11,6 +11,7 @@ import sample.components.pokemonDetailsControls.StatsBoxControl;
 import sample.components.pokemonDetailsControls.TypesBoxControl;
 import sample.controllers.SceneSwitchController;
 import sample.model.datamodels.PokemonType;
+import sample.model.datamodels.Type;
 import sample.model.exceptions.HttpException;
 import sample.model.fetchers.PokemonTypeFetcher;
 
@@ -52,7 +53,7 @@ public class SinglePokemonDetailsController implements Initializable {
         typesBoxControl.setIcons(pokemon.getTypes());
         statsBox.setIcons(pokemon.getStats());
 
-        String type = pokemon.getTypes()[0].name;
+        Type type = pokemon.getTypes()[0];
         mainInfoBoxControl.setBackgroundColor(type);
         statsBox.setBackgroundColor(type);
         typesBoxControl.setBackgroundColor(type);
