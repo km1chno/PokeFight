@@ -42,6 +42,8 @@ public class PokemonInstance {
     private final int spAttack;
     private final int spDef;
     private final int speed;
+    private int accuracy = 0; // buff/debuff to accuracy
+    private int evasion = 0; // buff/debuff to evasion
 
     PokemonInstance() {
         pokemonType = new PokemonType();
@@ -96,6 +98,18 @@ public class PokemonInstance {
         // in order: hp, attack, defense, specialAttack, specialDefense, speed
         return Arrays.asList(hp, attack, defense, spAttack, spDef, speed);
     }
+
+    public Integer getHp() { return hp; }
+    public Integer getAttack() { return attack; }
+    public Integer getDefense() { return defense; }
+    public Integer getSpAttack() { return spAttack; }
+    public Integer getSpDef() { return spDef; }
+    public Integer getSpeed() { return speed; }
+    public Integer getAccuracy() { return accuracy; }
+    public Integer getEvasion() { return evasion; }
+
+    public void setAccuracy(int value) { accuracy = value; }
+    public void setEvasion(int value) { evasion = value; }
 
     public void print() {
         System.out.println("Pokemon type name: " + pokemonType.getName());

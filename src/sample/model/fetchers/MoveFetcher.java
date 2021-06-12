@@ -4,6 +4,8 @@ import sample.model.Constants;
 import sample.model.datamodels.Move;
 import sample.model.exceptions.HttpException;
 
+import java.util.Arrays;
+
 public class MoveFetcher extends AbstractFetcher {
 
     public MoveFetcher() {
@@ -14,5 +16,7 @@ public class MoveFetcher extends AbstractFetcher {
         return fetch(Constants.API_BASE_URL + "move/" + moveName);
     }
 
-    public Object fetchAndParseFromName(String moveName) throws HttpException { return parse(fetchFromName(moveName)); }
+    public Object fetchAndParseFromName(String moveName) throws HttpException {
+        return parse(fetchFromName(moveName));
+    }
 }
