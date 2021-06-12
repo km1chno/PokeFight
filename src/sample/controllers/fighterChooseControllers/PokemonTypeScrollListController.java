@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-public class PokemonTypeScrollListController implements Initializable {
+public class PokemonTypeScrollListController {
     private Consumer<Integer> onClickFunction;
     private PokemonTypeList pokemonList;
 
@@ -35,8 +35,8 @@ public class PokemonTypeScrollListController implements Initializable {
     @FXML
     TilePane tilePane;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    public void initialize() throws HttpException {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         chosen = null;
 
@@ -53,19 +53,15 @@ public class PokemonTypeScrollListController implements Initializable {
             }
         };
 
-        try {
-            pokemonList = PokemonTypeListProvider.getData();
+        pokemonList = PokemonTypeListProvider.getData();
 
-            updateScrollList();
-            scrollPane.vvalueProperty().addListener((observableValue, number, t1) -> {
-                if ((double) t1 >= scrollPane.getVmax()) {
-                    loadedPosition = Math.min(loadedPosition + NUMBER_TO_LOAD, NUMBER_OF_POKEMONS);
-                    addTiles();
-                }
-            });
-        } catch (HttpException e) {
-            SceneSwitchController.handleException(e);
-        }
+        updateScrollList();
+        scrollPane.vvalueProperty().addListener((observableValue, number, t1) -> {
+            if ((double) t1 >= scrollPane.getVmax()) {
+                loadedPosition = Math.min(loadedPosition + NUMBER_TO_LOAD, NUMBER_OF_POKEMONS);
+                addTiles();
+            }
+        });
     }
 
     private void updateScrollList() {

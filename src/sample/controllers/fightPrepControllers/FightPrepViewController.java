@@ -28,7 +28,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class FightPrepViewController implements Initializable {
+public class FightPrepViewController {
     private PokemonType leftPokemon;
     private PokemonType rightPokemon;
     private Simulator fightSimulator;
@@ -137,8 +137,8 @@ public class FightPrepViewController implements Initializable {
     @FXML
     Label scoreLabelRight;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    public void initialize() {
         fightSimulator = new Simulator();
 
         leftIVFields = new ArrayList<>(Arrays.asList(leftIVhp, leftIVAttack, leftIVdef, leftIVspAttack, leftIVspDef, leftIVspeed));

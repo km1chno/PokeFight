@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
 
-public class LibraryViewController implements Initializable {
+public class LibraryViewController {
     private int NUMBER_OF_POKEMONS; // The number of all the fetched pokemons
     private int NUMBER_TO_LOAD; // The number of all pokemons displayed on screen
     private PokemonTypeList pokemonList; // List containing all of the fetched pokemons
@@ -45,27 +45,23 @@ public class LibraryViewController implements Initializable {
     };
 
     // Initializes the LibraryView and adds scrollListener
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    public void initialize() throws HttpException {
         filterBar = new LibraryFilterBarControl();
         filterBar.getController().setLibraryUpdateFunction(updateLibraryWithFilter);
         Utils.configureNumericTextField(filterBar.getController().filterBarCountInput);
         filterBar.setStyle("-fx-background-color: #54b66e");
 
         anchorPane.getChildren().add(filterBar);
-        try {
-            pokemonList = PokemonTypeListProvider.getData();
+        pokemonList = PokemonTypeListProvider.getData();
 
-            updateLibrary();
-            scrollPane.vvalueProperty().addListener((observableValue, number, t1) -> {
-                if ((double) t1 >= scrollPane.getVmax()) {
-                    loadedPosition = Math.min(loadedPosition + NUMBER_TO_LOAD, NUMBER_OF_POKEMONS);
-                    addTiles();
-                }
-            });
-        } catch (HttpException e) {
-            SceneSwitchController.handleException(e);
-        }
+        updateLibrary();
+        scrollPane.vvalueProperty().addListener((observableValue, number, t1) -> {
+            if ((double) t1 >= scrollPane.getVmax()) {
+                loadedPosition = Math.min(loadedPosition + NUMBER_TO_LOAD, NUMBER_OF_POKEMONS);
+                addTiles();
+            }
+        });
     }
 
     // Updates NUMBER_OF_POKEMONS, NUMBER_TO_LOAD and tilePane based on pokemonList

@@ -18,7 +18,7 @@ import sample.model.fetchers.PokemonTypeFetcher;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SinglePokemonDetailsController implements Initializable {
+public class SinglePokemonDetailsController {
     private PokemonType pokemon;
 
     private final MainInfoBoxControl mainInfoBoxControl = new MainInfoBoxControl();
@@ -34,7 +34,8 @@ public class SinglePokemonDetailsController implements Initializable {
     @FXML
     Pane anchorPane;
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    public void initialize() {
         mainInfoBoxControl.relocate(20, 20);
         anchorPane.getChildren().add(mainInfoBoxControl);
         anchorPane.getChildren().get(anchorPane.getChildren().size()-1).toFront();
@@ -59,7 +60,7 @@ public class SinglePokemonDetailsController implements Initializable {
         typesBoxControl.setBackgroundColor(type);
     }
 
-    public void setPokemon(int id) {
+    public void setPokemon(int id) throws HttpException {
         Task<Void> fetchPokemon = new Task<>() {
             @Override
             public Void call() throws Exception {
@@ -68,7 +69,7 @@ public class SinglePokemonDetailsController implements Initializable {
             }
         };
         fetchPokemon.setOnSucceeded(workerStateEvent -> updateInfo());
-        fetchPokemon.setOnFailed(workerStateEvent -> SceneSwitchController.handleException((HttpException) fetchPokemon.getException()));
+        fetchPokemon.setOnFailed(workerStateEvent -> SceneSwitchController.handleException(fetchPokemon.getException()));
 
         Thread thread = new Thread(fetchPokemon);
         thread.setDaemon(true);

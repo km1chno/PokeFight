@@ -19,10 +19,12 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class SceneSwitchController {
+    private static Stage primaryStage;
     private static Stage stage;
     private static Scene scene;
     private static Parent root;
-    private static boolean exceptionHandled = false;
+
+    public static void setPrimaryStage(Stage stage) { primaryStage = stage; }
 
     static public Stage sourceOfEvent(Event event) {
         return (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -68,10 +70,6 @@ public class SceneSwitchController {
         SinglePokemonDetailsController pokemonDetailsController = loader.getController();
         pokemonDetailsController.setPokemon(id);
 
-        if (exceptionHandled) {
-            exceptionHandled = false;
-            return;
-        }
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(SceneSwitchController.class.getResource("../css/pokemonDetails/singlePokemonDetailsView.css")).toExternalForm());
@@ -109,10 +107,11 @@ public class SceneSwitchController {
 
     public static void handleException(Throwable exception) {
         /* TO-DO: Create cases for different exceptions */
-        exceptionHandled = true;
+        while (exception.getCause() != null)
+            exception = exception.getCause();
 
         try {
-            switchToView(stage, "fetchFailView");
+            switchToView(primaryStage, "fetchFailView");
         } catch (IOException e) {
             e.printStackTrace();
         }

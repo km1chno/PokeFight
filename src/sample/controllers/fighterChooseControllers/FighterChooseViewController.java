@@ -10,11 +10,12 @@ import sample.components.fighterChooseControls.PokemonTypeScrollList;
 import sample.controllers.SceneSwitchController;
 import sample.model.Utils;
 import sample.model.datamodels.PokemonType;
+import sample.model.exceptions.HttpException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FighterChooseViewController implements Initializable {
+public class FighterChooseViewController {
     private PokemonTypeScrollList leftScrollList;
     private PokemonTypeScrollList rightScrollList;
 
@@ -27,8 +28,8 @@ public class FighterChooseViewController implements Initializable {
     @FXML
     Button goBackButton;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    public void initialize() throws HttpException {
         leftScrollList = new PokemonTypeScrollList("redBordered");
         rightScrollList = new PokemonTypeScrollList("blueBordered");
 

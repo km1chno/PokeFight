@@ -5,13 +5,15 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import sample.controllers.fighterChooseControllers.PokemonTypeScrollListController;
 import sample.model.datamodels.PokemonType;
+import sample.model.exceptions.HttpException;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class PokemonTypeScrollList extends AnchorPane {
     PokemonTypeScrollListController controller;
 
-    public PokemonTypeScrollList(String color) {
+    public PokemonTypeScrollList(String color) throws HttpException {
         super();
 
         try {
@@ -25,8 +27,11 @@ public class PokemonTypeScrollList extends AnchorPane {
             this.getChildren().add(node);
 
             controller.setClickedTileColor(color);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            Throwable ex = e;
+            while (ex.getCause() != null)
+                ex = ex.getCause();
+            throw (HttpException) ex;
         }
     }
 

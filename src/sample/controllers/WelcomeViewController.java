@@ -20,16 +20,16 @@ public class WelcomeViewController {
     public void welcomeLibraryButtonOnClick(javafx.event.ActionEvent actionEvent) {
         try {
             SceneSwitchController.switchToLibraryView(actionEvent);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Throwable e) {
+            SceneSwitchController.handleException(e);
         }
     }
 
     public void welcomeArenaButtonOnClick(javafx.event.ActionEvent actionEvent) {
         try {
             SceneSwitchController.switchToView(SceneSwitchController.sourceOfEvent(actionEvent), "../view/fighterChooseViews/fighterChooseView.fxml", "../css/fighterChoose/fighterChooseView.css");
-        } catch (IOException e) {
-          e.printStackTrace();
+        } catch (Throwable e) {
+            SceneSwitchController.handleException(e);
         }
     }
 }
