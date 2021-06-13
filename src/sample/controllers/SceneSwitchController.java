@@ -25,6 +25,15 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class SceneSwitchController {
+    private static SwitchController currentSwitch;
+
+    public static void setCurrentSwitch(SwitchController currentSwitch) {
+        SceneSwitchController.currentSwitch = currentSwitch;
+    }
+
+    public static SwitchController getCurrentSwitch() {
+        return currentSwitch;
+    }
 
     // Sets the escape Stage
     /*public static void escapeToView(String name) {

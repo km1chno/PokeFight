@@ -12,4 +12,8 @@ public abstract class AbstractSwitchController implements SwitchController {
 
     @Override
     public abstract void switchTo() throws HttpException;
+
+    /*@Override
+    public abstract void returnTo() throws HttpException
+     */
 }
