@@ -134,6 +134,7 @@ public class PokemonInstance {
     public Integer getSpeed() { return speed; }
     public Integer getAccuracy() { return accuracy; }
     public Integer getEvasion() { return evasion; }
+    public Integer getLvl() {return lvl;}
 
     public void setAccuracy(int value) { accuracy = value; }
     public void setEvasion(int value) { evasion = value; }
