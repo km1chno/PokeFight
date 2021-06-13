@@ -4,36 +4,49 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.fightPrepControllers.FightPlayerViewController">
    <children>
-      <ImageView fx:id="leftPokemonImageView" fitHeight="400.0" fitWidth="400.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="rightPokemonImageView" fitHeight="400.0" fitWidth="400.0" layoutX="830.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-      <VBox fx:id="leftButtonBox" layoutX="50.0" layoutY="514.0" prefHeight="200.0" prefWidth="400.0">
+      <Pane layoutX="50.0" layoutY="50.0" prefHeight="700.0" prefWidth="420.0" styleClass="pokemonInfoContainer">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+            <ImageView fx:id="leftPokemonImageView" fitHeight="400.0" fitWidth="400.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox fx:id="leftButtonBox" layoutX="10.0" layoutY="464.0" prefHeight="223.0" prefWidth="400.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+               </children>
+            </VBox>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="25.0" layoutX="10.0" layoutY="425.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <Rectangle fx:id="leftHealthIndicator" arcHeight="5.0" arcWidth="5.0" fill="#e8251b" height="21.0" layoutX="10.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
          </children>
-      </VBox>
-      <VBox fx:id="rightButtonBox" layoutX="830.0" layoutY="514.0" prefHeight="200.0" prefWidth="400.0">
+      </Pane>
+      <Pane layoutX="820.0" layoutY="50.0" prefHeight="700.0" prefWidth="420.0" styleClass="pokemonInfoContainer">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="25.0" layoutX="10.0" layoutY="425.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <Rectangle fx:id="rightHealthIndicator" arcHeight="5.0" arcWidth="5.0" fill="#e8251b" height="21.0" layoutX="10.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <ImageView fx:id="rightPokemonImageView" fitHeight="400.0" fitWidth="400.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox fx:id="rightButtonBox" layoutX="10.0" layoutY="464.0" prefHeight="223.0" prefWidth="400.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </Pane>
       <Label alignment="CENTER" layoutX="599.0" layoutY="218.0" prefHeight="65.0" prefWidth="83.0" text="VS" textAlignment="CENTER">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="563.0" layoutY="392.0" prefHeight="17.0" prefWidth="156.0" text="Press ESC to return" visible="false" />
+      <Label alignment="CENTER" layoutX="563.0" layoutY="392.0" prefHeight="17.0" prefWidth="156.0" text="Press ESC to return" />
       <Button alignment="CENTER" layoutX="556.0" layoutY="438.0" mnemonicParsing="false" text="Click here for battle overview" visible="false" />
    </children>
 </AnchorPane>

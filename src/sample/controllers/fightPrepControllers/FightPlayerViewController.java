@@ -1,12 +1,13 @@
 package sample.controllers.fightPrepControllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import sample.model.Constants;
 import sample.model.datamodels.FightingPokemon;
 import sample.model.datamodels.Move;
@@ -26,6 +27,12 @@ public class FightPlayerViewController {
     @FXML
     VBox rightButtonBox;
 
+    @FXML
+    Rectangle leftHealthIndicator;
+
+    @FXML
+    Rectangle rightHealthIndicator;
+
     private enum PlayerType {
         HUMAN,
         COMPUTER
@@ -42,6 +49,15 @@ public class FightPlayerViewController {
         rightPokemon = right;
 
         setImages();
+
+        for (Node child : leftButtonBox.getChildren()) {
+            VBox.setMargin(child, new Insets(10, 0, 10, 0));
+        }
+
+        for (Node child : rightButtonBox.getChildren()) {
+            VBox.setMargin(child, new Insets(10, 0, 10, 0));
+        }
+
         setButtons(FightingPokemon.LEFT);
         setButtons(FightingPokemon.RIGHT);
     }

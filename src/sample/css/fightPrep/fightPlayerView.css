@@ -1,0 +1,16 @@
+.root {
+    -fx-background-color: #65c77f;
+}
+
+.button {
+    -fx-pref-width: inherit;
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-background-color: #111111;
+    -fx-alignment: center;
+}
+
+.pokemonInfoContainer {
+    -fx-border-color: black;
+    -fx-background-color: #519162;
+}
