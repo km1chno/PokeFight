@@ -22,7 +22,6 @@ public class LoadingSwitchController extends BasicSwitchController {
     @Override
     public void switchTo() {
         loadingSwitch.switchTo();
-        System.out.println("LOADING VIEW LOADED");
 
         Task<Void> fetchPokemons = new Task<>() {
             @Override
@@ -32,10 +31,7 @@ public class LoadingSwitchController extends BasicSwitchController {
             }
         };
 
-        fetchPokemons.setOnSucceeded(workerStateEvent -> {
-            super.switchTo();
-            System.out.println("POKEMONS");
-        });
+        fetchPokemons.setOnSucceeded(workerStateEvent -> super.switchTo());
 
         Thread thread = new Thread(fetchPokemons);
         thread.setDaemon(true);

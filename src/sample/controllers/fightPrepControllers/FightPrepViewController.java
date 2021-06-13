@@ -145,6 +145,12 @@ public class FightPrepViewController {
     Button moreInfoButton;
 
     @FXML
+    CheckBox leftPlayerCheckBox;
+
+    @FXML
+    CheckBox rightPlayerCheckBox;
+
+    @FXML
     public void initialize() {
         fightSimulator = new Simulator();
 
@@ -230,15 +236,32 @@ public class FightPrepViewController {
         leftPokemonInstance.print();
         rightPokemonInstance.print();
 
-        fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
+        if (leftPlayerCheckBox.isSelected() || rightPlayerCheckBox.isSelected()) {
+            try {
+                new BasicSwitchController("fightPrep/fightPlayerView") {
+                    @Override
+                    public void switchTo() throws HttpException {
+                        super.switchTo();
+                        FightPlayerViewController controller = loader.getController();
+                        controller.setPokemon(leftPokemonInstance, rightPokemonInstance);
+                        controller.setPlayers(leftPlayerCheckBox.isSelected(), rightPlayerCheckBox.isSelected());
+                    }
+                }.switchTo();
 
-        showResult();
+            } catch (Exception e) {
+                SceneSwitchController.handleException(e);
+            }
+        }
+        else {
+            fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
+            showResult();
+        }
     }
 
     public void onGoBackButtonClick(ActionEvent event) {
         try {
             new BasicSwitchController("../view/fighterChooseViews/fighterChooseView.fxml", "../css/fighterChoose/fighterChooseView.css").switchTo();
-        } catch (IOException | HttpException e) {
+        } catch (Exception e) {
             SceneSwitchController.handleException(e);
         }
     }
@@ -254,15 +277,14 @@ public class FightPrepViewController {
             leftIVFields.get(i).setText(String.valueOf(random.nextInt(5)));
             rightIVFields.get(i).setText(String.valueOf(random.nextInt(5)));
         }
-        leftLvl.setText(String.valueOf(random.nextInt(100)+1 ));
-        leftExp.setText(String.valueOf(random.nextInt(101) ));
-        rightLvl.setText(String.valueOf(random.nextInt(101) ));
-        rightExp.setText(String.valueOf(random.nextInt(101) ));
+        leftLvl.setText(String.valueOf(random.nextInt(100) + 1));
+        leftExp.setText(String.valueOf(random.nextInt(101)));
+        rightLvl.setText(String.valueOf(random.nextInt(100) + 1));
+        rightExp.setText(String.valueOf(random.nextInt(101)));
     }
 
     public void onMoreInfoClick(ActionEvent event) {
         try {
-            //SceneSwitchController.switchToFightResultView(fightLogs);
             new BasicSwitchController("fightPrep/fightResultView") {
                 @Override
                 public void switchTo() throws HttpException {
@@ -271,7 +293,7 @@ public class FightPrepViewController {
                     controller.init(fightLogs);
                 }
             }.switchTo();
-        } catch (IOException | HttpException e) {
+        } catch (Exception e) {
             SceneSwitchController.handleException(e);
         }
     }
