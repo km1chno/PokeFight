@@ -71,7 +71,9 @@ public class Game {
         }
         Move activeMove = getPokemon(pokemonNum).getMoves()[moveNum];
         //PP
-        getPokemon(pokemonNum).decrementPP(moveNum);
+
+        //getPokemon(pokemonNum).decrementPP(moveNum);
+
         //Status
         if(activeMove.getMeta().getAilment().getStatus()!=Status.NONE){
             if(random.nextInt(100)<activeMove.getMeta().getAilmentChange()){
@@ -145,5 +147,8 @@ public class Game {
 
     public void printHP(){
         System.out.println(left.getFinalHp()+ " " + right.getFinalHp());
+    }
+    public void printPP(){
+        System.out.println(left.sumPP()  +  " " + right.sumPP());
     }
 }
