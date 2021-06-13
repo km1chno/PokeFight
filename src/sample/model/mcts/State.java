@@ -64,6 +64,7 @@ public class State {
     public void swap(){
         pokemonNum = 1-pokemonNum;
     }
+
     public void addScore(double score){
         if(score>Integer.MIN_VALUE)
             winScore+=score;
@@ -84,13 +85,20 @@ public class State {
                 ar.add(state);
             }
         }
+        if(ar.isEmpty()){ //no PP
+            State state = new State(this.game);
+            state.setPokemonNum(1-pokemonNum);
+            state.getGame().move(state.getPokemonNum(), -1);
+            ar.add(state);
+        }
         return ar;
     }
 
 
     public void fight(){
         if(game.getPokemon(pokemonNum).sumPP()==0){
-            game.move(pokemonNum, -1); //means that pokemon has no PP
+            game.move(pokemonNum, -1);//means that pokemon has no PP
+            return;
         }
         int d=game.getMovesNumber(pokemonNum);
         Random random =new Random();

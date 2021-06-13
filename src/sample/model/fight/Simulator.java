@@ -57,6 +57,7 @@ public class Simulator {
         GeneralLogs logs = new GeneralLogs(leftPokemon.getPokemonType(), rightPokemon.getPokemonType());
 
         for(int i=0; i<numberOfFights; i++){
+
             System.out.println(i+1 + " walka: " );
              SingleFightLog log = singleFight(leftPokemon, rightPokemon);
              logs.addResult(log);
@@ -78,9 +79,11 @@ public class Simulator {
         MCTS engine = new MCTS();
         while(mainGame.getStatus()==Game.PROGRESS){
            try{
+               //mainGame.printPP();
                mainGame = engine.getNextMove(mainGame,pokemonNum);
-               mainGame.printHP();
-               mainGame.printPP();
+               //mainGame.printHP();
+
+
            } catch (MCTSException e){
                e.getCause();
            }
