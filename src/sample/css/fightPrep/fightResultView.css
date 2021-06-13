@@ -1,25 +1,20 @@
 * {
-    -fx-background-color: #222222;
-    -fx-text-fill: #EEEEEE;
+    -fx-background-color: #65c77f;
+    -fx-text-fill: black;
     -fx-font-family: "Roboto Light";
 }
 
-.button {
-    -fx-border-width: 1px;
-    -fx-border-color: #EEEEEE;
-    -fx-border-radius: 5px;
+.backgroundPane {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #f0efda;
+    -fx-background-radius: 20px;
+    -fx-alignment: center;
 }
 
-.button:hover {
-    -fx-border-width: 3px;
-    -fx-border-color: #FFFFFF;
-    -fx-text-fill: #FFFFFF;
-}
-
-#resultsPane {
-    -fx-border-width: 1px;
-    -fx-border-color: #EEEEEE;
-    -fx-border-radius: 25px;
+.label {
+    -fx-background-color: transparent;
 }
 
 #resultLabel {
@@ -27,9 +22,9 @@
 }
 
 #scoreLabelLeft {
-    -fx-text-fill: pink;
+    -fx-text-fill: red;
 }
 
 #scoreLabelRight {
-    -fx-text-fill: skyblue;
+    -fx-text-fill: blue;
 }

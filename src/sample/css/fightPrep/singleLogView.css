@@ -1,3 +1,11 @@
 .label {
     -fx-alignment: center;
 }
+
+.button {
+    -fx-pref-width: inherit;
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-background-color: #111111;
+    -fx-alignment: baseline-right;
+}
