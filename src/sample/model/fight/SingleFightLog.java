@@ -1,5 +1,6 @@
 package sample.model.fight;
 
+import sample.model.datamodels.FightingPokemon;
 import sample.model.datamodels.Move;
 import sample.model.datamodels.PokemonType;
 
@@ -39,6 +40,18 @@ public class SingleFightLog {
             logs.add("Pat w walkach pokemonow? co do diabla?!");
             winner=FightingPokemon.NONE;
         }
+    }
+
+    public FightingPokemon getWinner() {
+        return winner;
+    }
+
+    public PokemonType getWinnerName() {
+        if (winner == FightingPokemon.LEFT)
+            return leftType;
+        if (winner == FightingPokemon.RIGHT)
+            return rightType;
+        return null;
     }
 
     public ArrayList<String> getMoveLogs() { return logs; }

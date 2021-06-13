@@ -12,12 +12,6 @@ enum LogsPrecision{
     MEDIUM,
     HIGH
 }
-enum FightingPokemon{
-    LEFT,
-    RIGHT,
-    NONE
-}
-
 
 public class Simulator {
     private final int defaultNumberOfFights = 100;

@@ -154,7 +154,7 @@ public class SceneSwitchController {
         switchToView(event, "fightPrep/fightResultView");
         escapeToView(sourceOfEvent(event), "fightPrep/fightPrepView");
         FightResultViewController controller = loader.getController();
-        controller.setLogs(logs);
+        controller.init(logs);
     }
 
     public static Scene getScene() { return scene; }

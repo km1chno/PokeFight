@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import sample.components.SingleLogControl;
 import sample.model.fight.GeneralLogs;
 import sample.model.fight.SingleFightLog;
@@ -14,27 +15,18 @@ public class SingleLogController {
     private SingleLogControl singleLogControl;
 
     @FXML
-    AnchorPane anchorPane;
+    FlowPane flowPane;
 
     @FXML
-    Label winnerLabel;
+    public Label winnerLabel;
 
     @FXML
-    Label leftCounter;
-
-    @FXML
-    Label rightCounter;
-
-    @FXML
-    Label drawCounter;
-
-    @FXML
-    Button expandButton;
+    public Button expandButton;
 
     public SingleLogController(SingleLogControl singleLogControl) { this.singleLogControl = singleLogControl; }
 
     public void onExpandButtonClick(ActionEvent event) {
         expandButton.setVisible(false);
-        anchorPane.getChildren().addAll(singleLogControl.getMoves());
+        flowPane.getChildren().addAll(singleLogControl.getMoves());
     }
 }

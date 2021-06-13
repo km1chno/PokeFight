@@ -5,8 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import sample.controllers.SinglePokemonTypeTileController;
 import sample.controllers.fightPrepControllers.SingleLogController;
+import sample.model.datamodels.FightingPokemon;
+import sample.model.datamodels.PokemonType;
 import sample.model.fight.GeneralLogs;
 import sample.model.fight.SingleFightLog;
 
@@ -24,7 +28,9 @@ public class SingleLogControl extends Pane {
         this.log = log;
         moves = new ArrayList<>();
         for (String labelText : log.getMoveLogs()) {
-            moves.add(new Label(labelText));
+            Label moveLog = new Label(labelText);
+            moveLog.setPrefWidth(1280.0);
+            moves.add(moveLog);
         }
 
         try {
@@ -37,8 +43,20 @@ public class SingleLogControl extends Pane {
             Node node = loader.load();
             this.getChildren().add(node);
 
+            setLabels();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setLabels() {
+        FightingPokemon winner = log.getWinner();
+        if (winner == FightingPokemon.NONE) {
+            controller.winnerLabel.setText("This fight is a draw!");
+        }
+        else {
+            controller.winnerLabel.setText(log.getWinnerName().getName() + " " + "won this fight!");
+            controller.winnerLabel.setStyle("-fx-text-fill: " + (winner == FightingPokemon.LEFT ? "pink" : "skyblue"));
         }
     }
 

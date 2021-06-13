@@ -5,8 +5,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import sample.components.SingleLogControl;
+import sample.model.Constants;
 import sample.model.fight.GeneralLogs;
 
 public class FightResultViewController {
@@ -22,6 +25,9 @@ public class FightResultViewController {
     AnchorPane anchorPane;
 
     @FXML
+    FlowPane flowPane;
+
+    @FXML
     ImageView leftPokemonImageView;
 
     @FXML
@@ -29,6 +35,9 @@ public class FightResultViewController {
 
     @FXML
     Pane resultsPane;
+
+    @FXML
+    Label resultLabel;
 
     @FXML
     Label scoreLabelLeft;
@@ -39,10 +48,22 @@ public class FightResultViewController {
     @FXML
     Label scoreLabelStalemate;
 
-    public void setLogs(GeneralLogs logs) {
+    public void init(GeneralLogs logs) {
         this.logs = logs;
+
+        setLabels();
+
         for (int i = 0; i < logs.getAllFights(); i++)
-            anchorPane.getChildren().add(new SingleLogControl(logs.getLogs()[i]));
+            flowPane.getChildren().add(new SingleLogControl(logs.getLogs()[i]));
+    }
+
+    private void setLabels() {
+        String winner = logs.getWinnerName();
+        resultLabel.setText(winner.equals("NONE") ? "Neither Pokemon could get an advantage!" : winner + " came out on top!");
+
+        scoreLabelLeft.setText(logs.getLeftWins().toString());
+        scoreLabelRight.setText(logs.getRightWins().toString());
+        scoreLabelStalemate.setText(String.valueOf(Constants.NUMBER_OF_FIGHTS - logs.getRightWins() - logs.getLeftWins()));
     }
 
 }

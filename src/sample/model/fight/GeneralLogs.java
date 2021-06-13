@@ -1,5 +1,6 @@
 package sample.model.fight;
 
+import sample.model.datamodels.FightingPokemon;
 import sample.model.datamodels.PokemonType;
 
 import java.util.ArrayList;
