@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.fightPrepControllers.FightPlayerViewController">
+   <children>
+      <ImageView fx:id="leftPokemonImageView" fitHeight="400.0" fitWidth="400.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="rightPokemonImageView" fitHeight="400.0" fitWidth="400.0" layoutX="830.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox fx:id="leftButtonBox" layoutX="50.0" layoutY="514.0" prefHeight="200.0" prefWidth="400.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+         </children>
+      </VBox>
+      <VBox fx:id="rightButtonBox" layoutX="830.0" layoutY="514.0" prefHeight="200.0" prefWidth="400.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
+         </children>
+      </VBox>
+      <Label alignment="CENTER" layoutX="599.0" layoutY="218.0" prefHeight="65.0" prefWidth="83.0" text="VS" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="563.0" layoutY="392.0" prefHeight="17.0" prefWidth="156.0" text="Press ESC to return" visible="false" />
+      <Button alignment="CENTER" layoutX="556.0" layoutY="438.0" mnemonicParsing="false" text="Click here for battle overview" visible="false" />
+   </children>
+</AnchorPane>
