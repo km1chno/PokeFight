@@ -11,7 +11,7 @@ public class PokemonType {
     private final int weight;
     private final String name;
     private final TypeResult[] types;
-    private final StatResult[] stats;
+    public final StatResult[] stats;
     private final MoveResult[] moves;
 
     PokemonType() {

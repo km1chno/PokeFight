@@ -12,6 +12,8 @@ import sample.controllers.fightPrepControllers.FightPrepViewController;
 import sample.controllers.switchControllers.BasicSwitchController;
 import sample.model.Utils;
 import sample.model.datamodels.PokemonType;
+import sample.model.datamodels.Stat;
+import sample.model.datamodels.StatResult;
 import sample.model.exceptions.HttpException;
 
 import java.io.IOException;
@@ -55,7 +57,6 @@ public class FighterChooseViewController {
             return;
         }
 
-        //SceneSwitchController.switchToFightPrepView(chosenLeft, chosenRight);
         new BasicSwitchController("fightPrep/fightPrepView") {
             @Override
             public void switchTo() {

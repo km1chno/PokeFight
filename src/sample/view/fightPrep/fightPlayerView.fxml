@@ -22,14 +22,14 @@
                   <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
                </children>
             </VBox>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="25.0" layoutX="10.0" layoutY="425.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
-            <Rectangle fx:id="leftHealthIndicator" arcHeight="5.0" arcWidth="5.0" fill="#e8251b" height="21.0" layoutX="10.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <Rectangle fx:id="leftHealthBar" arcHeight="5.0" arcWidth="5.0" fill="#e8251b" height="25.0" layoutX="10.0" layoutY="425.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <Rectangle fx:id="leftHealthIndicator" arcHeight="5.0" arcWidth="5.0" fill="#1ffc2e" height="25.0" layoutX="10.0" layoutY="425.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
          </children>
       </Pane>
       <Pane layoutX="820.0" layoutY="50.0" prefHeight="700.0" prefWidth="420.0" styleClass="pokemonInfoContainer">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="25.0" layoutX="10.0" layoutY="425.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
-            <Rectangle fx:id="rightHealthIndicator" arcHeight="5.0" arcWidth="5.0" fill="#e8251b" height="21.0" layoutX="10.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <Rectangle fx:id="rightHealthBar" arcHeight="5.0" arcWidth="5.0" fill="#e8251b" height="25.0" layoutX="10.0" layoutY="425.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <Rectangle fx:id="rightHealthIndicator" arcHeight="5.0" arcWidth="5.0" fill="#1ffc2e" height="25.0" layoutX="10.0" layoutY="425.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
             <ImageView fx:id="rightPokemonImageView" fitHeight="400.0" fitWidth="400.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
             <VBox fx:id="rightButtonBox" layoutX="10.0" layoutY="464.0" prefHeight="223.0" prefWidth="400.0">
                <children>
@@ -48,5 +48,6 @@
       </Label>
       <Label alignment="CENTER" layoutX="563.0" layoutY="392.0" prefHeight="17.0" prefWidth="156.0" text="Press ESC to return" />
       <Button alignment="CENTER" layoutX="556.0" layoutY="438.0" mnemonicParsing="false" text="Click here for battle overview" visible="false" />
+      <VBox fx:id="tooltipBox" layoutX="491.0" layoutY="463.0" prefHeight="250.0" prefWidth="300.0" />
    </children>
 </AnchorPane>
