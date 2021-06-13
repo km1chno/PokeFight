@@ -5,7 +5,7 @@ import sample.model.exceptions.MCTSException;
 import java.util.List;
 
 public class MCTS {
-    static final int timeBudget = 2;
+    static final int timeBudget = 10;
     static final int winScore = 5;
     static int coo=0;
     int enemyPokemon;
@@ -19,12 +19,12 @@ public class MCTS {
         long endTime= System.currentTimeMillis()+timeBudget;
         int cnt=0;
         while(System.currentTimeMillis() < endTime){
-           // System.out.println(System.currentTimeMillis() + " " + endTime);
+            System.out.println(System.currentTimeMillis() + " " + endTime);
             Node expansionNode = selectionRoute(rootNode);
             if(expansionNode.getState().getGame().getStatus()==Game.PROGRESS){
                 expandNode(expansionNode);
             }
-
+            System.out.println("expand");
             Node randomNode;
             if(expansionNode.nextNodes.size()>0){
                 randomNode = expansionNode.getRandomNextNode();
@@ -32,7 +32,7 @@ public class MCTS {
             else{
                 randomNode = expansionNode;
             }
-
+            System.out.println("simulate");
             int simulationResult = simulateRandomNode(randomNode);
 
             propagation(randomNode, simulationResult);

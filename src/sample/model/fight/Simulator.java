@@ -19,7 +19,7 @@ enum FightingPokemon{
 
 
 public class Simulator {
-    private final int defaultNumberOfFights = 1;
+    private final int defaultNumberOfFights = 100;
     private final LogsPrecision defaultLogsPrecision=LogsPrecision.MEDIUM;
     private final int fightsUpperBound = 10000000;
     private final int maxRoundsWithNoDamage = 100;
@@ -80,6 +80,7 @@ public class Simulator {
            try{
                mainGame = engine.getNextMove(mainGame,pokemonNum);
                mainGame.printHP();
+               mainGame.printPP();
            } catch (MCTSException e){
                e.getCause();
            }
