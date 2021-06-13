@@ -18,6 +18,6 @@ public class FetchFailViewController {
     Button goBackButton;
 
     public void onGoBackButtonClick(ActionEvent event) {
-        SceneSwitchController.goHome(event);
+        SceneSwitchController.goHome();
     }
 }

@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.controllers.SceneSwitchController;
+import sample.model.Constants;
 
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        SceneSwitchController.setPrimaryStage(primaryStage);
+        Constants.stage = primaryStage;
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/welcomeView.fxml")));
             Scene welcomeScene = new Scene(root);

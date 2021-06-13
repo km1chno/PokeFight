@@ -1,5 +1,6 @@
 package sample.model;
 
+import javafx.stage.Stage;
 import sample.model.datamodels.Move;
 
 public class Constants {
@@ -12,6 +13,8 @@ public class Constants {
     public static final int TYPES_NUMBER;
 
     public static final int NUMBER_OF_FIGHTS;
+
+    public static Stage stage;
 
     static {
         EMPTY_MOVE = new Move();

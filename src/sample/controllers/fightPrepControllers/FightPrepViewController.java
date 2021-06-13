@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sample.controllers.SceneSwitchController;
+import sample.controllers.switchControllers.BasicSwitchController;
 import sample.model.Constants;
 import sample.model.Utils;
 import sample.model.datamodels.Move;
@@ -236,9 +237,9 @@ public class FightPrepViewController {
 
     public void onGoBackButtonClick(ActionEvent event) {
         try {
-            SceneSwitchController.switchToView(SceneSwitchController.sourceOfEvent(event), "../view/fighterChooseViews/fighterChooseView.fxml", "../css/fighterChoose/fighterChooseView.css");
-        } catch (IOException e) {
-            e.printStackTrace();
+            new BasicSwitchController("../view/fighterChooseViews/fighterChooseView.fxml", "../css/fighterChoose/fighterChooseView.css").switchTo();
+        } catch (IOException | HttpException e) {
+            SceneSwitchController.handleException(e);
         }
     }
 
@@ -261,9 +262,17 @@ public class FightPrepViewController {
 
     public void onMoreInfoClick(ActionEvent event) {
         try {
-            SceneSwitchController.switchToFightResultView(event, fightLogs);
-        } catch (IOException e) {
-            e.printStackTrace();
+            //SceneSwitchController.switchToFightResultView(fightLogs);
+            new BasicSwitchController("fightPrep/fightResultView") {
+                @Override
+                public void switchTo() throws HttpException {
+                    super.switchTo();
+                    FightResultViewController controller = loader.getController();
+                    controller.init(fightLogs);
+                }
+            }.switchTo();
+        } catch (IOException | HttpException e) {
+            SceneSwitchController.handleException(e);
         }
     }
 }

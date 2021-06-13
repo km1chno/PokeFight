@@ -44,5 +44,5 @@ public class LibraryFilterBarController {
 
     public void onTextFieldEnter(ActionEvent event) { submit(); }
 
-    public void onFilterBarGoBackButtonClick(ActionEvent event) { SceneSwitchController.goHome(event); }
+    public void onFilterBarGoBackButtonClick(ActionEvent event) { SceneSwitchController.goHome(); }
 }

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import sample.controllers.switchControllers.BasicSwitchController;
 
 public class ArenaViewController {
     @FXML
@@ -13,7 +14,7 @@ public class ArenaViewController {
 
     public void menuButtonOnClick (ActionEvent event) {
         try {
-            SceneSwitchController.switchToView(event, "welcomeView");
+            new BasicSwitchController("welcomeView").switchTo();
         } catch (Exception e) {
             e.printStackTrace();
         }
