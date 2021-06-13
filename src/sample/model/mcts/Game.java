@@ -1,6 +1,7 @@
 package sample.model.mcts;
 
 import sample.model.datamodels.Move;
+import sample.model.datamodels.PokemonInstance;
 import sample.model.datamodels.Status;
 import sample.model.datamodels.Type;
 import sample.model.fight.SimulatedPokemon;
@@ -18,8 +19,6 @@ public class Game {
     int turnsWithoutDmg;
     SimulatedPokemon left, right;
 
-
-
     public Game(Game game){
         this.status=game.status;
         this.left = new SimulatedPokemon(game.left);
@@ -28,8 +27,8 @@ public class Game {
     }
 
    public Game(SimulatedPokemon left, SimulatedPokemon right){
-        this.left = left;
-        this.right = right;
+        this.left = new SimulatedPokemon(left);
+        this.right = new SimulatedPokemon(right);
         status = PROGRESS;
         turnsWithoutDmg = 0;
     }
@@ -117,6 +116,7 @@ public class Game {
         int rndDmg= random.nextInt(15);
         double rndMdf=(double)(rndDmg+85)/100;
         int dmg=(int)(((((2*(getPokemon(pokemonNum).getLvl()/5)+2)*activeMove.getPower()*A/D)/50+2)*crit)*rndMdf);
+
         getEnemy(pokemonNum).dealDMG(dmg);
         //get dmg log with crit info
     }

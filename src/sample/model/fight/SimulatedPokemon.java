@@ -35,6 +35,22 @@ public class SimulatedPokemon extends PokemonInstance {
         }
     }
 
+    public SimulatedPokemon(SimulatedPokemon pokemon){
+        super(pokemon);
+
+        currentHP = pokemon.getFinalHp();
+        movesPP = pokemon.movesPP;
+
+        modAttack = pokemon.modAttack;
+        modDefence = pokemon.modDefence;
+        modSpAttack = pokemon.modSpAttack;
+        modSpDefence = pokemon.modSpDefence;
+        modAccuracy = pokemon.modAccuracy;
+        modEvasion = pokemon.modEvasion;
+
+        statusCounter = pokemon.statusCounter;
+    }
+
    public int getFinalHp(){
         return currentHP;
    }
@@ -150,6 +166,9 @@ public class SimulatedPokemon extends PokemonInstance {
    }
 
    public void dealDMG (int dmg){
+
+        System.out.println("Dostaje " + dmg + " dmg i mam teraz " + (currentHP - dmg));
+
         currentHP -= dmg;
    }
 

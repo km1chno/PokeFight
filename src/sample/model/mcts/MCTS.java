@@ -24,6 +24,7 @@ public class MCTS {
             if(expansionNode.getState().getGame().getStatus()==Game.PROGRESS){
                 expandNode(expansionNode);
             }
+
             Node randomNode;
             if(expansionNode.nextNodes.size()>0){
                 randomNode = expansionNode.getRandomNextNode();
@@ -31,7 +32,9 @@ public class MCTS {
             else{
                 randomNode = expansionNode;
             }
+
             int simulationResult = simulateRandomNode(randomNode);
+
             propagation(randomNode, simulationResult);
         }
         rootNode.getState().getGame().printHP();
@@ -40,6 +43,8 @@ public class MCTS {
         }
         System.out.println("");
         Node chosenNode = rootNode.getMaxScoreNode();
+
+
         if(chosenNode == null){
             //TODO
             throw new MCTSException();
@@ -70,7 +75,7 @@ public class MCTS {
         State simulationState = temp.getState();
         int status = temp.getState().getGame().getStatus();
         if(status == enemyPokemon){
-            temp.getParent().getParent().getState().setWinScore(Integer.MIN_VALUE);
+            temp.getParent().getState().setWinScore(Integer.MIN_VALUE);
             return status;
         }
         while(status == Game.PROGRESS){
