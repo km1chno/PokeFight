@@ -66,7 +66,6 @@ public class Node {
         int cnt=-1;
         Node res=null;
         for(Node n: nextNodes){
-            n.getState().getGame().printHP();
             if(n.getState().getVisitCnt()>cnt){
                 cnt = n.getState().getVisitCnt();
                 res = n;

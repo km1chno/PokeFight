@@ -81,7 +81,6 @@ public class State {
                 State state = new State(this.game);
                 state.setPokemonNum(1-pokemonNum);
                 state.getGame().move(state.getPokemonNum(), i);
-                state.getGame().printHP();
                 ar.add(state);
             }
         }
