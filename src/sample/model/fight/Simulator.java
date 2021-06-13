@@ -1,7 +1,10 @@
 package sample.model.fight;
 
 import sample.model.datamodels.*;
+import sample.model.exceptions.MCTSException;
 import sample.model.exceptions.ToManyFightsException;
+import sample.model.mcts.Game;
+import sample.model.mcts.MCTS;
 
 enum LogsPrecision{
     LOW,
@@ -61,7 +64,26 @@ public class Simulator {
     }
 
     public SingleFightLog singleFight(PokemonInstance leftPokemon, PokemonInstance rightPokemon){
-
+        SimulatedPokemon left = new SimulatedPokemon(leftPokemon);
+        SimulatedPokemon right = new SimulatedPokemon(rightPokemon);
+        int pokemonNum;
+        if(left.getSpeed()> right.getSpeed()) {
+            pokemonNum = 0;
+        }
+        else {
+            pokemonNum = 1;
+        }
+        Game mainGame = new Game(left, right);
+        MCTS engine = new MCTS();
+        while(mainGame.getStatus()==Game.PROGRESS){
+           try{
+               mainGame = engine.getNextMove(mainGame,pokemonNum);
+           } catch (MCTSException e){
+               e.getCause();
+           }
+           //TODO ADD LOGS
+           pokemonNum = 1 - pokemonNum;
+        }
         return null;
     }
 }

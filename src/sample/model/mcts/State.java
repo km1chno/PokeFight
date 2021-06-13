@@ -1,6 +1,8 @@
 package sample.model.mcts;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class State {
     Game game;
@@ -57,12 +59,14 @@ public class State {
     public void addVisit(){
         visitCnt++;
     }
-    public List<State> getPossibleStates(){
+    public ArrayList<State> getPossibleStates(){
         return null;
     }
 
 
     public void fight(){
-        //TODO
+        int d=game.getMovesNumber(pokemonNum);
+        int rnd=new Random().nextInt(d);
+        game.move(pokemonNum, d);
     }
 }

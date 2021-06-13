@@ -35,17 +35,17 @@ public class TypeEffectSupplier {
         upToDate = true;
     }
 
-    public static double getEffect(String type1, String type2) throws HttpException {
+    public static double getEffect(String attackType, String pokemonType) throws HttpException {
         if (!upToDate) {
             update();
         }
-        if (effect.containsKey(new Pair<>(type1, type2))) {
-            return effect.get(new Pair<>(type1, type2));
+        if (effect.containsKey(new Pair<>(attackType, pokemonType))) {
+            return effect.get(new Pair<>(attackType, pokemonType));
         }
         return 1.0;
     }
 
-    public static double getEffect(String type1, String type2, String type3) throws HttpException {
-        return getEffect(type1, type2) * getEffect(type1, type3);
+    public static double getEffect(String attackType, String pokemonType1, String pokemonType2) throws HttpException {
+        return getEffect(attackType, pokemonType1) * getEffect(attackType, pokemonType2);
     }
 }
