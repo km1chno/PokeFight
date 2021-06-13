@@ -1,14 +1,15 @@
 package sample.model.mcts;
 
+import sample.model.exceptions.MCTSException;
+
 import java.util.List;
 
 public class MCTS {
-    static final int winsUpperBound = 5;
     static final int timeBudget = 20;
     static final int winScore = 5;
     int enemyPokemon;
 
-    public Game selection(Game game, int pokemonNum){
+    public Game getNextMove(Game game, int pokemonNum) throws MCTSException {
         enemyPokemon = 1 - pokemonNum;
         TreeRoot root = new TreeRoot();
         Node rootNode = root.getRoot();
@@ -84,9 +85,5 @@ public class MCTS {
             temp = temp.getParent();
         }
     }
-
-}
-
-class MCTSException extends RuntimeException{
 
 }
