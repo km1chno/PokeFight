@@ -245,6 +245,7 @@ public class FightPrepViewController {
                         FightPlayerViewController controller = loader.getController();
                         controller.setPokemon(leftPokemonInstance, rightPokemonInstance);
                         controller.setPlayers(leftPlayerCheckBox.isSelected(), rightPlayerCheckBox.isSelected());
+                        controller.getMove();
                     }
                 }.switchTo();
 

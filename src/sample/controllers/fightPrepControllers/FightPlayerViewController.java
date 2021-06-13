@@ -1,5 +1,6 @@
 package sample.controllers.fightPrepControllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -8,8 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import sample.model.Constants;
 import sample.model.datamodels.FightingPokemon;
+import sample.model.datamodels.Move;
 import sample.model.datamodels.PokemonInstance;
-import sample.model.datamodels.PokemonType;
 
 public class FightPlayerViewController {
 
@@ -34,12 +35,22 @@ public class FightPlayerViewController {
     private PlayerType leftPlayer, rightPlayer;
     private FightingPokemon nextToMove = FightingPokemon.LEFT;
 
+    private PlayerType playerToMoveType() { return nextToMove == FightingPokemon.LEFT ? leftPlayer : rightPlayer; }
+
     public void setPokemon(PokemonInstance left, PokemonInstance right) {
         leftPokemon = left;
         rightPokemon = right;
 
         setImages();
-        setMoves();
+        setButtons(FightingPokemon.LEFT);
+        setButtons(FightingPokemon.RIGHT);
+    }
+
+    private void humanMove(Move move) {
+        disablePokemon(nextToMove);
+        System.out.println(nextToMove + " used " + move.getName());
+        nextToMove = nextToMove.opposite();
+        getMove();
     }
 
     public void setPlayers(boolean left, boolean right) {
@@ -50,11 +61,17 @@ public class FightPlayerViewController {
         disablePokemon(FightingPokemon.RIGHT);
     }
 
-    private void setMoves() {
-        for (int i = 0; i < 4; i++)
-            ((Button) leftButtonBox.getChildren().get(i)).setText(leftPokemon.getMoves()[i].getName());
-        for (int i = 0; i < 4; i++)
-            ((Button) rightButtonBox.getChildren().get(i)).setText(rightPokemon.getMoves()[i].getName());
+    private void setButtons(FightingPokemon side) {
+        PokemonInstance pokemon = side == FightingPokemon.LEFT ? leftPokemon : rightPokemon;
+        VBox buttonBox = side == FightingPokemon.LEFT ? leftButtonBox : rightButtonBox;
+        for (int i = 0; i < 4; i++) {
+            Button button = (Button) buttonBox.getChildren().get(i);
+            Move move  = pokemon.getMoves()[i];
+
+            button.setText(move.getName());
+            if (move != Constants.EMPTY_MOVE)
+                button.setOnAction(actionEvent -> humanMove(move));
+        }
     }
 
     private void disablePokemon(FightingPokemon side) {
@@ -69,6 +86,20 @@ public class FightPlayerViewController {
         for (int i = 0; i < 4; i++)
             if (pokemon.getMoves()[i] != Constants.EMPTY_MOVE)
                 buttonBox.getChildren().get(i).setDisable(false);
+    }
+
+    private void computerMove() {
+        System.out.println(nextToMove + " is choosing the singular best move");
+        nextToMove = nextToMove.opposite();
+        // TODO - actually calculate move
+        getMove();
+    }
+
+    public void getMove() {
+        if (playerToMoveType() == PlayerType.HUMAN)
+            enablePokemon(nextToMove);
+        else
+            computerMove();
     }
 
     private void setImages() {
