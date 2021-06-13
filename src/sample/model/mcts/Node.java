@@ -1,5 +1,7 @@
 package sample.model.mcts;
 
+import sample.model.fight.SimulatedPokemon;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,11 +9,13 @@ public class Node {
     Node parent;
     State state;
     ArrayList<Node> nextNodes;
+    int id;
 
-    Node(){
+    Node(SimulatedPokemon main, SimulatedPokemon op){
         parent=null;
-        state=null;
+        state= new State(main, op);
         nextNodes = new ArrayList<>();
+        id=MCTS.coo++;
     }
 
     Node(Node node){
@@ -24,12 +28,14 @@ public class Node {
         for(Node n: tempAr){
             this.nextNodes.add(new Node(n));
         }
+        id=MCTS.coo++;
     }
 
     Node(State state){
         parent = null;
         nextNodes = new ArrayList<>();
         this.state = state;
+        id=MCTS.coo++;
     }
 
     public State getState(){
@@ -60,6 +66,7 @@ public class Node {
         int cnt=-1;
         Node res=null;
         for(Node n: nextNodes){
+            n.getState().getGame().printHP();
             if(n.getState().getVisitCnt()>cnt){
                 cnt = n.getState().getVisitCnt();
                 res = n;
