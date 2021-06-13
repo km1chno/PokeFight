@@ -17,7 +17,7 @@
                      <children>
                         <ImageView fx:id="leftPokemonImageView" fitHeight="400.0" fitWidth="400.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="rightPokemonImageView" fitHeight="400.0" fitWidth="400.0" layoutX="830.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
-                        <Pane fx:id="resultsPane" layoutX="465.0" layoutY="50.0" prefHeight="400.0" prefWidth="350.0">
+                        <Pane fx:id="resultsPane" layoutX="465.0" layoutY="50.0" prefHeight="400.0" prefWidth="350.0" styleClass="backgroundPane">
                            <children>
                               <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0" layoutY="70.0" prefWidth="348.0" text="Label" textAlignment="CENTER" />
                               <Label fx:id="scoreLabelLeft" layoutX="31.0" layoutY="192.0" text="Label" />

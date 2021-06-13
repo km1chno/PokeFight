@@ -2,6 +2,8 @@ package sample.controllers.fightPrepControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +20,9 @@ public class SingleLogController {
     FlowPane flowPane;
 
     @FXML
+    FlowPane innerFlowPane;
+
+    @FXML
     public Label winnerLabel;
 
     @FXML
@@ -27,6 +32,14 @@ public class SingleLogController {
 
     public void onExpandButtonClick(ActionEvent event) {
         expandButton.setVisible(false);
-        flowPane.getChildren().addAll(singleLogControl.getMoves());
+        innerFlowPane.getChildren().addAll(singleLogControl.getMoves());
+
+        setMargins();
+    }
+
+    public void setMargins() {
+        for (Node child : innerFlowPane.getChildren()) {
+            FlowPane.setMargin(child, new Insets(10, 0, 10, 0));
+        }
     }
 }
