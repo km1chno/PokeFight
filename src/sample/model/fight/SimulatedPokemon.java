@@ -39,7 +39,8 @@ public class SimulatedPokemon extends PokemonInstance {
         super(pokemon);
 
         currentHP = pokemon.getFinalHp();
-        movesPP = pokemon.movesPP;
+        movesPP = new int[pokemon.movesPP.length];
+        System.arraycopy(pokemon.movesPP, 0, movesPP, 0, pokemon.movesPP.length);
 
         modAttack = pokemon.modAttack;
         modDefence = pokemon.modDefence;
@@ -158,7 +159,7 @@ public class SimulatedPokemon extends PokemonInstance {
    }
 
    public void decrementPP(int moveId){
-        this.movesPP[moveId]--;
+        if(this.movesPP[moveId]>0) this.movesPP[moveId]--;
    }
 
    public void heal(int healVal){
@@ -166,8 +167,6 @@ public class SimulatedPokemon extends PokemonInstance {
    }
 
    public void dealDMG (int dmg){
-
-        System.out.println("Dostaje " + dmg + " dmg i mam teraz " + (currentHP - dmg));
 
         currentHP -= dmg;
    }

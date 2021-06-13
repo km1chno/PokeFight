@@ -14,7 +14,7 @@ public class Game {
     public static int RIGHT = 1;
     public static int DRAW = 2;
     public static int PROGRESS = 3;
-    private final int turnsOffset = 20;
+    private final int turnsOffset = 13;
     int status;
     int turnsWithoutDmg;
     SimulatedPokemon left, right;
@@ -60,19 +60,20 @@ public class Game {
 
     public void move(int pokemonNum, int moveNum){
         //TODO add logs
+        if(moveNum==-1){
+            //do nothing
+            turnsWithoutDmg++;
+            return;
+        }
         Random random = new Random();
         TreeSet<Status> appliedStatuses = getPokemon(pokemonNum).processStatus(); //to apply logs
         if(getStatus()!=Game.PROGRESS){
             return;
         }
-        if(moveNum==-1){
-            //add log which says that pokemon waits;
-            return;
-        }
         Move activeMove = getPokemon(pokemonNum).getMoves()[moveNum];
         //PP
 
-        //getPokemon(pokemonNum).decrementPP(moveNum);
+        getPokemon(pokemonNum).decrementPP(moveNum);
 
         //Status
         if(activeMove.getMeta().getAilment().getStatus()!=Status.NONE){
@@ -92,10 +93,10 @@ public class Game {
 //            }
 //        }
         //Healing
-//        if(activeMove.getMeta().getHealing()>0){
-//            int healVal=getPokemon(pokemonNum).getHp()*(activeMove.getMeta().getHealing()/100);
-//            getPokemon(pokemonNum).heal(healVal);
-//        }
+        if(activeMove.getMeta().getHealing()>0){
+            int healVal=getPokemon(pokemonNum).getHp()*(activeMove.getMeta().getHealing()/100);
+            getPokemon(pokemonNum).heal(healVal);
+        }
 
         //Drain and others
 
@@ -120,6 +121,8 @@ public class Game {
         int dmg=(int)(((((2*(getPokemon(pokemonNum).getLvl()/5)+2)*activeMove.getPower()*A/D)/50+2)*crit)*rndMdf);
 
         getEnemy(pokemonNum).dealDMG(dmg);
+        if(dmg==0) turnsWithoutDmg++;
+        else turnsWithoutDmg=0;
         //get dmg log with crit info
     }
 
