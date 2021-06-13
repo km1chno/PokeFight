@@ -91,10 +91,10 @@ public class Game {
 //            }
 //        }
         //Healing
-        if(activeMove.getMeta().getHealing()>0){
-            int healVal=getPokemon(pokemonNum).getHp()*(activeMove.getMeta().getHealing()/100);
-            getPokemon(pokemonNum).heal(healVal);
-        }
+//        if(activeMove.getMeta().getHealing()>0){
+//            int healVal=getPokemon(pokemonNum).getHp()*(activeMove.getMeta().getHealing()/100);
+//            getPokemon(pokemonNum).heal(healVal);
+//        }
 
         //Drain and others
 
@@ -118,7 +118,6 @@ public class Game {
         double rndMdf=(double)(rndDmg+85)/100;
         int dmg=(int)(((((2*(getPokemon(pokemonNum).getLvl()/5)+2)*activeMove.getPower()*A/D)/50+2)*crit)*rndMdf);
         getEnemy(pokemonNum).dealDMG(dmg);
-        printHP();
         //get dmg log with crit info
     }
 
@@ -144,7 +143,7 @@ public class Game {
         }
     }
 
-    public void  printHP(){
+    public void printHP(){
         System.out.println(left.getFinalHp()+ " " + right.getFinalHp());
     }
 }

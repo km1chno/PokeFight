@@ -13,7 +13,7 @@ enum LogsPrecision{
 }
 
 public class Simulator {
-    private final int defaultNumberOfFights = 100;
+    private final int defaultNumberOfFights = 1;
     private final LogsPrecision defaultLogsPrecision=LogsPrecision.MEDIUM;
     private final int fightsUpperBound = 10000000;
     private final int maxRoundsWithNoDamage = 100;
