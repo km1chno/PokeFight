@@ -52,7 +52,7 @@ public class FightPlayerViewController {
 
     private PokemonInstance leftPokemon, rightPokemon;
     private PlayerType leftPlayer, rightPlayer;
-    private FightingPokemon nextToMove = FightingPokemon.LEFT;
+    private FightingPokemon nextToMove;
     private SimulatedPokemon leftSimulatedPokemon, rightSimulatedPokemon;
     private Game mainGame;
     private MCTS engine;
@@ -86,6 +86,14 @@ public class FightPlayerViewController {
 
         disablePokemon(FightingPokemon.LEFT);
         disablePokemon(FightingPokemon.RIGHT);
+
+        if (leftPlayer == PlayerType.HUMAN && rightPlayer == PlayerType.HUMAN) {
+            nextToMove = (leftPokemon.getSpeed() >= rightPokemon.getSpeed()) ? FightingPokemon.LEFT : FightingPokemon.RIGHT;
+        } else if (leftPlayer == PlayerType.HUMAN) {
+            nextToMove = FightingPokemon.LEFT;
+        } else {
+            nextToMove = FightingPokemon.RIGHT;
+        }
     }
 
     private void setButtons(FightingPokemon side) {
@@ -98,7 +106,7 @@ public class FightPlayerViewController {
             button.setText(move.getName());
             if (move != Constants.EMPTY_MOVE) {
                 int finalI = i;
-                button.setOnAction(actionEvent -> humanMove(finalI, move));
+                button.setOnAction(actionEvent -> humanMove(finalI));
                 button.setOnMouseEntered(mouseEvent -> updateTooltip(move));
             }
         }
@@ -171,10 +179,8 @@ public class FightPlayerViewController {
     }
 
     private void computerMove() {
-        System.out.println(nextToMove + " is choosing the singular best move");
-
         int d;
-        if( nextToMove == FightingPokemon.LEFT) d=1;
+        if (nextToMove == FightingPokemon.LEFT) d=1;
         else d=0;
 
         try {
@@ -189,10 +195,8 @@ public class FightPlayerViewController {
         getMove();
     }
 
-    private void humanMove(int moveId, Move move) {
+    private void humanMove(int moveId) {
         disablePokemon(nextToMove);
-        System.out.println(nextToMove + " used " + move.getName());
-
         int d;
         if( nextToMove == FightingPokemon.LEFT) d=0;
         else d=1;
@@ -205,7 +209,10 @@ public class FightPlayerViewController {
 
     public void getMove() {
         updateHealthIndicators();
-        if (playerToMoveType() == PlayerType.HUMAN)
+        if (mainGame.getStatus() != Game.PROGRESS) {
+            disablePokemon(FightingPokemon.LEFT);
+            disablePokemon(FightingPokemon.RIGHT);
+        } else if (playerToMoveType() == PlayerType.HUMAN)
             enablePokemon(nextToMove);
         else
             computerMove();

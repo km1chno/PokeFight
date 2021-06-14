@@ -232,10 +232,6 @@ public class FightPrepViewController {
             return;
         }
 
-        System.out.println("They are ready to fight!");
-        leftPokemonInstance.print();
-        rightPokemonInstance.print();
-
         if (leftPlayerCheckBox.isSelected() || rightPlayerCheckBox.isSelected()) {
             try {
                 new BasicSwitchController("fightPrep/fightPlayerView") {

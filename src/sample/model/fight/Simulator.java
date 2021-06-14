@@ -13,7 +13,7 @@ enum LogsPrecision{
 }
 
 public class Simulator {
-    private final int defaultNumberOfFights = 1;
+    private final int defaultNumberOfFights = 100;
     private final LogsPrecision defaultLogsPrecision=LogsPrecision.MEDIUM;
     private final int fightsUpperBound = 10000000;
     private final int maxRoundsWithNoDamage = 100;
@@ -52,7 +52,7 @@ public class Simulator {
 
         for(int i=0; i<numberOfFights; i++){
 
-            System.out.println(i+1 + " walka: " );
+            System.out.println("Finished fight number: " + (i+1));
              SingleFightLog log = singleFight(leftPokemon, rightPokemon);
              logs.addResult(log);
         }
@@ -82,7 +82,6 @@ public class Simulator {
            pokemonNum = 1 - pokemonNum;
         }
         log.addLog(mainGame);
-        log.print();
         return log;
     }
 }
