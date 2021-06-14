@@ -40,7 +40,6 @@ public class Move {
     public static class MoveMetaData {
 
         private MoveAilment ailment;
-        private MoveStatChange statChange;
         private int ailment_chance; // PERCENTAGE
         private int stat_chance; // PERCENTAGE
         private int crit_rate; // BONUS TO CRIT RATE
@@ -52,7 +51,6 @@ public class Move {
         private int max_turns; // Maximum number of turns the move takes effect
 
         public MoveAilment getAilment() { return ailment; }
-        public MoveStatChange getStatChange() {return statChange;}
         public int getAilmentChange() { return ailment_chance; }
         public int getAilmentChance() { return ailment_chance; }
         public int getStatChance() { return stat_chance; }

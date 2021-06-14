@@ -12,6 +12,8 @@ public class SimulatedPokemon extends PokemonInstance {
     private int currentHP;
     private int[] movesPP;
 
+    public boolean stunned=false;
+
     private int modAttack;
     private int modDefence;
     private int modSpAttack;
@@ -101,25 +103,25 @@ public class SimulatedPokemon extends PokemonInstance {
    public void affectStatus(Status status){
         switch (status) {
             case PARALYSIS:
-                //TODO
+            stunned=true;
                 break;
             case  BURN:
-                //TODO
+                dealDMG(this.getHp()/10);
                 break;
             case FREEZE:
-                //TODO
+                stunned=true;
                 break;
             case  POISON:
-                //TODO
+                dealDMG(this.getHp()/9);
                 break;
             case SLEEP:
-                //TODO
+                stunned=true;
                 break;
             case  INFATUATION:
                 //TODO
                 break;
             case CONFUSION:
-                //TODO
+                stunned=true;
                 break;
         }
    }
@@ -138,14 +140,13 @@ public class SimulatedPokemon extends PokemonInstance {
         return res;
    }
 
-
-   public void affectBuffDebuff(Move m){
-        int d=m.getMeta().getStatChange().getIndex();
+   public void affectBuffDebuff(Move m, int id){
+        int d=m.getStatChanges()[id].getIndex();
         switch (d){
-            case 1 -> addAttack(m.getMeta().getStatChange().getChange());
-            case 2 -> addDefence(m.getMeta().getStatChange().getChange());
-            case 3 -> addSpAttack(m.getMeta().getStatChange().getChange());
-            case 4 -> addSpDefence(m.getMeta().getStatChange().getChange());
+            case 1 -> addAttack(m.getStatChanges()[id].getChange());
+            case 2 -> addDefence(m.getStatChanges()[id].getChange());
+            case 3 -> addSpAttack(m.getStatChanges()[id].getChange());
+            case 4 -> addSpDefence(m.getStatChanges()[id].getChange());
         }
 
    }
@@ -167,7 +168,6 @@ public class SimulatedPokemon extends PokemonInstance {
    }
 
    public void dealDMG (int dmg){
-
         currentHP -= dmg;
    }
 

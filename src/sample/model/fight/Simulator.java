@@ -13,7 +13,7 @@ enum LogsPrecision{
 }
 
 public class Simulator {
-    private final int defaultNumberOfFights = 100;
+    private final int defaultNumberOfFights = 1;
     private final LogsPrecision defaultLogsPrecision=LogsPrecision.MEDIUM;
     private final int fightsUpperBound = 10000000;
     private final int maxRoundsWithNoDamage = 100;
@@ -71,21 +71,18 @@ public class Simulator {
         }
         Game mainGame = new Game(left, right);
         MCTS engine = new MCTS();
+        SingleFightLog log = new SingleFightLog(leftPokemon.getPokemonType(), rightPokemon.getPokemonType());
         while(mainGame.getStatus()==Game.PROGRESS){
            try{
-               //mainGame.printPP();
                mainGame = engine.getNextMove(mainGame,pokemonNum);
-               //mainGame.printHP();
-
-
            } catch (MCTSException e){
                e.getCause();
            }
-           //TODO ADD MORE LOGS
+           log.addLog(mainGame.getLogs());
            pokemonNum = 1 - pokemonNum;
         }
-        SingleFightLog log = new SingleFightLog(leftPokemon.getPokemonType(), rightPokemon.getPokemonType());
         log.addLog(mainGame);
+        log.print();
         return log;
     }
 }
