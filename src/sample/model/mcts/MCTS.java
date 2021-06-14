@@ -5,7 +5,7 @@ import sample.model.exceptions.MCTSException;
 import java.util.List;
 
 public class MCTS {
-    static final int timeBudget = 10;
+    static final int timeBudget = 20;
     static final int winScore = 5;
     static int coo=0;
     int enemyPokemon;

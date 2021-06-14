@@ -9,6 +9,7 @@ public class Move {
     private final int power;
     private final int pp;
     private final MoveMetaData meta;
+    private MoveMetaData.MoveStatChange[] stat_changes; // The number of stat changes
     Result type;
 
     public Move() {
@@ -33,12 +34,12 @@ public class Move {
     public int getPowerPoints() { return pp; }
     public Type getType() { return Type.valueOf(type.name.toUpperCase()); }
     public MoveMetaData getMeta() { return meta; }
+    public MoveMetaData.MoveStatChange[] getStatChanges() { return stat_changes; }
 
 
     public static class MoveMetaData {
 
         private MoveAilment ailment;
-        private MoveStatChange statChange;
         private int ailment_chance; // PERCENTAGE
         private int stat_chance; // PERCENTAGE
         private int crit_rate; // BONUS TO CRIT RATE
@@ -50,7 +51,6 @@ public class Move {
         private int max_turns; // Maximum number of turns the move takes effect
 
         public MoveAilment getAilment() { return ailment; }
-        public MoveStatChange getStatChange() {return statChange;}
         public int getAilmentChange() { return ailment_chance; }
         public int getStatChance() { return stat_chance; }
         public int getCritRate() { return crit_rate; }

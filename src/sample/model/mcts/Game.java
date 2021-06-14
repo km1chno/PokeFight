@@ -6,6 +6,7 @@ import sample.model.datamodels.Status;
 import sample.model.datamodels.Type;
 import sample.model.fight.SimulatedPokemon;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.TreeSet;
 
@@ -19,11 +20,15 @@ public class Game {
     int turnsWithoutDmg;
     SimulatedPokemon left, right;
 
+    ArrayList<String> lastMoveLogs;
+
+
     public Game(Game game){
         this.status=game.status;
         this.left = new SimulatedPokemon(game.left);
         this.right = new SimulatedPokemon(game.right);
         turnsWithoutDmg = 0;
+        lastMoveLogs = new ArrayList<>();
     }
 
    public Game(SimulatedPokemon left, SimulatedPokemon right){
@@ -31,6 +36,8 @@ public class Game {
         this.right = new SimulatedPokemon(right);
         status = PROGRESS;
         turnsWithoutDmg = 0;
+        lastMoveLogs = new ArrayList<>();
+
     }
 
     SimulatedPokemon getPokemon(int i){
@@ -60,48 +67,81 @@ public class Game {
 
     public void move(int pokemonNum, int moveNum){
         //TODO add logs
+        String myName=getPokemon(pokemonNum).getPokemonType().getName();
+        String opName=getEnemy(pokemonNum).getPokemonType().getName();
+        lastMoveLogs.clear();
         if(moveNum==-1){
             //do nothing
             turnsWithoutDmg++;
+            lastMoveLogs.add( myName + " has no power points and does nothing");
             return;
         }
         Random random = new Random();
-        TreeSet<Status> appliedStatuses = getPokemon(pokemonNum).processStatus(); //to apply logs
+        TreeSet<Status> appliedStatuses = getPokemon(pokemonNum).processStatus();
+        for(Status s: appliedStatuses){
+            if(s!=Status.BURN  && s!=Status.POISON)
+                lastMoveLogs.add(myName + " suffers from " + s.name());
+            else{
+                turnsWithoutDmg=0;
+                if(s == Status.BURN) lastMoveLogs.add(myName + " is burning for " + getPokemon(pokemonNum).getHp()/10 +"damage" );
+                else lastMoveLogs.add(myName + " is poisoned and lost " + getPokemon(pokemonNum).getHp()/9 +" hp" );
+            }
+        }
+        if(getPokemon(pokemonNum).stunned){
+            getPokemon(pokemonNum).stunned=false;
+            if(!(appliedStatuses.contains(Status.BURN) || appliedStatuses.contains(Status.POISON)))
+                turnsWithoutDmg++;
+            return;
+        }
+
         if(getStatus()!=Game.PROGRESS){
             return;
         }
         Move activeMove = getPokemon(pokemonNum).getMoves()[moveNum];
+
         //PP
 
         getPokemon(pokemonNum).decrementPP(moveNum);
 
         //Status
+
         if(activeMove.getMeta().getAilment().getStatus()!=Status.NONE){
             if(random.nextInt(100)<activeMove.getMeta().getAilmentChange()){
                 getEnemy(pokemonNum).addStatus(activeMove);
+                lastMoveLogs.add(myName + " affects " + opName + " with "
+                        + activeMove.getMeta().getAilment().getStatus().name());
             }
         }
+
         //Buffs Debuffs
-//        if(activeMove.getMeta().getStatChange().getIndex()>=1 && activeMove.getMeta().getStatChange().getIndex()<=4){
-//            if(random.nextInt(100)<activeMove.getMeta().getStatChance()){
-//                if(activeMove.getMeta().getStatChange().getChange()>0){
-//                    getPokemon(pokemonNum).affectBuffDebuff(activeMove);
-//                }
-//                else{
-//                    getEnemy(pokemonNum).affectBuffDebuff(activeMove);
-//                }
-//            }
-//        }
+        if(activeMove.getStatChanges() != null) {
+            System.out.println(activeMove.getStatChanges().toString());
+            for (int i = 0; i < activeMove.getStatChanges().length; i++) {
+                System.out.println(activeMove.getStatChanges().length);
+                if (activeMove.getStatChanges()[i].getIndex() >= 1 && activeMove.getStatChanges()[i].getIndex() <= 4) {
+                    if (random.nextInt(100) < activeMove.getMeta().getStatChance()) {
+                        if (activeMove.getStatChanges()[i].getChange() > 0) {
+                            getPokemon(pokemonNum).affectBuffDebuff(activeMove, i);
+                            lastMoveLogs.add(myName + " buffs itself");
+                        } else {
+                            getEnemy(pokemonNum).affectBuffDebuff(activeMove, i);
+                            lastMoveLogs.add(myName + " debuffs " + opName );
+                        }
+                    }
+                }
+            }
+        }
+
         //Healing
+
         if(activeMove.getMeta().getHealing()>0){
             int healVal=getPokemon(pokemonNum).getHp()*(activeMove.getMeta().getHealing()/100);
             getPokemon(pokemonNum).heal(healVal);
+            lastMoveLogs.add(myName + " heals for " + healVal + "percent max health");
         }
 
-        //Drain and others
-
         //Damage
-        //add accuracy
+
         double crit;
         if(random.nextInt(256)>215) crit=(double)(2*getPokemon(pokemonNum).getLvl()+5)/(double)(getPokemon(pokemonNum).getLvl()+5);
         else crit=1;
@@ -123,6 +163,7 @@ public class Game {
         getEnemy(pokemonNum).dealDMG(dmg);
         if(dmg==0) turnsWithoutDmg++;
         else turnsWithoutDmg=0;
+        lastMoveLogs.add(myName + " deals " + dmg + " damage  to " + opName +  " with " + activeMove.getName());
         //get dmg log with crit info
     }
 
@@ -146,6 +187,13 @@ public class Game {
         else{
             return Game.PROGRESS;
         }
+    }
+
+    public ArrayList<String> getLogs(){
+        if(!lastMoveLogs.isEmpty())
+            return lastMoveLogs;
+        else
+            return null;
     }
 
     public void printHP(){
