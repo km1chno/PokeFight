@@ -104,7 +104,7 @@ public class FightPlayerViewController {
             tooltipBox.getChildren().add(new Label("Hits between " + move.getMeta().getMinHits() + " and " + move.getMeta().getMaxHits() + " times"));
         }
         if (move.getMeta().getHealing() > 0) {
-            tooltipBox.getChildren().add(new Label("Heals for " + move.getMeta().getHealing() + " HP"));
+            tooltipBox.getChildren().add(new Label("Heals for " + move.getMeta().getHealing() + "% of maxHP"));
         }
         if (move.getMeta().getDrain() > 0) {
             tooltipBox.getChildren().add(new Label("Drains " + move.getMeta().getDrain() + "% of damage done"));
