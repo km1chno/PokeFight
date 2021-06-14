@@ -19,6 +19,11 @@
     -fx-background-color: #111111;
 }
 
+.button:hover {
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+}
+
 #filterBar {
     -fx-background-color: blue;
 }

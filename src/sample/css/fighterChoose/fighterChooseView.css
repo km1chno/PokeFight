@@ -8,6 +8,11 @@
     -fx-background-color: #111111;
 }
 
+.button:hover {
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+}
+
 .label {
     -fx-font-size: 3em;
     -fx-alignment: center;
