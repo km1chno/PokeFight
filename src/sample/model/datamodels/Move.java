@@ -9,6 +9,7 @@ public class Move {
     private final int power;
     private final int pp;
     private final MoveMetaData meta;
+    private MoveMetaData.MoveStatChange[] stat_changes; // The number of stat changes
     Result type;
 
     public Move() {
@@ -18,12 +19,22 @@ public class Move {
         meta = new MoveMetaData();
     }
 
+    public Move(Move move) {
+        this.name= move.getName();
+        this.accuracy=move.getAccuracy();
+        this.power=move.getPower();
+        this.pp=move.getPowerPoints();
+        this.meta=move.getMeta();
+        this.type = new Result(move.type);
+    }
+
     public String getName() { return name; }
     public int getAccuracy() { return accuracy; }
     public int getPower() { return power; }
     public int getPowerPoints() { return pp; }
     public Type getType() { return Type.valueOf(type.name.toUpperCase()); }
     public MoveMetaData getMeta() { return meta; }
+    public MoveMetaData.MoveStatChange[] getStatChanges() { return stat_changes; }
 
 
     public static class MoveMetaData {
@@ -41,6 +52,7 @@ public class Move {
 
         public MoveAilment getAilment() { return ailment; }
         public int getAilmentChange() { return ailment_chance; }
+        public int getAilmentChance() { return ailment_chance; }
         public int getStatChance() { return stat_chance; }
         public int getCritRate() { return crit_rate; }
         public int getHealing() { return healing; }
@@ -62,13 +74,13 @@ public class Move {
             }
         }
 
-
         public static class MoveStatChange {
             private int change; // ABSOLUTE VALUE (?)
             private Stat stat;
 
             public int getChange() { return change; }
-            public int getIndex() { return stat.getId() - 1; }
+            public Stat getStat() { return stat; }
+            public int getIndex() { return stat.getId(); }
         }
     }
 }

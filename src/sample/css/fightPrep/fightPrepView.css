@@ -18,6 +18,11 @@
     -fx-background-color: #111111;
 }
 
+.button:hover {
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+}
+
 .imageWrapper {
     -fx-border-color: black;
     -fx-border-width: 2px;

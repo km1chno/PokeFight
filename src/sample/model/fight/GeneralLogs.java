@@ -1,5 +1,6 @@
 package sample.model.fight;
 
+import sample.model.datamodels.FightingPokemon;
 import sample.model.datamodels.PokemonType;
 
 import java.util.ArrayList;
@@ -24,10 +25,10 @@ public class GeneralLogs {
     }
 
     public void addResult(SingleFightLog log){
-        if(log.winner==FightingPokemon.LEFT){
+        if(log.winner== FightingPokemon.LEFT){
             leftWins++;
         }
-        else if(log.winner==FightingPokemon.RIGHT){
+        else if(log.winner== FightingPokemon.RIGHT){
             rightWins++;
         }
         else{

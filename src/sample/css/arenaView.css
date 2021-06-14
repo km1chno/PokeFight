@@ -15,3 +15,8 @@
     -fx-background-color: #111111;
     -fx-alignment: baseline-right;
 }
+
+#menuButton:hover {
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+}

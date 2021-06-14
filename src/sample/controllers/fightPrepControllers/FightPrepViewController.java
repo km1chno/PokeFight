@@ -7,7 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import sample.controllers.SceneSwitchController;
+import sample.controllers.switchControllers.BasicSwitchController;
 import sample.model.Constants;
 import sample.model.Utils;
 import sample.model.datamodels.Move;
@@ -20,6 +22,7 @@ import sample.model.fight.GeneralLogs;
 import sample.model.fight.Simulator;
 import sample.model.providers.MoveProvider;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,6 +35,7 @@ public class FightPrepViewController {
     private PokemonType leftPokemon;
     private PokemonType rightPokemon;
     private Simulator fightSimulator;
+    private GeneralLogs fightLogs;
 
     private ArrayList<TextField> leftIVFields;
     private ArrayList<TextField> rightIVFields;
@@ -138,6 +142,15 @@ public class FightPrepViewController {
     Label scoreLabelRight;
 
     @FXML
+    Button moreInfoButton;
+
+    @FXML
+    CheckBox leftPlayerCheckBox;
+
+    @FXML
+    CheckBox rightPlayerCheckBox;
+
+    @FXML
     public void initialize() {
         fightSimulator = new Simulator();
 
@@ -180,13 +193,14 @@ public class FightPrepViewController {
         }
     }
 
-    public void showResult(GeneralLogs logs) {
-        vsLabel.setStyle("-fx-opacity: 0");
-        resultsPane.setStyle("-fx-opacity: 1");
-        winnerNameLabel.setText(logs.getWinnerName() + " wins!");
-        scoreLabelLeft.setText(String.valueOf(logs.getLeftWins()));
-        scoreLabelStalemate.setText(String.valueOf(logs.getStalemates()));
-        scoreLabelRight.setText(String.valueOf(logs.getRightWins()));
+    public void showResult() {
+        vsLabel.setVisible(false);
+        resultsPane.setVisible(true);
+        winnerNameLabel.setText(fightLogs.getWinnerName() + " wins!");
+        scoreLabelLeft.setText(String.valueOf(fightLogs.getLeftWins()));
+        scoreLabelStalemate.setText(String.valueOf(fightLogs.getStalemates()));
+        scoreLabelRight.setText(String.valueOf(fightLogs.getRightWins()));
+        moreInfoButton.setVisible(true);
     }
 
     public void onFightButtonClick(ActionEvent event) {
@@ -218,20 +232,34 @@ public class FightPrepViewController {
             return;
         }
 
-        System.out.println("They are ready to fight!");
-        leftPokemonInstance.print();
-        rightPokemonInstance.print();
+        if (leftPlayerCheckBox.isSelected() || rightPlayerCheckBox.isSelected()) {
+            try {
+                new BasicSwitchController("fightPrep/fightPlayerView") {
+                    @Override
+                    public void switchTo() throws HttpException {
+                        super.switchTo();
+                        FightPlayerViewController controller = loader.getController();
+                        controller.setPokemon(leftPokemonInstance, rightPokemonInstance);
+                        controller.setPlayers(leftPlayerCheckBox.isSelected(), rightPlayerCheckBox.isSelected());
+                        controller.getMove();
+                    }
+                }.switchTo();
 
-        GeneralLogs fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
-
-        showResult(fightLogs);
+            } catch (Exception e) {
+                SceneSwitchController.handleException(e);
+            }
+        }
+        else {
+            fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
+            showResult();
+        }
     }
 
     public void onGoBackButtonClick(ActionEvent event) {
         try {
-            SceneSwitchController.switchToView(SceneSwitchController.sourceOfEvent(event), "../view/fighterChooseViews/fighterChooseView.fxml", "../css/fighterChoose/fighterChooseView.css");
-        } catch (IOException e) {
-            e.printStackTrace();
+            new BasicSwitchController("../view/fighterChooseViews/fighterChooseView.fxml", "../css/fighterChoose/fighterChooseView.css").switchTo();
+        } catch (Exception e) {
+            SceneSwitchController.handleException(e);
         }
     }
 
@@ -241,15 +269,30 @@ public class FightPrepViewController {
         for (int i = 0; i < 4; i++) {
             leftMovesFields.get(i).getSelectionModel().select(Math.abs(random.nextInt()) % leftMovesFields.get(i).getItems().size());
             rightMovesFields.get(i).getSelectionModel().select(Math.abs(random.nextInt()) % rightMovesFields.get(i).getItems().size());
-
         }
         for (int i = 0; i < 6; i++) {
             leftIVFields.get(i).setText(String.valueOf(random.nextInt(5)));
             rightIVFields.get(i).setText(String.valueOf(random.nextInt(5)));
         }
-        leftLvl.setText(String.valueOf(random.nextInt(100)+1 ));
-        leftExp.setText(String.valueOf(random.nextInt(101) ));
-        rightLvl.setText(String.valueOf(random.nextInt(101) ));
-        rightExp.setText(String.valueOf(random.nextInt(101) ));
+        leftLvl.setText(String.valueOf(random.nextInt(100) + 1));
+        leftExp.setText(String.valueOf(random.nextInt(101)));
+        rightLvl.setText(String.valueOf(random.nextInt(100) + 1));
+        rightExp.setText(String.valueOf(random.nextInt(101)));
+    }
+
+    public void onMoreInfoClick(ActionEvent event) {
+        try {
+            new BasicSwitchController("fightPrep/fightResultView") {
+                @Override
+                public void switchTo() throws HttpException {
+                    super.switchTo();
+                    FightResultViewController controller = loader.getController();
+                    controller.init(fightLogs);
+                    controller.setImages(leftPokemon, rightPokemon);
+                }
+            }.switchTo();
+        } catch (Exception e) {
+            SceneSwitchController.handleException(e);
+        }
     }
 }

@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sample.controllers.SceneSwitchController;
+import sample.controllers.switchControllers.BasicSwitchController;
+import sample.model.Constants;
 
 import java.util.Objects;
 
@@ -14,18 +16,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        SceneSwitchController.setPrimaryStage(primaryStage);
+        Constants.stage = primaryStage;
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/welcomeView.fxml")));
-            Scene welcomeScene = new Scene(root);
-            welcomeScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("css/welcomeView.css")).toExternalForm());
+            BasicSwitchController primarySwitch = new BasicSwitchController("welcomeView");
 
             primaryStage.setTitle("PokeFight");
             primaryStage.getIcons().add(new Image("file:resources/icons/programIcon.png"));
             primaryStage.setResizable(false);
 
-            primaryStage.setScene(welcomeScene);
-            primaryStage.show();
+            primarySwitch.switchTo();
         } catch (Throwable e) {
             SceneSwitchController.handleException(e);
         }

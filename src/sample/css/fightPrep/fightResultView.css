@@ -1,0 +1,30 @@
+* {
+    -fx-background-color: #65c77f;
+    -fx-text-fill: black;
+    -fx-font-family: "Roboto Light";
+}
+
+.backgroundPane {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #f0efda;
+    -fx-background-radius: 20px;
+    -fx-alignment: center;
+}
+
+.label {
+    -fx-background-color: transparent;
+}
+
+#resultLabel {
+    -fx-font-size: 20px;
+}
+
+#scoreLabelLeft {
+    -fx-text-fill: red;
+}
+
+#scoreLabelRight {
+    -fx-text-fill: blue;
+}

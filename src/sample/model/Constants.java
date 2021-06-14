@@ -1,15 +1,20 @@
 package sample.model;
 
+import javafx.stage.Stage;
 import sample.model.datamodels.Move;
 
 public class Constants {
     public static final Move EMPTY_MOVE;
 
-    public static String API_BASE_URL;
+    public static final String API_BASE_URL;
 
-    public static int MAX_POKEDEX_POKEMON_NUMBER;
+    public static final int MAX_POKEDEX_POKEMON_NUMBER;
 
-    public static int TYPES_NUMBER;
+    public static final int TYPES_NUMBER;
+
+    public static final int NUMBER_OF_FIGHTS;
+
+    public static Stage stage;
 
     static {
         EMPTY_MOVE = new Move();
@@ -19,5 +24,7 @@ public class Constants {
         MAX_POKEDEX_POKEMON_NUMBER = 898;
 
         TYPES_NUMBER = 18;
+
+        NUMBER_OF_FIGHTS = 100;
     }
 }

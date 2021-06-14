@@ -7,6 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import sample.controllers.pokemonDetailsControllers.SinglePokemonDetailsController;
+import sample.controllers.switchControllers.BasicSwitchController;
+import sample.controllers.switchControllers.SwitchController;
+import sample.model.exceptions.HttpException;
 
 import java.io.IOException;
 
@@ -41,9 +45,16 @@ public class SinglePokemonTypeTileController {
 
     public void onMoreButtonClick(ActionEvent event) {
         try {
-            SceneSwitchController.switchToSinglePokemonDetails(event, id);
-        } catch (IOException e) {
-            e.printStackTrace();
+            new BasicSwitchController("../view/pokemonDetailsViews/singlePokemonDetailsView.fxml", "../css/pokemonDetails/singlePokemonDetailsView.css") {
+                @Override
+                public void switchTo() throws HttpException {
+                    SinglePokemonDetailsController pokemonDetailsController = loader.getController();
+                    pokemonDetailsController.setPokemon(id);
+                    super.switchTo();
+                }
+            }.switchTo();
+        } catch (IOException | HttpException e) {
+            SceneSwitchController.handleException(e);
         }
     }
 }

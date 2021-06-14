@@ -9,7 +9,9 @@ import javafx.scene.layout.Pane;
 import sample.components.pokemonDetailsControls.MainInfoBoxControl;
 import sample.components.pokemonDetailsControls.StatsBoxControl;
 import sample.components.pokemonDetailsControls.TypesBoxControl;
+import sample.controllers.LoadingViewController;
 import sample.controllers.SceneSwitchController;
+import sample.controllers.switchControllers.LoadingSwitchController;
 import sample.model.datamodels.PokemonType;
 import sample.model.datamodels.Type;
 import sample.model.exceptions.HttpException;
@@ -78,7 +80,7 @@ public class SinglePokemonDetailsController {
 
     public void onSinglePokemonDetailsGoBackClick(ActionEvent event) {
         try {
-            SceneSwitchController.switchToLibraryView(event);
+            new LoadingSwitchController("libraryView").switchTo();
         } catch (Exception e) {
             e.printStackTrace();
         }

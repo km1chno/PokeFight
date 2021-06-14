@@ -1,6 +1,9 @@
 package sample.model.mcts;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MCTSCalculator {
     public static double value(int totalVisit, int nodeVisit, double score){
@@ -10,17 +13,6 @@ public class MCTSCalculator {
 
     public static Node bestNode(Node node){
         int parentVisitCnt = node.getState().getVisitCnt();
-        ArrayList<Node> nextNodeAr = node.getNextNodes();
-        double res=Integer.MIN_VALUE;
-        Node bestNode=null;
-        for (Node value : nextNodeAr) {
-            double temp = value(parentVisitCnt, value.getState().getVisitCnt(),
-                    value.getState().getWinScore());
-            if (temp >= res) {
-                res = temp;
-                bestNode = value;
-            }
-        }
-        return bestNode;
+        return Collections.max(node.getNextNodes(), Comparator.comparing(n ->value(parentVisitCnt,  n.getState().getVisitCnt(), n.getState().getWinScore())));
     }
 }

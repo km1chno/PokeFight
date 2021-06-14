@@ -1,7 +1,5 @@
 package sample.model.datamodels;
 
 public class Stat extends Result {
-    private int id; // Same order as in PokemonType, numbered from 1
-
-    public int getId() { return id; }
+    public int getId() { return Integer.parseInt(url.substring(url.length() - 2, url.length() - 1)) - 1; }
 }

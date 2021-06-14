@@ -8,10 +8,15 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import sample.components.fighterChooseControls.PokemonTypeScrollList;
 import sample.controllers.SceneSwitchController;
+import sample.controllers.fightPrepControllers.FightPrepViewController;
+import sample.controllers.switchControllers.BasicSwitchController;
 import sample.model.Utils;
 import sample.model.datamodels.PokemonType;
+import sample.model.datamodels.Stat;
+import sample.model.datamodels.StatResult;
 import sample.model.exceptions.HttpException;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,7 +48,7 @@ public class FighterChooseViewController {
         anchorPane.getChildren().add(rightScrollList);
     }
 
-    public void onChooseFighterAdvanceButtonClick(ActionEvent event) {
+    public void onChooseFighterAdvanceButtonClick(ActionEvent event) throws IOException {
         PokemonType chosenLeft = leftScrollList.getChosen();
         PokemonType chosenRight = rightScrollList.getChosen();
 
@@ -52,10 +57,16 @@ public class FighterChooseViewController {
             return;
         }
 
-        SceneSwitchController.switchToFightPrepView(event, chosenLeft, chosenRight);
+        new BasicSwitchController("fightPrep/fightPrepView") {
+            @Override
+            public void switchTo() {
+                ((FightPrepViewController) loader.getController()).setPokemons(chosenLeft, chosenRight);
+                super.switchTo();
+            }
+        }.switchTo();
     }
 
     public void onGoBackButtonClick(ActionEvent event) {
-        SceneSwitchController.goHome(event);
+        SceneSwitchController.goHome();
     }
 }
