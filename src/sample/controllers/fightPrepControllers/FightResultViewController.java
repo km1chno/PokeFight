@@ -3,6 +3,7 @@ package sample.controllers.fightPrepControllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -10,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import sample.components.SingleLogControl;
 import sample.model.Constants;
+import sample.model.datamodels.PokemonType;
 import sample.model.fight.GeneralLogs;
 
 public class FightResultViewController {
@@ -64,6 +66,11 @@ public class FightResultViewController {
         scoreLabelLeft.setText(logs.getLeftWins().toString());
         scoreLabelRight.setText(logs.getRightWins().toString());
         scoreLabelStalemate.setText(String.valueOf(Constants.NUMBER_OF_FIGHTS - logs.getRightWins() - logs.getLeftWins()));
+    }
+
+    public void setImages(PokemonType leftPokemon, PokemonType rightPokemon) {
+        leftPokemonImageView.setImage(new Image("file:resources/sprites/pokemon/" + leftPokemon.getId() + ".png"));
+        rightPokemonImageView.setImage(new Image("file:resources/sprites/pokemon/" + rightPokemon.getId() + ".png"));
     }
 
 }

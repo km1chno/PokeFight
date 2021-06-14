@@ -95,7 +95,7 @@ public class FightPlayerViewController {
 
     private void updateTooltip(Move move) {
         tooltipBox.getChildren().clear();
-
+        
         tooltipBox.getChildren().add(new Label("This is a " + move.getType() + " type move"));
         if (move.getPower() > 0) {
             tooltipBox.getChildren().add(new Label("Does " + move.getPower() + " base damage to enemy"));
@@ -141,6 +141,8 @@ public class FightPlayerViewController {
         tooltipBox.getChildren().add(new Label("Using this move more than " + move.getPowerPoints() + " will render it useless"));
 
         tooltipBox.setAlignment(Pos.CENTER);
+        for (Node label : tooltipBox.getChildren())
+            ((Label) label).setWrapText(true);
     }
 
     private void disablePokemon(FightingPokemon side) {

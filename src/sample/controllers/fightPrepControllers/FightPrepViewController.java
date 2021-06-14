@@ -292,6 +292,7 @@ public class FightPrepViewController {
                     super.switchTo();
                     FightResultViewController controller = loader.getController();
                     controller.init(fightLogs);
+                    controller.setImages(leftPokemon, rightPokemon);
                 }
             }.switchTo();
         } catch (Exception e) {
