@@ -157,7 +157,7 @@ public class FightPlayerViewController {
         if (move.getMeta().getMaxTurns() > 1) {
             tooltipBox.getChildren().add(new Label("This move's effects last between " + move.getMeta().getMinTurns() + " and " + move.getMeta().getMaxTurns() + " turns"));
         }
-        tooltipBox.getChildren().add(new Label("Using this move more than " + move.getPowerPoints() + " will render it useless"));
+        tooltipBox.getChildren().add(new Label("Using this move more than " + move.getPowerPoints() + " times will render it useless"));
 
         tooltipBox.setAlignment(Pos.CENTER);
         for (Node label : tooltipBox.getChildren())
