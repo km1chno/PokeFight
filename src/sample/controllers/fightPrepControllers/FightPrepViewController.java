@@ -1,5 +1,6 @@
 package sample.controllers.fightPrepControllers;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +22,7 @@ import sample.model.exceptions.IncorrectStatsException;
 import sample.model.fight.GeneralLogs;
 import sample.model.fight.Simulator;
 import sample.model.providers.MoveProvider;
+import sample.model.providers.PokemonTypeListProvider;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -250,8 +252,20 @@ public class FightPrepViewController {
             }
         }
         else {
-            fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
-            showResult();
+
+            Task<Void> simulateFights = new Task<>() {
+                @Override
+                public Void call() throws HttpException {
+                    fightLogs = fightSimulator.simulate(leftPokemonInstance, rightPokemonInstance);
+                    return null;
+                }
+            };
+
+            simulateFights.setOnSucceeded(workerStateEvent -> showResult());
+
+            Thread thread = new Thread(simulateFights);
+            thread.setDaemon(true);
+            thread.start();
         }
     }
 
