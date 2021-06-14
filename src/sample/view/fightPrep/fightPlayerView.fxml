@@ -41,13 +41,14 @@
             </VBox>
          </children>
       </Pane>
-      <Label alignment="CENTER" layoutX="599.0" layoutY="218.0" prefHeight="65.0" prefWidth="83.0" text="VS" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="601.0" layoutY="330.0" prefHeight="65.0" prefWidth="83.0" text="VS" textAlignment="CENTER">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="563.0" layoutY="392.0" prefHeight="17.0" prefWidth="156.0" text="Press ESC to return" />
+      <Label alignment="CENTER" layoutX="564.0" layoutY="430.0" prefHeight="17.0" prefWidth="156.0" text="Press ESC to return" />
       <Button alignment="CENTER" layoutX="556.0" layoutY="438.0" mnemonicParsing="false" text="Click here for battle overview" visible="false" />
       <VBox fx:id="tooltipBox" layoutX="491.0" layoutY="463.0" prefHeight="250.0" prefWidth="300.0" />
+      <Label fx:id="logLabel" alignment="CENTER" layoutX="493.0" layoutY="93.0" prefHeight="200.0" prefWidth="300.0" text="DISPLAY MOVE LOGS HERE" textAlignment="CENTER" />
    </children>
 </AnchorPane>

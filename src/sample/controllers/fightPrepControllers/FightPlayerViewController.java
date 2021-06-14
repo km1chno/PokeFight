@@ -36,6 +36,8 @@ public class FightPlayerViewController {
     Rectangle rightHealthIndicator;
     @FXML
     VBox tooltipBox;
+    @FXML
+    Label logLabel;
 
     private enum PlayerType {
         HUMAN,
@@ -108,14 +110,15 @@ public class FightPlayerViewController {
             tooltipBox.getChildren().add(new Label("Drains " + move.getMeta().getDrain() + "% of damage done"));
         }
         else if (move.getMeta().getDrain() < 0) {
-            tooltipBox.getChildren().add(new Label(move.getMeta().getDrain() + "% of damage done is taken as damage"));
+            tooltipBox.getChildren().add(new Label(-move.getMeta().getDrain() + "% of damage done is taken as damage"));
         }
         if (move.getMeta().getAilment().getStatus() != Status.NONE) {
             tooltipBox.getChildren().add(new Label("Applies " + move.getMeta().getAilment().getStatus() + " with a " + move.getMeta().getAilmentChance() + "% base probability"));
         }
         for (Move.MoveMetaData.MoveStatChange statChange : move.getStatChanges()) {
             if (statChange.getChange() < 0) {
-                tooltipBox.getChildren().add(new Label("Has a "
+                tooltipBox.getChildren().add(new Label(
+                        "Has a "
                         + move.getMeta().getStatChance()
                         + "% base chance to lower enemy's "
                         + statName[statChange.getIndex()]
@@ -123,7 +126,8 @@ public class FightPlayerViewController {
                 ));
             }
             else {
-                tooltipBox.getChildren().add(new Label("Has a "
+                tooltipBox.getChildren().add(new Label(
+                        "Has a "
                         + move.getMeta().getStatChance()
                         + " % base chance to buff its "
                         + statName[statChange.getIndex()]
@@ -134,6 +138,7 @@ public class FightPlayerViewController {
         if (move.getMeta().getMaxTurns() > 1) {
             tooltipBox.getChildren().add(new Label("This move's effects last between " + move.getMeta().getMinTurns() + " and " + move.getMeta().getMaxTurns() + " turns"));
         }
+        tooltipBox.getChildren().add(new Label("Using this move more than " + move.getPowerPoints() + " will render it useless"));
 
         tooltipBox.setAlignment(Pos.CENTER);
     }
@@ -155,7 +160,10 @@ public class FightPlayerViewController {
     private void computerMove() {
         System.out.println(nextToMove + " is choosing the singular best move");
         nextToMove = nextToMove.opposite();
+
         // TODO - actually calculate move
+        // TODO - update logLabel
+
         getMove();
     }
 
@@ -163,6 +171,10 @@ public class FightPlayerViewController {
         disablePokemon(nextToMove);
         System.out.println(nextToMove + " used " + move.getName());
         nextToMove = nextToMove.opposite();
+
+        // TODO - apply move
+        // TODO - update logLabel
+
         getMove();
     }
 
@@ -174,10 +186,14 @@ public class FightPlayerViewController {
             computerMove();
     }
 
+    private void updateLogLabel() {
+        logLabel.setText("SOMETHING SOMETHING"); // TODO
+    }
+
     private void updateHealthIndicators() {
         double leftHpFraction = 1; // TODO get actual currentHP/maxHP
         leftHealthIndicator.setWidth(leftHpFraction * leftHealthBar.getWidth());
-        double rightHpFraction = 0.7;
+        double rightHpFraction = 0.7; // TODO get actual currentHP/maxHP
         rightHealthIndicator.setWidth(rightHpFraction * rightHealthBar.getWidth());
     }
 
