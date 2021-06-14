@@ -39,9 +39,7 @@ public class MCTS {
 
         Node chosenNode = rootNode.getMaxScoreNode();
 
-
         if(chosenNode == null){
-            //TODO
             throw new MCTSException();
         }
         return chosenNode.getState().getGame();

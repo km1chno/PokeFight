@@ -173,10 +173,9 @@ public class FightPlayerViewController {
     private void computerMove() {
         System.out.println(nextToMove + " is choosing the singular best move");
 
-
         int d;
-        if( nextToMove == FightingPokemon.LEFT) d=0;
-        else d=1;
+        if( nextToMove == FightingPokemon.LEFT) d=1;
+        else d=0;
 
         try {
            mainGame = engine.getNextMove(mainGame, d);
@@ -229,9 +228,9 @@ public class FightPlayerViewController {
     }
 
     private void updateHealthIndicators() {
-        double leftHpFraction = (double)mainGame.left.getFinalHp()/mainGame.left.getHp(); // TODO get actual currentHP/maxHP
+        double leftHpFraction = (double)mainGame.left.getFinalHp()/mainGame.left.getHp();
         leftHealthIndicator.setWidth(leftHpFraction * leftHealthBar.getWidth());
-        double rightHpFraction = (double)mainGame.right.getFinalHp()/mainGame.right.getHp(); // TODO get actual currentHP/maxHP
+        double rightHpFraction = (double)mainGame.right.getFinalHp()/mainGame.right.getHp();
         rightHealthIndicator.setWidth(rightHpFraction * rightHealthBar.getWidth());
     }
 

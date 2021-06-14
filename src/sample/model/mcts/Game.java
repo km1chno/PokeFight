@@ -66,7 +66,6 @@ public class Game {
     }
 
     public void move(int pokemonNum, int moveNum){
-        //TODO add logs
         String myName=getPokemon(pokemonNum).getPokemonType().getName();
         String opName=getEnemy(pokemonNum).getPokemonType().getName();
         lastMoveLogs.clear();
@@ -137,7 +136,7 @@ public class Game {
         if(activeMove.getMeta().getHealing()>0){
             int healVal=getPokemon(pokemonNum).getHp()*(activeMove.getMeta().getHealing()/100);
             getPokemon(pokemonNum).heal(healVal);
-            lastMoveLogs.add(myName + " heals for " + healVal + "percent max health");
+            lastMoveLogs.add(myName + " heals for " + healVal + " percent max health");
         }
 
         //Damage
