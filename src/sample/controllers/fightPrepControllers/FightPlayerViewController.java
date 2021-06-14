@@ -15,6 +15,10 @@ import sample.model.datamodels.FightingPokemon;
 import sample.model.datamodels.Move;
 import sample.model.datamodels.PokemonInstance;
 import sample.model.datamodels.Status;
+import sample.model.exceptions.MCTSException;
+import sample.model.fight.SimulatedPokemon;
+import sample.model.mcts.Game;
+import sample.model.mcts.MCTS;
 
 public class FightPlayerViewController {
 
@@ -49,13 +53,19 @@ public class FightPlayerViewController {
     private PokemonInstance leftPokemon, rightPokemon;
     private PlayerType leftPlayer, rightPlayer;
     private FightingPokemon nextToMove = FightingPokemon.LEFT;
+    private SimulatedPokemon leftSimulatedPokemon, rightSimulatedPokemon;
+    private Game mainGame;
+    private MCTS engine;
 
     private PlayerType playerToMoveType() { return nextToMove == FightingPokemon.LEFT ? leftPlayer : rightPlayer; }
 
     public void setPokemon(PokemonInstance left, PokemonInstance right) {
         leftPokemon = left;
         rightPokemon = right;
-
+        leftSimulatedPokemon = new SimulatedPokemon(left);
+        rightSimulatedPokemon = new SimulatedPokemon(right);
+        mainGame = new Game(leftSimulatedPokemon, rightSimulatedPokemon);
+        engine = new MCTS();
         setImages();
 
         for (Node child : leftButtonBox.getChildren()) {
@@ -87,7 +97,8 @@ public class FightPlayerViewController {
 
             button.setText(move.getName());
             if (move != Constants.EMPTY_MOVE) {
-                button.setOnAction(actionEvent -> humanMove(move));
+                int finalI = i;
+                button.setOnAction(actionEvent -> humanMove(finalI, move));
                 button.setOnMouseEntered(mouseEvent -> updateTooltip(move));
             }
         }
@@ -161,22 +172,35 @@ public class FightPlayerViewController {
 
     private void computerMove() {
         System.out.println(nextToMove + " is choosing the singular best move");
+
+
+        int d;
+        if( nextToMove == FightingPokemon.LEFT) d=0;
+        else d=1;
+
+        try {
+           mainGame = engine.getNextMove(mainGame, d);
+        }catch (MCTSException e){
+           e.printStackTrace();
+        }
         nextToMove = nextToMove.opposite();
 
-        // TODO - actually calculate move
-        // TODO - update logLabel
+        updateLogLabel();
 
         getMove();
     }
 
-    private void humanMove(Move move) {
+    private void humanMove(int moveId, Move move) {
         disablePokemon(nextToMove);
         System.out.println(nextToMove + " used " + move.getName());
+
+        int d;
+        if( nextToMove == FightingPokemon.LEFT) d=0;
+        else d=1;
+        mainGame.move(d, moveId);
         nextToMove = nextToMove.opposite();
 
-        // TODO - apply move
-        // TODO - update logLabel
-
+        updateLogLabel();
         getMove();
     }
 
@@ -189,13 +213,25 @@ public class FightPlayerViewController {
     }
 
     private void updateLogLabel() {
-        logLabel.setText("SOMETHING SOMETHING"); // TODO
+        logLabel.setText("");
+        for(String s: mainGame.getLogs()) {
+            logLabel.setText(logLabel.getText() + "\n" + s);
+        }
+        if(mainGame.getStatus()==Game.LEFT){
+            logLabel.setText(logLabel.getText() + "\n" + leftSimulatedPokemon.getPokemonType().getName() + " wins!");
+        }
+        else if(mainGame.getStatus()==Game.RIGHT){
+            logLabel.setText(logLabel.getText() + "\n" + rightSimulatedPokemon.getPokemonType().getName() + " wins!");
+        }
+        else if(mainGame.getStatus()==Game.DRAW){
+            logLabel.setText(logLabel.getText() + "\n" + "draw!");
+        }
     }
 
     private void updateHealthIndicators() {
-        double leftHpFraction = 1; // TODO get actual currentHP/maxHP
+        double leftHpFraction = (double)mainGame.left.getFinalHp()/mainGame.left.getHp(); // TODO get actual currentHP/maxHP
         leftHealthIndicator.setWidth(leftHpFraction * leftHealthBar.getWidth());
-        double rightHpFraction = 0.7; // TODO get actual currentHP/maxHP
+        double rightHpFraction = (double)mainGame.right.getFinalHp()/mainGame.right.getHp(); // TODO get actual currentHP/maxHP
         rightHealthIndicator.setWidth(rightHpFraction * rightHealthBar.getWidth());
     }
 

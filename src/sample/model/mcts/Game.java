@@ -18,7 +18,7 @@ public class Game {
     private final int turnsOffset = 13;
     int status;
     int turnsWithoutDmg;
-    SimulatedPokemon left, right;
+    public SimulatedPokemon left, right;
 
     ArrayList<String> lastMoveLogs;
 
